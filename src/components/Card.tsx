@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react'
 
-const tags = ["#travel", "#photography", "#winter"]
+const tags = ['#travel', '#photography', '#winter']
 
 interface TagPillProps {
   tag: string

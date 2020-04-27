@@ -1,19 +1,19 @@
-import React, { useState } from "react"
-import { Link } from "gatsby"
+import React, { useState } from 'react'
+import { Link } from 'gatsby'
 
 interface HeaderProps {}
 
 const menuItems = [
-  { url: '/about', text: 'About'},
-  { url: '/projects', text: 'Projects'},
-  { url: '/resume', text: 'Resume'},
-  { url: '/blog', text: 'Blog'},
+  { url: '/about', text: 'About' },
+  { url: '/projects', text: 'Projects' },
+  { url: '/resume', text: 'Resume' },
+  { url: '/blog', text: 'Blog' },
 ]
 
 const Header: React.FC<HeaderProps> = () => {
   const [isMenuOpen, setMenuOpen] = useState(false)
 
-  const MenuItem: React.FC<{url: string, text: string}> = ({ url, text }) => (
+  const MenuItem: React.FC<{ url: string; text: string }> = ({ url, text }) => (
     <Link
       to={url}
       className="block mt-4 mr-4 text-blue-200 lg:inline-block lg:mt-0 hover:text-white"
@@ -25,7 +25,10 @@ const Header: React.FC<HeaderProps> = () => {
   return (
     <div className="bg-blue-800">
       <nav className="relative flex flex-wrap items-center justify-between max-w-screen-xl p-6 px-6 mx-auto">
-        <Link to="/" className="flex items-center flex-shrink-0 mr-6 text-white">
+        <Link
+          to="/"
+          className="flex items-center flex-shrink-0 mr-6 text-white"
+        >
           <svg
             className="w-8 h-8 mr-2 fill-current"
             width="54"
@@ -58,11 +61,13 @@ const Header: React.FC<HeaderProps> = () => {
         </div>
         <div
           className={`w-full ${
-            isMenuOpen ? "block" : "hidden"
+            isMenuOpen ? 'block' : 'hidden'
           } lg:block flex-grow lg:flex lg:items-center lg:w-auto`}
         >
           <div className="text-sm lg:flex-grow">
-            {menuItems.map(item => <MenuItem {...item} />)}
+            {menuItems.map(item => (
+              <MenuItem {...item} />
+            ))}
           </div>
           <div>
             <a
