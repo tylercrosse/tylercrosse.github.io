@@ -4,10 +4,11 @@ import { Link } from 'gatsby'
 interface HeaderProps {}
 
 const menuItems = [
-  { url: '/about', text: 'About' },
+  { url: '/', text: 'Home' },
+  { url: '/blog', text: 'Blog' },
   { url: '/projects', text: 'Projects' },
   { url: '/resume', text: 'Resume' },
-  { url: '/blog', text: 'Blog' },
+  { url: '/about', text: 'About' },
 ]
 
 const Header: React.FC<HeaderProps> = () => {
@@ -16,18 +17,19 @@ const Header: React.FC<HeaderProps> = () => {
   const MenuItem: React.FC<{ url: string; text: string }> = ({ url, text }) => (
     <Link
       to={url}
-      className="block mt-4 mr-4 text-blue-200 lg:inline-block lg:mt-0 hover:text-white"
+      activeClassName="text-blue-600 border-t-2 border-blue-600"
+      className="box-border block p-6 text-gray-600 border-t-2 border-white text-md lg:inline-block lg:mt-0 hover:text-blue-600"
     >
       {text}
     </Link>
   )
 
   return (
-    <div className="bg-blue-800">
-      <nav className="relative flex flex-wrap items-center justify-between max-w-screen-xl p-6 px-6 mx-auto">
+    <div className="bg-white border-b border-gray-400">
+      <nav className="relative flex flex-wrap items-center justify-between max-w-screen-xl px-6 mx-auto">
         <Link
           to="/"
-          className="flex items-center flex-shrink-0 mr-6 text-white"
+          className="flex items-center flex-shrink-0 mr-6 text-gray-800 hover:text-blue-800"
         >
           <svg
             className="w-8 h-8 mr-2 fill-current"
@@ -42,12 +44,12 @@ const Header: React.FC<HeaderProps> = () => {
             Tyler Crosse
           </span>
         </Link>
-        <div className="block lg:hidden">
+        <div className="block py-6 lg:hidden">
           <button
             onClick={() => {
               setMenuOpen(isMenuOpen => !isMenuOpen)
             }}
-            className="flex items-center px-3 py-2 text-blue-200 border border-blue-400 rounded hover:text-white hover:border-white"
+            className="flex items-center px-3 py-2 text-gray-800 border border-gray-800 rounded hover:text-white hover:border-white"
           >
             <svg
               className="w-3 h-3 fill-current"
@@ -62,21 +64,11 @@ const Header: React.FC<HeaderProps> = () => {
         <div
           className={`w-full ${
             isMenuOpen ? 'block' : 'hidden'
-          } lg:block flex-grow lg:flex lg:items-center lg:w-auto`}
+          } lg:block flex-grow lg:flex lg:items-center lg:w-auto justify-end`}
         >
-          <div className="text-sm lg:flex-grow">
-            {menuItems.map(item => (
-              <MenuItem {...item} />
-            ))}
-          </div>
-          <div>
-            <a
-              href="/"
-              className="inline-block px-4 py-2 mt-4 text-sm leading-none text-white border border-white rounded hover:border-transparent hover:text-blue-500 hover:bg-white lg:mt-0"
-            >
-              Download
-            </a>
-          </div>
+          {menuItems.map(item => (
+            <MenuItem {...item} />
+          ))}
         </div>
       </nav>
     </div>
