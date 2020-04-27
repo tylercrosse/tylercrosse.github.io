@@ -1,30 +1,31 @@
 import React, { useState } from "react"
+import { Link } from "gatsby"
 
 interface HeaderProps {}
 
 const menuItems = [
-  { url: '#responsive-header', text: 'About'},
-  { url: '#responsive-header', text: 'Projects'},
-  { url: '#responsive-header', text: 'Resume'},
-  { url: '#responsive-header', text: 'Blog'},
+  { url: '/about', text: 'About'},
+  { url: '/projects', text: 'Projects'},
+  { url: '/resume', text: 'Resume'},
+  { url: '/blog', text: 'Blog'},
 ]
 
 const Header: React.FC<HeaderProps> = () => {
   const [isMenuOpen, setMenuOpen] = useState(false)
 
   const MenuItem: React.FC<{url: string, text: string}> = ({ url, text }) => (
-    <a
-      href={url}
-      className="block mt-4 mr-4 text-teal-200 lg:inline-block lg:mt-0 hover:text-white"
+    <Link
+      to={url}
+      className="block mt-4 mr-4 text-blue-200 lg:inline-block lg:mt-0 hover:text-white"
     >
       {text}
-    </a>
+    </Link>
   )
 
   return (
-    <div>
-      <nav className="relative flex flex-wrap items-center justify-between max-w-screen-xl p-6 px-6 mx-auto bg-teal-500">
-        <div className="flex items-center flex-shrink-0 mr-6 text-white">
+    <div className="bg-blue-800">
+      <nav className="relative flex flex-wrap items-center justify-between max-w-screen-xl p-6 px-6 mx-auto">
+        <Link to="/" className="flex items-center flex-shrink-0 mr-6 text-white">
           <svg
             className="w-8 h-8 mr-2 fill-current"
             width="54"
@@ -37,13 +38,13 @@ const Header: React.FC<HeaderProps> = () => {
           <span className="text-xl font-semibold tracking-tight">
             Tyler Crosse
           </span>
-        </div>
+        </Link>
         <div className="block lg:hidden">
           <button
             onClick={() => {
               setMenuOpen(isMenuOpen => !isMenuOpen)
             }}
-            className="flex items-center px-3 py-2 text-teal-200 border border-teal-400 rounded hover:text-white hover:border-white"
+            className="flex items-center px-3 py-2 text-blue-200 border border-blue-400 rounded hover:text-white hover:border-white"
           >
             <svg
               className="w-3 h-3 fill-current"
@@ -66,7 +67,7 @@ const Header: React.FC<HeaderProps> = () => {
           <div>
             <a
               href="/"
-              className="inline-block px-4 py-2 mt-4 text-sm leading-none text-white border border-white rounded hover:border-transparent hover:text-teal-500 hover:bg-white lg:mt-0"
+              className="inline-block px-4 py-2 mt-4 text-sm leading-none text-white border border-white rounded hover:border-transparent hover:text-blue-500 hover:bg-white lg:mt-0"
             >
               Download
             </a>
