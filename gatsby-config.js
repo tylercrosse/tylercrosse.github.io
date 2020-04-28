@@ -5,6 +5,8 @@ module.exports = {
     author: `@gatsbyjs`,
   },
   plugins: [
+    `gatsby-plugin-typescript`,
+    `gatsby-plugin-graphql-codegen`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -13,15 +15,22 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    "gatsby-plugin-postcss",
     {
-      resolve: "gatsby-plugin-purgecss",
+      resolve: `gatsby-source-filesystem`,
       options: {
-        tailwind: true,
-        purgeOnly: ["src/css/index.css"],
+        path: `${__dirname}/src/content`,
+        name: `content`,
       },
     },
-    `gatsby-plugin-typescript`,
+    `gatsby-transformer-remark`,
+    'gatsby-plugin-postcss',
+    {
+      resolve: 'gatsby-plugin-purgecss',
+      options: {
+        tailwind: true,
+        purgeOnly: ['src/css/index.css'],
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -44,10 +53,10 @@ module.exports = {
         stages: ['develop', 'build-javascript'],
         options: {
           emitWarning: true,
-          failOnError: false
-        }
-      }
-    }
+          failOnError: false,
+        },
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
