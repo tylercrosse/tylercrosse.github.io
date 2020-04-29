@@ -2744,7 +2744,10 @@ export type BlogIndexPageQuery = {
     edges: Array<{
       node: Pick<MarkdownRemark, 'id' | 'timeToRead'> & {
         frontmatter?: Maybe<
-          Pick<MarkdownRemarkFrontmatter, 'date' | 'path' | 'title'>
+          Pick<
+            MarkdownRemarkFrontmatter,
+            'date' | 'path' | 'title' | 'description'
+          >
         >
       }
     }>
