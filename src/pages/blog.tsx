@@ -19,7 +19,7 @@ const Blog: React.FC<BlogProps> = ({ data }) => {
                 <h2 className="text-3xl group-hover:underline font-display">
                   {node.frontmatter?.title}
                 </h2>
-                <p className="text-gray-700 font-body">
+                <p className="pb-2 text-gray-700 font-body">
                   {node.frontmatter?.description}
                 </p>
                 <div className="text-gray-500 font-body">

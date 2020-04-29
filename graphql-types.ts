@@ -2769,6 +2769,11 @@ export type IndexPageQuery = {
       }
     }>
   }
+  file?: Maybe<{
+    childImageSharp?: Maybe<{
+      fluid?: Maybe<GatsbyImageSharpFluid_TracedSvgFragment>
+    }>
+  }>
 }
 
 export type BlogPostQueryVariables = {

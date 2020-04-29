@@ -14,9 +14,11 @@ const Template: React.FC<any> = ({
   const { frontmatter, html, timeToRead } = markdownRemark
   return (
     <Layout>
-      <main className="max-w-2xl p-6 pt-32 m-auto">
-        <h1 className="text-4xl font-display">{frontmatter.title}</h1>
-        <h2 className="text-xl text-gray-700 font-body">
+      <main className="max-w-3xl p-10 pt-32 m-auto">
+        <h1 className="text-5xl leading-tight font-display">
+          {frontmatter.title}
+        </h1>
+        <h2 className="pb-2 text-xl text-gray-700 font-body">
           {frontmatter.description}
         </h2>
         <div className="text-gray-500 font-body">
