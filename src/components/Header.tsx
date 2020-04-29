@@ -18,7 +18,7 @@ const Header: React.FC<HeaderProps> = () => {
     <Link
       to={url}
       activeClassName="text-blue-600 border-t-2 border-blue-600"
-      className="box-border block p-6 text-gray-600 border-t-2 border-white text-md lg:inline-block lg:mt-0 hover:text-blue-600 font-body"
+      className="box-border block p-6 text-gray-700 border-t-2 border-white text-md lg:inline-block lg:mt-0 hover:text-blue-600 font-body"
     >
       {text}
     </Link>

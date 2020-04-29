@@ -27,6 +27,7 @@ module.exports = {
   },
   variants: {
     textColor: ['responsive', 'hover', 'focus', 'group-hover'],
+    underline: ['responsive', 'hover', 'focus', 'group-hover'],
   },
   plugins: [],
 }

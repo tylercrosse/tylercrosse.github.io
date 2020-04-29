@@ -10,18 +10,20 @@ interface BlogProps {
 const Blog: React.FC<BlogProps> = ({ data }) => {
   return (
     <Layout>
-      <main className="max-w-screen-lg p-6 mx-auto">
-        <h1 className="">BLOG</h1>
+      <main className="max-w-screen-lg p-6 pt-32 mx-auto">
+        <h1 className="text-xl font-display">All Posts</h1>
         <div>
           {data.allMarkdownRemark.edges.map(({ node }) => (
-            <div className="py-4 my-4 group">
-              <Link to={node.frontmatter.path}>
-                <h2 className="text-xl group-hover:text-blue-600">
-                  {node.frontmatter.title}
+            <div className="py-4 my-4 group" key={node.id}>
+              <Link to={node.frontmatter?.path || '/blog'}>
+                <h2 className="text-3xl group-hover:underline font-display">
+                  {node.frontmatter?.title}
                 </h2>
-                <p className="text-gray-600">{node.frontmatter.description}</p>
-                <div className="text-gray-400">
-                  {node.frontmatter.date} - {node.timeToRead} min read
+                <p className="text-gray-700 font-body">
+                  {node.frontmatter?.description}
+                </p>
+                <div className="text-gray-500 font-body">
+                  {node.frontmatter?.date} - {node.timeToRead} min read
                 </div>
               </Link>
             </div>

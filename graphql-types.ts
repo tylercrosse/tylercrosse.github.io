@@ -2754,15 +2754,35 @@ export type BlogIndexPageQuery = {
   }
 }
 
+export type IndexPageQueryVariables = {}
+
+export type IndexPageQuery = {
+  allMarkdownRemark: {
+    edges: Array<{
+      node: Pick<MarkdownRemark, 'id' | 'timeToRead'> & {
+        frontmatter?: Maybe<
+          Pick<
+            MarkdownRemarkFrontmatter,
+            'date' | 'path' | 'title' | 'description'
+          >
+        >
+      }
+    }>
+  }
+}
+
 export type BlogPostQueryVariables = {
   path: Scalars['String']
 }
 
 export type BlogPostQuery = {
   markdownRemark?: Maybe<
-    Pick<MarkdownRemark, 'html'> & {
+    Pick<MarkdownRemark, 'html' | 'timeToRead'> & {
       frontmatter?: Maybe<
-        Pick<MarkdownRemarkFrontmatter, 'date' | 'path' | 'title'>
+        Pick<
+          MarkdownRemarkFrontmatter,
+          'date' | 'path' | 'title' | 'description'
+        >
       >
     }
   >
