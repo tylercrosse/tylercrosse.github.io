@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
+import DayOrNight from './DayOrNight'
 
 interface HeaderProps {}
 
@@ -70,6 +71,7 @@ const Header: React.FC<HeaderProps> = () => {
             <MenuItem {...item} />
           ))}
         </div>
+        <DayOrNight />
       </nav>
     </header>
   )

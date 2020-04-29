@@ -4,10 +4,10 @@
   font-family: 'Recoleta Alt';
   src: url('../fonts/RecoletaAlt-SemiBold.eot');
   src: local('Recoleta Alt SemiBold'), local('RecoletaAlt-SemiBold'),
-      url('../fonts/RecoletaAlt-SemiBold.eot?#iefix') format('embedded-opentype'),
-      url('../fonts/RecoletaAlt-SemiBold.woff2') format('woff2'),
-      url('../fonts/RecoletaAlt-SemiBold.woff') format('woff'),
-      url('../fonts/RecoletaAlt-SemiBold.ttf') format('truetype');
+    url('../fonts/RecoletaAlt-SemiBold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/RecoletaAlt-SemiBold.woff2') format('woff2'),
+    url('../fonts/RecoletaAlt-SemiBold.woff') format('woff'),
+    url('../fonts/RecoletaAlt-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
 }
@@ -15,34 +15,34 @@
 @font-face {
   font-family: 'Roboto';
   src: url('../fonts/Roboto-Regular-webfont.eot');
-  src: url('../fonts/Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/Roboto-Regular-webfont.woff') format('woff'),
-       url('../fonts/Roboto-Regular-webfont.ttf') format('truetype');
+  src: url('../fonts/Roboto-Regular-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/Roboto-Regular-webfont.woff') format('woff'),
+    url('../fonts/Roboto-Regular-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-
 }
 
 @font-face {
   font-family: 'Roboto';
   src: url('../fonts/Roboto-Bold-webfont.eot');
-  src: url('../fonts/Roboto-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/Roboto-Bold-webfont.woff') format('woff'),
-       url('../fonts/Roboto-Bold-webfont.ttf') format('truetype');
+  src: url('../fonts/Roboto-Bold-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/Roboto-Bold-webfont.woff') format('woff'),
+    url('../fonts/Roboto-Bold-webfont.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
-
 }
 
 @font-face {
   font-family: 'Roboto';
   src: url('../fonts/Roboto-Italic-webfont.eot');
-  src: url('../fonts/Roboto-Italic-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/Roboto-Italic-webfont.woff') format('woff'),
-       url('../fonts/Roboto-Italic-webfont.ttf') format('truetype');
+  src: url('../fonts/Roboto-Italic-webfont.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/Roboto-Italic-webfont.woff') format('woff'),
+    url('../fonts/Roboto-Italic-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: italic;
-
 }
 
 @tailwind components;
@@ -51,4 +51,139 @@
 
 .text-7xl {
   font-size: 5rem;
+}
+
+:root {
+  --white: #fff;
+  --primary: #5628ee;
+}
+
+/*
+Inspired by the usage in Novella & Gatsby from 
+https://github.com/narative/gatsby-theme-novela/blob/fb38329e17595df6e846be1d33517ff6125cde4e/src/components/Navigation/Navigation.Header.tsx
+https://github.com/gatsbyjs/gatsby/blob/master/www/src/components/dark-mode-toggle.js
+
+The original inspiration is due to Aaron Iker
+https://codepen.io/aaroniker/pen/KGpXZo
+*/
+.iconWrapper {
+    /*
+    both padding and appearance are here to help
+    Mobile Safari rendering correctly, at least on
+    older iOS versions — tested on iOS 12.4.2 / iPhone 5s
+  */
+  padding: 0;
+  appearance: none;
+  align-items: center;
+  background: transparent;
+  border-radius: 5px;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  height: 40px;
+  justify-content: center;
+  /*
+    roughly compensates for the additional whitespace of this specific
+    "icon button" in relation to its "social icon" siblings;
+    leave the left untouched for some separation from the aforementioned
+  */
+  margin-right: -11px;
+  opacity: 0.75;
+  /*
+    allows us to use the default :focus
+    outline without the "moon mask" being taken into account
+    by the browser when rendering the outline —
+    not an ideal solution, but good for now
+  */
+  overflow: hidden;
+  position: relative;
+  /*
+    scaling to 75% of the original size
+    scales the "moon" shape from 24px to 18px,
+    aligning it with the rest of the main nav's
+    "social icons"; sun and its rays are slightly larger;
+    good for now, too ;-)
+  */
+  transform: scale(0.75);
+  transition: opacity 0.3s ease;
+  vertical-align: middle;
+  width: 40px;
+}
+.iconWrapper:hover {
+  opacity: 1;
+}
+
+.moonOrSun {
+  background: var(--primary);
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  position: relative;
+  transition: all 0.45s ease;
+  border: 2px solid var(--primary);
+  overflow: hidden;
+  transform: scale(1);
+}
+.themeDark .moonOrSun {
+  border: 4px solid var(--primary);
+  overflow: visible;
+  transform: scale(0.55);
+}
+.moonOrSun::before {
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  content: "";
+  height: 24px;
+  position: absolute;
+  right: -9px;
+  top: -9px;
+  transition: transform 0.45s ease;
+  width: 24px;
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.themeDark .moonOrSun::before {
+  opacity: 0;
+  transform: translate(14px, -14px);
+}
+.moonOrSun::after {
+  border-radius: 50%;
+  box-shadow: 0 -23px 0 var(--primary),
+    0 23px 0 var(--primary),
+    23px 0 0 var(--primary),
+    -23px 0 0 var(--primary),
+    15px 15px 0 var(--primary),
+    -15px 15px 0 var(--primary),
+    15px -15px 0 var(--primary),
+    -15px -15px 0 var(--primary);
+  content: "";
+  height: 8px;
+  left: 50%;
+  margin: -4px 0 0 -4px;
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  transition: all 0.35s ease;
+  transform: scale(0);
+}
+.themeDark .moonOrSun::after {
+  transform: scale(1);
+}
+
+.moonMask {
+  background: var(--white);
+  border-radius: 50%;
+  border: 0;
+  height: 24px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: background 0.25s ease, transform 0.45s ease;
+  width: 24px;
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.themeDark .moonMask {
+  opacity: 0;
+  transform: translate(14px, -14px);
 }
