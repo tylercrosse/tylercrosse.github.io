@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps> = () => {
   )
 
   return (
-    <div className="fixed inset-x-0 top-0 z-10 bg-white border-b border-gray-200">
+    <header className="fixed inset-x-0 top-0 z-10 bg-white border-b border-gray-200">
       <nav className="relative flex flex-wrap items-center justify-between max-w-screen-xl px-6 mx-auto">
         <Link
           to="/"
@@ -71,7 +71,7 @@ const Header: React.FC<HeaderProps> = () => {
           ))}
         </div>
       </nav>
-    </div>
+    </header>
   )
 }
 

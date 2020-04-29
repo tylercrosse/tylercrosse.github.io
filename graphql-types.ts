@@ -2757,18 +2757,6 @@ export type BlogIndexPageQuery = {
 export type IndexPageQueryVariables = {}
 
 export type IndexPageQuery = {
-  allMarkdownRemark: {
-    edges: Array<{
-      node: Pick<MarkdownRemark, 'id' | 'timeToRead'> & {
-        frontmatter?: Maybe<
-          Pick<
-            MarkdownRemarkFrontmatter,
-            'date' | 'path' | 'title' | 'description'
-          >
-        >
-      }
-    }>
-  }
   file?: Maybe<{
     childImageSharp?: Maybe<{
       fluid?: Maybe<GatsbyImageSharpFluid_TracedSvgFragment>
