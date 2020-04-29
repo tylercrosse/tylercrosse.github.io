@@ -55,7 +55,36 @@
 
 :root {
   --white: #fff;
-  --primary: #5628ee;
+  --sol-yellow: #b58900;
+  --sol-orange: #cb4b16;
+  --sol-red: #dc322f;
+  --sol-magenta: #d33682;
+  --sol-violet: #6c71c4;
+  --sol-blue: #268bd2;
+  --sol-cyan: #2aa198;
+  --sol-green: #859900;
+  --sol-base00: #657b83;
+  --sol-base01: #586e75;
+  --sol-base02: #073642;
+  --sol-base03: #002b36;
+  --sol-base0: #839496;
+  --sol-base1: #93a1a1;
+  --sol-base2: #eee8d5;
+  --sol-base3: #fdf6e3;
+}
+
+.themeLight {
+  --theme-0: #839496;
+  --theme-1: #93a1a1;
+  --theme-2: #eee8d5;
+  --theme-3: #fdf6e3;
+}
+
+.themeDark {
+  --theme-0: #657b83;
+  --theme-1: #586e75;
+  --theme-2: #073642;
+  --theme-3: #002b36;
 }
 
 /*
@@ -114,24 +143,24 @@ https://codepen.io/aaroniker/pen/KGpXZo
 }
 
 .moonOrSun {
-  background: var(--primary);
+  background: var(--sol-blue);
   border-radius: 50%;
   height: 24px;
   width: 24px;
   position: relative;
   transition: all 0.45s ease;
-  border: 2px solid var(--primary);
+  border: 2px solid var(--sol-blue);
   overflow: hidden;
   transform: scale(1);
 }
 .themeDark .moonOrSun {
-  border: 4px solid var(--primary);
+  border: 4px solid var(--sol-blue);
   overflow: visible;
   transform: scale(0.55);
 }
 .moonOrSun::before {
   border-radius: 50%;
-  border: 2px solid var(--primary);
+  border: 2px solid var(--sol-blue);
   content: "";
   height: 24px;
   position: absolute;
@@ -148,14 +177,14 @@ https://codepen.io/aaroniker/pen/KGpXZo
 }
 .moonOrSun::after {
   border-radius: 50%;
-  box-shadow: 0 -23px 0 var(--primary),
-    0 23px 0 var(--primary),
-    23px 0 0 var(--primary),
-    -23px 0 0 var(--primary),
-    15px 15px 0 var(--primary),
-    -15px 15px 0 var(--primary),
-    15px -15px 0 var(--primary),
-    -15px -15px 0 var(--primary);
+  box-shadow: 0 -23px 0 var(--sol-blue),
+    0 23px 0 var(--sol-blue),
+    23px 0 0 var(--sol-blue),
+    -23px 0 0 var(--sol-blue),
+    15px 15px 0 var(--sol-blue),
+    -15px 15px 0 var(--sol-blue),
+    15px -15px 0 var(--sol-blue),
+    -15px -15px 0 var(--sol-blue);
   content: "";
   height: 8px;
   left: 50%;

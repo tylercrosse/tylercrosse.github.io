@@ -12,7 +12,7 @@ interface IndexProps {
 const Index: React.FC<IndexProps> = ({ data }) => {
   return (
     <Layout>
-      <main className="relative py-10 bg-sol-base3">
+      <main className="relative py-10 bg-theme-3">
         <section className="flex max-w-screen-xl p-6 pt-64 mx-auto">
           <div className="w-1/2 pt-10 pr-8">
             <h1 className="text-7xl font-display">Hi, I'm Tyler,</h1>
