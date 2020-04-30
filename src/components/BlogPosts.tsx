@@ -47,13 +47,13 @@ const BlogPosts: React.FC<BlogPostsProps> = () => {
       {data.allMarkdownRemark.edges.map(({ node }) => (
         <div className="py-4 my-4 group" key={node.id}>
           <Link to={node.frontmatter?.path || '/blog'}>
-            <h2 className="text-3xl group-hover:underline font-display">
+            <h2 className="text-3xl group-hover:underline font-display text-theme-s9">
               {node.frontmatter?.title}
             </h2>
-            <p className="pb-2 text-gray-700 font-body">
+            <p className="pb-2 text-gray-700 font-body text-theme-s8">
               {node.frontmatter?.description}
             </p>
-            <div className="text-gray-500 font-body">
+            <div className="text-gray-500 font-body text-theme-s8">
               {node.frontmatter?.date} - {node.timeToRead} min read
             </div>
           </Link>

@@ -12,15 +12,17 @@ interface IndexProps {
 const Index: React.FC<IndexProps> = ({ data }) => {
   return (
     <Layout>
-      <main className="relative py-10 bg-theme-3">
+      <main className="relative py-10 bg-theme-p5">
         <section className="flex max-w-screen-xl p-6 pt-64 mx-auto">
           <div className="w-1/2 pt-10 pr-8">
-            <h1 className="text-7xl font-display">Hi, I'm Tyler,</h1>
-            <p className="pb-5 text-xl font-body">
+            <h1 className="text-7xl font-display text-theme-s9">
+              Hi, I'm Tyler,
+            </h1>
+            <p className="pb-5 text-xl font-body text-theme-s8">
               a <span className="font-bold">Software Developer </span> in
               Seattle WA.
             </p>
-            <p className="text-xl font-body">
+            <p className="text-xl font-body text-theme-s8">
               I'm passionate about crafting high quality products that excite
               users and are easy to maintain.
             </p>
@@ -30,9 +32,11 @@ const Index: React.FC<IndexProps> = ({ data }) => {
           </div>
         </section>
         <section className="max-w-screen-lg p-6 pt-32 mx-auto">
-          <div className="text-xl font-display">Recent Posts</div>
+          <div className="text-xl font-display text-theme-s9">Recent Posts</div>
           <BlogPosts />
-          <Link to="/blog">See More</Link>
+          <Link to="/blog" className="font-body text-theme-s9">
+            See More
+          </Link>
         </section>
       </main>
     </Layout>

@@ -14,18 +14,18 @@ const Template: React.FC<any> = ({
   const { frontmatter, html, timeToRead } = markdownRemark
   return (
     <Layout>
-      <main className="max-w-3xl p-10 pt-32 m-auto">
-        <h1 className="text-5xl leading-tight font-display">
+      <main className="max-w-3xl p-10 pt-32 m-auto bg-theme-p6">
+        <h1 className="text-5xl leading-tight font-display text-theme-s9">
           {frontmatter.title}
         </h1>
-        <h2 className="pb-2 text-xl text-gray-700 font-body">
+        <h2 className="pb-2 text-xl text-theme-s8 font-body">
           {frontmatter.description}
         </h2>
-        <div className="text-gray-500 font-body">
+        <div className="text-gray-500 text-theme-s8 font-body">
           {frontmatter.date} - {timeToRead} min read
         </div>
         <div
-          className="pt-8 text-xl text-gray-700 blog-post-content font-body"
+          className="pt-8 text-xl text-theme-s8 blog-post-content font-body"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </main>

@@ -18,19 +18,19 @@ const Header: React.FC<HeaderProps> = () => {
   const MenuItem: React.FC<{ url: string; text: string }> = ({ url, text }) => (
     <Link
       to={url}
-      activeClassName="text-blue-600 border-t-2 border-blue-600"
-      className="box-border block p-6 text-gray-700 border-t-2 border-white text-md lg:inline-block lg:mt-0 hover:text-blue-600 font-body"
+      activeClassName="text-sol-blue border-t-2 border-sol-blue"
+      className="box-border block p-6 border-t-2 text-theme-s8 border-theme-p6 text-md lg:inline-block lg:mt-0 hover:text-sol-blue font-body"
     >
       {text}
     </Link>
   )
 
   return (
-    <header className="fixed inset-x-0 top-0 z-10 bg-white border-b border-gray-200">
+    <header className="fixed inset-x-0 top-0 z-10 border-b border-theme-p2 bg-theme-p6">
       <nav className="relative flex flex-wrap items-center justify-between max-w-screen-xl px-6 mx-auto">
         <Link
           to="/"
-          className="flex items-center flex-shrink-0 mr-6 text-gray-800 hover:text-blue-800"
+          className="flex items-center flex-shrink-0 mr-6 text-theme-s9 hover:text-blue-800"
         >
           {/* <svg
             className="w-8 h-8 mr-2 fill-current"
