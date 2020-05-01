@@ -69,4 +69,4 @@ yarn-error.log
 .yarn-integrity
 
 # Auto generated graphql types - this is very noisy
-graphql-types.ts
+graphql-types

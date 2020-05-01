@@ -8,11 +8,9 @@ const Blog: React.FC<BlogProps> = ({ data }) => {
   return (
     <Layout>
       <main className="relative py-10 bg-theme-p5">
-        <section className="flex max-w-screen-xl p-6 pt-64 mx-auto">
-          <h1 className="text-xl font-display text-theme-s9">All Posts</h1>
-          <div>
-            <BlogPosts />
-          </div>
+        <section className="max-w-screen-lg p-6 pt-32 mx-auto">
+          <div className="text-xl font-display text-theme-s9">All Posts</div>
+          <BlogPosts />
         </section>
       </main>
     </Layout>

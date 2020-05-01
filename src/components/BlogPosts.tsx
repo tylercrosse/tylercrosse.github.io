@@ -53,7 +53,7 @@ const BlogPosts: React.FC<BlogPostsProps> = () => {
             <p className="pb-2 text-gray-700 font-body text-theme-s8">
               {node.frontmatter?.description}
             </p>
-            <div className="text-gray-500 font-body text-theme-s8">
+            <div className="text-gray-500 font-body text-theme-s7">
               {node.frontmatter?.date} - {node.timeToRead} min read
             </div>
           </Link>

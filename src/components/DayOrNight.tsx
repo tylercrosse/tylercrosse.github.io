@@ -1,19 +1,15 @@
 import React, { useContext } from 'react'
-
-export const ThemeContext: React.Context<[
-  string,
-  (s: string) => void
-]> = React.createContext(['light', () => {}])
+import ThemeContext from '../context/ThemeContext'
 
 interface DayOrNightProps {}
 
 const DayOrNight: React.FC<DayOrNightProps> = () => {
-  const [theme, setTheme] = useContext(ThemeContext)
+  const { toggleDark } = useContext(ThemeContext)
   return (
     <button
       className="iconWrapper"
       onClick={() => {
-        setTheme(theme === 'light' ? 'dark' : 'light')
+        toggleDark()
       }}
     >
       <div className="moonOrSun" />

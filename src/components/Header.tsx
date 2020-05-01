@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import DayOrNight from './DayOrNight'
 
-interface HeaderProps {}
+interface HeaderProps {
+  isWhite?: boolean
+}
 
 const menuItems = [
   { url: '/', text: 'Home' },
@@ -12,7 +14,7 @@ const menuItems = [
   // { url: '/about', text: 'About' },
 ]
 
-const Header: React.FC<HeaderProps> = () => {
+const Header: React.FC<HeaderProps> = ({ isWhite = false }) => {
   const [isMenuOpen, setMenuOpen] = useState(false)
 
   const MenuItem: React.FC<{ url: string; text: string }> = ({ url, text }) => (
@@ -26,11 +28,15 @@ const Header: React.FC<HeaderProps> = () => {
   )
 
   return (
-    <header className="fixed inset-x-0 top-0 z-10 border-b border-theme-p2 bg-theme-p6">
+    <header
+      className={`fixed inset-x-0 top-0 z-10 border-b border-theme-p2 ${
+        isWhite ? 'bg-white' : 'bg-theme-p6'
+      }`}
+    >
       <nav className="relative flex flex-wrap items-center justify-between max-w-screen-xl px-6 mx-auto">
         <Link
           to="/"
-          className="flex items-center flex-shrink-0 mr-6 text-theme-s9 hover:text-blue-800"
+          className="flex items-center flex-shrink-0 mr-6 text-theme-s9 hover:text-sol-blue"
         >
           {/* <svg
             className="w-8 h-8 mr-2 fill-current"

@@ -1,11 +1,17 @@
 import React from 'react'
 import { FaLinkedin, FaGithub, FaRegEnvelope } from 'react-icons/fa'
 
-interface FooterProps {}
+interface FooterProps {
+  isWhite?: boolean
+}
 
-const Footer: React.FC<FooterProps> = ({ children }) => {
+const Footer: React.FC<FooterProps> = ({ children, isWhite = false }) => {
   return (
-    <footer className="flex items-center justify-center p-10 border-t border-theme-p2 bg-theme-p6">
+    <footer
+      className={`flex items-center justify-center p-10 border-t border-theme-p2 ${
+        isWhite ? 'bg-white' : 'bg-theme-p6'
+      }`}
+    >
       <div className="mr-10 text-theme-s7">
         &copy; Tyler Crosse - All rights reserved.
       </div>

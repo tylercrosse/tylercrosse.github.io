@@ -1,20 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import Header from './Header'
 import Footer from './Footer'
-import { ThemeContext } from './DayOrNight'
+import ThemeContext from '../context/ThemeContext'
 
-interface LayoutProps {}
+interface LayoutProps {
+  isWhite?: boolean
+}
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const themeHook = useState('light')
+const Layout: React.FC<LayoutProps> = ({ children, isWhite = false }) => {
+  const { dark } = useContext(ThemeContext)
   return (
-    <ThemeContext.Provider value={themeHook}>
-      <div className={themeHook[0] === 'light' ? 'themeDark' : 'themeLight'}>
-        <Header />
-        {children}
-        <Footer />
-      </div>
-    </ThemeContext.Provider>
+    <div className={dark ? 'themeDark' : 'themeLight'}>
+      <Header isWhite={isWhite} />
+      {children}
+      <Footer isWhite={isWhite} />
+    </div>
   )
 }
 
