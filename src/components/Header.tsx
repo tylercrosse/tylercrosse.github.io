@@ -19,6 +19,7 @@ const Header: React.FC<HeaderProps> = ({ isWhite = false }) => {
 
   const MenuItem: React.FC<{ url: string; text: string }> = ({ url, text }) => (
     <Link
+      key={url}
       to={url}
       activeClassName="text-sol-blue border-t-2 border-sol-blue"
       className="box-border block p-6 border-t-2 text-theme-s8 border-theme-p6 text-md lg:inline-block lg:mt-0 hover:text-sol-blue font-body"

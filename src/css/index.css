@@ -5,6 +5,7 @@
 @import './themeVars.css';
 @import './dayOrNight.css';
 @import './prismSolarized.css';
+@import './blogStyles.css';
 
 .text-7xl {
   font-size: 5rem;
