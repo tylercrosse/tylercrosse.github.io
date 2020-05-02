@@ -16,10 +16,10 @@ const Index: React.FC<IndexProps> = ({ data }) => {
         <section className="flex max-w-screen-xl p-6 pt-64 mx-auto">
           <div className="w-1/2 pt-10 pr-8">
             <h1 className="text-7xl font-display text-theme-s9">
-              Hi, I'm Tyler,
+              Hi, I'm Tyler
             </h1>
             <p className="pb-5 text-xl font-body text-theme-s8">
-              a <span className="font-bold">Software Developer </span> in
+              I'm a <span className="font-bold">Software Developer </span> in
               Seattle WA.
             </p>
             <p className="text-xl font-body text-theme-s8">

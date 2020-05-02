@@ -22,7 +22,16 @@ module.exports = {
         name: `content`,
       },
     },
-    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        gfm: true,
+        plugins: [
+          `gatsby-remark-autolink-headers`, // should be before prismjs
+          `gatsby-remark-prismjs`,
+        ],
+      },
+    },
     'gatsby-plugin-postcss',
     {
       resolve: 'gatsby-plugin-purgecss',
@@ -57,6 +66,7 @@ module.exports = {
         },
       },
     },
+    `gatsby-plugin-catch-links`,
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
