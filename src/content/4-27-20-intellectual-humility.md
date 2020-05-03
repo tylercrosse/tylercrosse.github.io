@@ -1,6 +1,6 @@
 ---
 path: '/blog/intellectual-humility'
-date: '4/27/20'
+date: '2020-04-27'
 title: 'Intellectual Humility'
 description: 'Being ok with not knowing something helps with learning it.'
 tags: ['personal development']

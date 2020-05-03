@@ -19,6 +19,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           node {
             frontmatter {
               path
+              tags
             }
           }
         }
@@ -30,11 +31,36 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
     return
   }
+
+  // Create blog post pages.
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
       path: node.frontmatter.path,
       component: blogPostTemplate,
-      context: {}, // additional data can be passed via context
+      context: {
+        highlight: node.frontmatter.highlight,
+        shadow: node.frontmatter.shadow,
+      },
     })
   })
+
+  // // Create Tag pages
+  // let tags = []
+  //   result.data.allMarkdownRemark.edges.forEach(edge => {
+  //     if (_.get(edge, `node.frontmatter.tags`)) {
+  //       tags = tags.concat(edge.node.frontmatter.tags)
+  //     }
+  //   })
+  //   tags = _.uniq(tags)
+  //   tags.forEach(tag => {
+  //     const tagPath = `/tags/${_.kebabCase(tag)}/`
+  //     createPage({
+  //       path: tagPath,
+  //       component: tagPagesTemplate,
+  //       context: {
+  //         tag,
+  //       },
+  //     })
+  //   })
+  // })
 }

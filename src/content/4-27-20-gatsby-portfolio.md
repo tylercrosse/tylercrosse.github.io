@@ -1,6 +1,6 @@
 ---
 path: '/blog/redoing-my-portfolio-site-with-gatsby'
-date: '4/27/20'
+date: '2020-04-27'
 title: 'Redoing my Portfolio Site with Gatsby'
 description: 'The slow evolution of my personal portfolio site.'
 tags: ['gatsby', 'javascript', 'typescript', 'graphql', 'tailwindcss']
