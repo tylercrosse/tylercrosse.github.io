@@ -1,9 +1,10 @@
 ---
-path: '/blog/redoing-my-portfolio-site-with-gatsby'
-date: '2020-04-27'
 title: 'Redoing my Portfolio Site with Gatsby'
 description: 'The slow evolution of my personal portfolio site.'
+date: '2020-04-27'
 tags: ['gatsby', 'javascript', 'typescript', 'graphql', 'tailwindcss']
+path: '/blog/redoing-my-portfolio-site-with-gatsby'
+draft: false
 ---
 
 This project has started with some simple goals.

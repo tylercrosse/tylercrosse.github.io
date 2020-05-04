@@ -30,12 +30,7 @@ module.exports = {
         footnotes: true,
         pedantic: true,
         plugins: [
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 896,
-            },
-          },
+          `gatsby-remark-images`,
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
           `gatsby-remark-autolink-headers`, // should be before prismjs

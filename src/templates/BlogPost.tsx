@@ -23,13 +23,13 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
           <h2 className="pb-2 text-xl text-theme-s8 font-body">
             {markdownRemark?.frontmatter?.description}
           </h2>
-          <div className="text-gray-500 text-theme-s8 font-body">
+          <div className="text-gray-500 text-theme-s7 font-body">
             {markdownRemark?.frontmatter?.date} - {markdownRemark?.timeToRead}{' '}
             min read
           </div>
         </div>
         <div
-          className="p-10 pt-8 text-xl text-theme-s8 blog-post-content font-body"
+          className="p-10 pt-0 text-xl text-theme-s8 blog-post-content font-body"
           dangerouslySetInnerHTML={{ __html: markdownRemark?.html || '' }}
         />
       </main>
@@ -45,7 +45,7 @@ export const pageQuery = graphql`
       html
       timeToRead
       frontmatter {
-        date
+        date(formatString: "MMMM DD, YYYY")
         path
         title
         description

@@ -32,7 +32,7 @@ const BlogPosts: React.FC<BlogPostsProps> = () => {
             id
             timeToRead
             frontmatter {
-              date
+              date(formatString: "MMMM DD, YYYY")
               path
               title
               description
