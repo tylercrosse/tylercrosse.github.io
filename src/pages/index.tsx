@@ -3,6 +3,7 @@ import { Link, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { IndexPageQuery } from '../../graphql-types'
 import Layout from '../components/Layout'
+import SEO from '../components/SEO'
 import BlogPosts from '../components/BlogPosts'
 
 interface IndexProps {
@@ -11,8 +12,9 @@ interface IndexProps {
 
 const Index: React.FC<IndexProps> = ({ data }) => {
   return (
-    <Layout>
-      <main className="relative py-10 bg-theme-p5">
+    <>
+      <SEO title="Home" />
+      <Layout>
         <section className="flex max-w-screen-xl p-6 pt-64 mx-auto">
           <div className="w-1/2 pt-10 pr-8">
             <h1 className="text-7xl font-display text-theme-s9">
@@ -38,8 +40,8 @@ const Index: React.FC<IndexProps> = ({ data }) => {
             See More
           </Link>
         </section>
-      </main>
-    </Layout>
+      </Layout>
+    </>
   )
 }
 

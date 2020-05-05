@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { graphql } from 'gatsby'
 import { BlogPostQuery } from '../../graphql-types'
 import Layout from '../components/Layout'
+import SEO from '../components/SEO'
 import ThemeContext from '../context/ThemeContext'
 
 interface BlogPostTemplateProps {
@@ -14,8 +15,15 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
   const { dark } = useContext(ThemeContext)
   const { markdownRemark } = data // data.markdownRemark holds your post data
   return (
-    <Layout isWhite={!dark}>
-      <main className={`relative pt-32 ${dark ? 'bg-sol-dark-4' : 'bg-white'}`}>
+    <>
+      <SEO
+        title={markdownRemark?.frontmatter?.title || ''}
+        description={markdownRemark?.frontmatter?.description || ''}
+      />
+      <Layout
+        isWhite={!dark}
+        mainClasses={`pt-32 ${dark ? 'bg-sol-dark-4' : 'bg-white'} flex-grow`}
+      >
         <div className="max-w-2xl py-10 m-auto">
           <h1 className="text-5xl leading-tight font-display text-theme-s9">
             {markdownRemark?.frontmatter?.title}
@@ -32,8 +40,8 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
           className="p-10 pt-0 text-xl text-theme-s8 blog-post-content font-body"
           dangerouslySetInnerHTML={{ __html: markdownRemark?.html || '' }}
         />
-      </main>
-    </Layout>
+      </Layout>
+    </>
   )
 }
 

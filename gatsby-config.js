@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Typescript Tailwind`,
-    description: `An example config of Gatsby + TypeScript + Tailwind CSS`,
-    author: `@gatsbyjs`,
+    title: `TC`,
+    description: `Tyler Crosse's blog`,
+    author: `Tyler Crosse`,
   },
   plugins: [
     `gatsby-plugin-typescript`,
@@ -57,7 +57,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        // icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/favicon-512.png`, // This path is relative to the root of the site.
       },
     },
     {

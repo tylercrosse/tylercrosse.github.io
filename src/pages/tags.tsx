@@ -10,25 +10,23 @@ const Tags: React.FC<TagsProps> = ({ data }) => {
 
   return (
     <Layout>
-      <main className="relative py-10 bg-theme-p5">
-        <section className="max-w-screen-lg p-6 pt-32 mx-auto">
-          <div className="text-xl font-display text-theme-s9">All Tags</div>
-          <ul>
-            {allTags.map(tag => (
-              <li key={tag.fieldValue}>
-                <Link
-                  style={{
-                    textDecoration: `none`,
-                  }}
-                  to={`/tags/${kebabCase(tag.fieldValue)}/`}
-                >
-                  {tag.fieldValue} ({tag.totalCount})
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </main>
+      <section className="max-w-screen-lg p-6 pt-32 mx-auto">
+        <div className="text-xl font-display text-theme-s9">All Tags</div>
+        <ul>
+          {allTags.map(tag => (
+            <li key={tag.fieldValue}>
+              <Link
+                style={{
+                  textDecoration: `none`,
+                }}
+                to={`/tags/${kebabCase(tag.fieldValue)}/`}
+              >
+                {tag.fieldValue} ({tag.totalCount})
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
     </Layout>
   )
 }
