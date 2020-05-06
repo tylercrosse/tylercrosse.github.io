@@ -7,13 +7,13 @@ const DayOrNight: React.FC<DayOrNightProps> = () => {
   const { toggleDark } = useContext(ThemeContext)
   return (
     <button
-      className="iconWrapper"
+      className="iconWrapper themeToggle"
       onClick={() => {
         toggleDark()
       }}
     >
-      <div className="moonOrSun" />
-      <div className="moonMask" />
+      <div className="moonOrSun themeToggle" />
+      <div className="moonMask themeToggle" />
     </button>
   )
 }
