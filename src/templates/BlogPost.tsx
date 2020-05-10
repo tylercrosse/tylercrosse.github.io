@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { graphql } from 'gatsby'
 import { BlogPostQuery } from '../../graphql-types'
+import BlogPosts from '../components/BlogPosts'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import ThemeContext from '../context/ThemeContext'
@@ -24,22 +25,28 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
         isWhite={!dark}
         mainClasses={`pt-32 ${dark ? 'bg-sol-dark-4' : 'bg-white'} flex-grow`}
       >
-        <div className="max-w-2xl py-10 m-auto">
-          <h1 className="text-5xl leading-tight font-display text-theme-s9">
-            {markdownRemark?.frontmatter?.title}
-          </h1>
-          <h2 className="pb-2 text-xl text-theme-s8 font-body">
-            {markdownRemark?.frontmatter?.description}
-          </h2>
-          <div className="text-gray-500 text-theme-s7 font-body">
-            {markdownRemark?.frontmatter?.date} - {markdownRemark?.timeToRead}{' '}
-            min read
+        <section>
+          <div className="max-w-2xl py-10 m-auto">
+            <h1 className="text-5xl leading-tight font-display text-theme-s9">
+              {markdownRemark?.frontmatter?.title}
+            </h1>
+            <h2 className="pb-2 text-xl text-theme-s8 font-body">
+              {markdownRemark?.frontmatter?.description}
+            </h2>
+            <div className="text-gray-500 text-theme-s7 font-body">
+              {markdownRemark?.frontmatter?.date} - {markdownRemark?.timeToRead}{' '}
+              min read
+            </div>
           </div>
-        </div>
-        <div
-          className="p-10 pt-0 text-xl text-theme-s8 blog-post-content font-body"
-          dangerouslySetInnerHTML={{ __html: markdownRemark?.html || '' }}
-        />
+          <div
+            className="p-10 pt-0 text-xl text-theme-s8 blog-post-content font-body"
+            dangerouslySetInnerHTML={{ __html: markdownRemark?.html || '' }}
+          />
+        </section>
+        <section className="max-w-2xl pt-16 pb-10 mx-auto mt-10 border-t border-theme-p2">
+          <div className="text-xl font-display text-theme-s9">Other Posts</div>
+          <BlogPosts />
+        </section>
       </Layout>
     </>
   )

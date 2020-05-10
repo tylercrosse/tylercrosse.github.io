@@ -26,7 +26,7 @@ interface BlogIndexPageQuery {
 const BlogPosts: React.FC<BlogPostsProps> = () => {
   const data: BlogIndexPageQuery = useStaticQuery(graphql`
     query BlogIndexPage {
-      allMarkdownRemark {
+      allMarkdownRemark(filter: { frontmatter: { draft: { ne: true } } }) {
         edges {
           node {
             id

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import DayOrNight from './DayOrNight'
+import TClogo from './TClogo'
 
 interface HeaderProps {
   isWhite?: boolean
@@ -38,6 +39,7 @@ const Header: React.FC<HeaderProps> = ({ isWhite = false }) => {
           to="/"
           className="flex items-center flex-shrink-0 mr-6 text-theme-s9 hover:text-sol-blue"
         >
+          <TClogo />
           <span className="text-xl font-semibold tracking-tight font-display">
             Tyler Crosse
           </span>
