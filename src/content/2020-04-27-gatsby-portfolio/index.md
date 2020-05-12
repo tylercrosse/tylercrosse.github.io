@@ -11,7 +11,18 @@ draft: false
 
 To be fair this is my first blog, and this is the first post. Welcome!
 
-## Site architecture
+#### Goals
+
+This project has started with some simple goals.
+
+- Practice Typescript, and Gatsby.
+- Try out some new tools like tailwindcss.
+- Re-do my portfolio site.
+- Start blogging (practice writing).
+
+### Site architecture
+
+Here's a quick rundown of the sites architecture.
 
 - Most of the styling is done with the help of [tailwindcss](https://tailwindcss.com/).
 - Powered by Gatsby with the React components written in [Typescript](https://www.typescriptlang.org/).
@@ -19,36 +30,7 @@ To be fair this is my first blog, and this is the first post. Welcome!
 - Blog posts are written in markdown which is parsed by remark. Syntax highlighting for code snippets is handled by prismjs. Gatsy makes this easy with plugins, [gatsby-transformer-remark](https://www.gatsbyjs.org/packages/gatsby-transformer-remark/) and [gatsby-remark-prismjs](https://www.gatsbyjs.org/packages/gatsby-remark-prismjs/) do most of the heavy lifting.
 - Moon/Sun theme switcher inspired by the switcher on the gatsby docs page which has it roots in a [codepen](https://codepen.io/aaroniker/pen/KGpXZo) created by Aaron Iker. The tailwind theme switching is modeled of a repo by [M. Appelman](https://github.com/huphtur/tailwind-theme-switcher/).
 
-### Goals
-
-This project has started with some simple goals. A lot of software development is weighing pros and cons
-
-- Practice Typescript, and Gatsby.
-- Try out some new tools like tailwindcss.
-- Re-do my portfolio site.
-- Start blogging (practice writing).
-
-### Typescript
-
-- js dev for 5 years
-- have wanted to try it
-- starting with a simple project
-
-- resources I used
-
-https://www.typescriptlang.org/v2/docs/handbook/
-https://react-typescript-cheatsheet.netlify.app/
-https://basarat.gitbook.io/typescript/
-https://www.youtube.com/watch?v=Z5iWr6Srsj8
-https://www.youtube.com/watch?v=nViEqpgwxHE
-
-### Gatsby
-
-- flexibility, ease of adding data + plugins
-- graphql but not really
-- comfort with react, experience at rosetta
-
-### 1. Design
+### 1. Design - Colors, Fonts, & Figma
 
 I started by looking at a ton of landing pages on [lapa.ninja](https://www.lapa.ninja/) for inspiration. For this project I wanted to keep the design simple and clean. There are a ton of wonderful pages out there and narrowing it down to a few designs to draw from was difficult. Two of the sites I wanted to pull queues from were [Mode Remote](https://moderemote.com/) and [The A-Z of AI](https://atozofai.withgoogle.com/intl/en-US/). They both have dramatic
 display fonts, warm palettes, and minimal layouts.
@@ -106,25 +88,23 @@ Another interesting consequence of using tailwind is it reduces the amount of cs
 
 With tailwindcss the css bundle grows closer to logarithmically, with a max near the total number of css rules available. The classes are reused but the css isn't duplicated.
 
-### Blog Posts
+### 3. Frontend Stack - Gatsby & Typescript
 
-- Remark + Prism + styles
-- inspo from medium, nytimes, novella, gatsby docs
-- why remark vs. mdx
+There is a solid argument that using React and Typescript are overkill for a site that could be totally static. My old personal site incredibly fast. It had minimal markup, small assets, and a tiny amount of js sprinkled on for interactivity. Using a similar approach for the rewrite would almost certainly be more performant. In a future post I'd like to talk about cargo culting in the frontend community. It's also a valid point but it's a lot to unpack.
 
-### Theme Switcher
+Performance wasn't the only concern for this project. I've wanted to work on and deploy a Typescript project for a while. The ones I've started to date have been too ambitious. With this project I wanted to learn with a scaffolded approach, building off what I already know. I have a lot of experience with React and Gatsby which gives me good foundation to build off of.
 
-- how it works
+Gatsby squeezes out at least enough performance for the tradeoff to be less of a concern. Gatsby also makes it pretty easy import lots of different data sources and add plugins. Implementing these choices was fast tracked by building off of the [gatsby-typescript-tailwind starter](https://www.gatsbyjs.org/starters/impulse/gatsby-typescript-tailwind/).
 
-### Deployment
-
-- github pages?
+Some of the better resources I read and consulted while working on this site are the official [Typescript Handbook](https://www.typescriptlang.org/v2/docs/handbook/) and docs, the [React TypeScript](https://react-typescript-cheatsheet.netlify.app/), and the [Typescript Deep Dive](https://basarat.gitbook.io/typescript/). There were parts of each that complemented one another.
 
 ### Future state
 
-- design improvments - esp. around the experience on mobile
-- tags
-  - tag graph - https://www.data-to-viz.com/graph/network.html
-- tag snippets with language
-- better handling of images, this may involve using the mdx plugin
-- search - algolia, elasticlunr, js-search https://www.gatsbyjs.org/docs/adding-search/
+There are a lot of things I'd like to improve about this site. Here are a few:
+
+- General design improvements and refinement. Especially around the experience on mobile.
+- Adding an index of Tags. It could be cool to build a graph visualization of how tags are interconnected across posts.
+- Adding site search.
+- Some sort of project showcase.
+
+Keep an eye out for posts on these!
