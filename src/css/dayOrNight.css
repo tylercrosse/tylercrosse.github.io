@@ -7,123 +7,79 @@ The original inspiration is due to Aaron Iker
 https://codepen.io/aaroniker/pen/KGpXZo
 */
 .iconWrapper {
+  @apply relative inline-flex items-center justify-center w-10 h-10 p-0
+  overflow-hidden align-middle bg-transparent border-0 rounded opacity-75
+  appearance-none cursor-pointer;
   /*
-  both padding and appearance are here to help
-  Mobile Safari rendering correctly, at least on
-  older iOS versions — tested on iOS 12.4.2 / iPhone 5s
-*/
-padding: 0;
-appearance: none;
-align-items: center;
-background: transparent;
-border-radius: 5px;
-border: 0;
-cursor: pointer;
-display: inline-flex;
-height: 40px;
-justify-content: center;
-/*
-  roughly compensates for the additional whitespace of this specific
-  "icon button" in relation to its "social icon" siblings;
-  leave the left untouched for some separation from the aforementioned
-*/
-margin-right: -11px;
-opacity: 0.75;
-/*
-  allows us to use the default :focus
-  outline without the "moon mask" being taken into account
-  by the browser when rendering the outline —
-  not an ideal solution, but good for now
-*/
-overflow: hidden;
-position: relative;
-/*
-  scaling to 75% of the original size
-  scales the "moon" shape from 24px to 18px,
-  aligning it with the rest of the main nav's
-  "social icons"; sun and its rays are slightly larger;
-  good for now, too ;-)
-*/
-transform: scale(0.75);
-transition: opacity 0.3s ease;
-vertical-align: middle;
-width: 40px;
+    roughly compensates for the additional whitespace of this specific
+    "icon button" in relation to its "social icon" siblings;
+    leave the left untouched for some separation from the aforementioned
+  */
+  margin-right: -11px;
+  /*
+    allows us to use the default :focus
+    outline without the "moon mask" being taken into account
+    by the browser when rendering the outline —
+    not an ideal solution, but good for now
+  */
+  /* overflow: hidden;
+  position: relative; */
+  /*
+    scaling to 75% of the original size
+    scales the "moon" shape from 24px to 18px,
+    aligning it with the rest of the main nav's
+    "social icons"; sun and its rays are slightly larger;
+    good for now, too ;-)
+  */
+  transform: scale(0.75);
+  transition: opacity 0.3s ease;
 }
 .iconWrapper:hover {
-opacity: 1;
+  opacity: 1;
 }
 
 .moonOrSun {
-background: var(--sol-blue);
-border-radius: 50%;
-height: 24px;
-width: 24px;
-position: relative;
-transition: all 0.45s ease;
-border: 2px solid var(--sol-blue);
-overflow: hidden;
-transform: scale(1);
+  @apply relative w-6 h-6 overflow-hidden scale-100 border-2 rounded-full
+  bg-sol-blue border-sol-blue;
+  transition: all 0.45s ease;
 }
 .themeDark .moonOrSun {
-border: 4px solid var(--sol-blue);
-overflow: visible;
-transform: scale(0.55);
+  @apply overflow-visible border-4 border-sol-blue;
+  transform: scale(0.55);
 }
 .moonOrSun::before {
-border-radius: 50%;
-border: 2px solid var(--sol-blue);
-content: "";
-height: 24px;
-position: absolute;
-right: -9px;
-top: -9px;
-transition: transform 0.45s ease;
-width: 24px;
-opacity: 1;
-transform: translate(0, 0);
+  @apply absolute w-6 h-6 border-2 rounded-full opacity-100 border-sol-blue;
+  content: '';
+  right: -9px;
+  top: -9px;
+  transition: transform 0.45s ease;
+  transform: translate(0, 0);
 }
 .themeDark .moonOrSun::before {
-opacity: 0;
-transform: translate(14px, -14px);
+  opacity: 0;
+  transform: translate(14px, -14px);
 }
 .moonOrSun::after {
-border-radius: 50%;
-box-shadow: 0 -23px 0 var(--sol-blue),
-  0 23px 0 var(--sol-blue),
-  23px 0 0 var(--sol-blue),
-  -23px 0 0 var(--sol-blue),
-  15px 15px 0 var(--sol-blue),
-  -15px 15px 0 var(--sol-blue),
-  15px -15px 0 var(--sol-blue),
-  -15px -15px 0 var(--sol-blue);
-content: "";
-height: 8px;
-left: 50%;
-margin: -4px 0 0 -4px;
-position: absolute;
-top: 50%;
-width: 8px;
-transition: all 0.35s ease;
-transform: scale(0);
+  @apply absolute w-2 h-2 m-0 -mt-1 -ml-1 rounded-full;
+  transform: scale(0);
+  box-shadow: 0 -23px 0 var(--sol-blue), 0 23px 0 var(--sol-blue),
+    23px 0 0 var(--sol-blue), -23px 0 0 var(--sol-blue),
+    15px 15px 0 var(--sol-blue), -15px 15px 0 var(--sol-blue),
+    15px -15px 0 var(--sol-blue), -15px -15px 0 var(--sol-blue);
+  content: '';
+  left: 50%;
+  top: 50%;
+  transition: all 0.35s ease;
 }
 .themeDark .moonOrSun::after {
-transform: scale(1);
+  transform: scale(1);
 }
-
 .moonMask {
-background: var(--white);
-border-radius: 50%;
-border: 0;
-height: 24px;
-position: absolute;
-right: 0;
-top: 0;
-transition: background 0.25s ease, transform 0.45s ease;
-width: 24px;
-opacity: 1;
-transform: translate(0, 0);
+  @apply absolute top-0 right-0 w-6 h-6 bg-white border-0 rounded-full opacity-100;
+  transition: background 0.25s ease, transform 0.45s ease;
+  transform: translate(0, 0);
 }
 .themeDark .moonMask {
-opacity: 0;
-transform: translate(14px, -14px);
+  opacity: 0;
+  transform: translate(14px, -14px);
 }
