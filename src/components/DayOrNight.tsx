@@ -1,9 +1,7 @@
 import React, { useContext } from 'react'
 import ThemeContext from '../context/ThemeContext'
 
-interface DayOrNightProps {}
-
-const DayOrNight: React.FC<DayOrNightProps> = () => {
+const DayOrNight: React.FC = () => {
   const { toggleDark } = useContext(ThemeContext)
   return (
     <button

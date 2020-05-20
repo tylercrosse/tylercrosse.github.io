@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `TC`,
-    description: `Tyler Crosse's blog`,
+    title: `Tyler Crosse`,
+    description: `Sharing my projects and expanding my knowledge of Software Development with a Frontend slant`,
     author: `Tyler Crosse`,
   },
   plugins: [
@@ -45,7 +45,12 @@ module.exports = {
         footnotes: true,
         pedantic: true,
         plugins: [
-          `gatsby-remark-images`,
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 900,
+            },
+          },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
           `gatsby-remark-autolink-headers`, // should be before prismjs
