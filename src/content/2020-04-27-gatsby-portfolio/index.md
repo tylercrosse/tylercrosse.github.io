@@ -1,13 +1,13 @@
 ---
-title: 'Redoing my Portfolio Site with Gatsby'
-description: 'The slow evolution of my personal portfolio site.'
+title: 'New blog who dis?'
+description: 'Creating a blog with Figma, Tailwindcss, Typescript, and Gatsby (React).'
 date: '2020-04-27'
 tags: ['gatsby', 'javascript', 'typescript', 'graphql', 'tailwindcss']
 path: '/blog/redoing-my-portfolio-site-with-gatsby'
 draft: false
 ---
 
-## New blog who dis?
+![](blog-home-light.png)
 
 To be fair this is my first blog, and this is the first post. Welcome!
 
