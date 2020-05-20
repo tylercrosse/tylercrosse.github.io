@@ -49,6 +49,7 @@
     "gatsby-source-filesystem": "2.2.5",
     "gatsby-transformer-remark": "^2.8.4",
     "gatsby-transformer-sharp": "2.4.7",
+    "gh-pages": "^2.2.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.1.7",
     "postcss-nesting": "^7.0.1",
@@ -66,14 +67,15 @@
   ],
   "license": "MIT",
   "scripts": {
-    "type-check": "tsc --noEmit",
-    "lint": "eslint . --ext ts,tsx",
     "build": "gatsby build",
+    "deploy": "gatsby build && gh-pages -d public -b master",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md,ts,tsx}\"",
-    "start": "npm run develop",
+    "lint": "eslint . --ext ts,tsx",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "start": "npm run develop",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "type-check": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
