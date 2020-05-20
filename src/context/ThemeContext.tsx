@@ -1,48 +1,41 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-/** {@link https://www.gatsbyjs.org/blog/2019-01-31-using-react-context-api-with-gatsby/} */
 const defaultState = {
   dark: false,
   toggleDark: () => {},
 }
+/** Originally based off this blog post {@link https://www.gatsbyjs.org/blog/2019-01-31-using-react-context-api-with-gatsby/} */
 const ThemeContext = React.createContext(defaultState)
-// Getting dark mode information from OS!
-// You need macOS Mojave + Safari Technology Preview Release 68 to test this currently.
+// Getting dark mode information from the OS!
 const supportsDarkMode = () =>
   window.matchMedia('(prefers-color-scheme: dark)').matches === true
 
-class ThemeProvider extends React.Component {
-  state = {
-    dark: false,
-  }
-  toggleDark = () => {
-    let dark = !this.state.dark
-    localStorage.setItem('dark', JSON.stringify(dark))
-    this.setState({ dark })
-  }
-  componentDidMount() {
+const ThemeProvider: React.FC = ({ children }) => {
+  const [dark, setDark] = useState(false)
+  useEffect(() => {
     // Getting dark mode value from localStorage!
     const lsDark = localStorage.getItem('dark')
     if (lsDark !== null) {
-      this.setState({ dark: JSON.parse(lsDark) })
+      setDark(JSON.parse(lsDark))
     } else if (supportsDarkMode()) {
-      this.setState({ dark: true })
+      setDark(true)
     }
+  }, [])
+  const toggleDark = () => {
+    localStorage.setItem('dark', JSON.stringify(!dark))
+    setDark(!dark)
   }
-  render() {
-    const { children } = this.props
-    const { dark } = this.state
-    return (
-      <ThemeContext.Provider
-        value={{
-          dark,
-          toggleDark: this.toggleDark,
-        }}
-      >
-        {children}
-      </ThemeContext.Provider>
-    )
-  }
+  return (
+    <ThemeContext.Provider
+      value={{
+        dark,
+        toggleDark,
+      }}
+    >
+      {children}
+    </ThemeContext.Provider>
+  )
 }
+
 export default ThemeContext
 export { ThemeProvider }
