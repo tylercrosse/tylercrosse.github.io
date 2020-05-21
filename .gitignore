@@ -1,3 +1,6 @@
+# Auto generated graphql types - this is very noisy
+graphql-types.ts
+
 # Logs
 logs
 *.log
@@ -67,6 +70,3 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
-
-# Auto generated graphql types - this is very noisy
-graphql-types.ts
