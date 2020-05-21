@@ -7,11 +7,7 @@ path: '/blog/theme-switcher'
 draft: false
 ---
 
-https://caniuse.com/#feat=prefers-color-scheme
-https://web.dev/color-scheme/
-https://en.wikipedia.org/wiki/Light-on-dark_color_scheme
-
-Support for dark mode has gotten pretty good in the last year. Windows, Android, iOS, macOS and most browsers now all support dark mode. This article talks about the advantages of using a dark theme and walks through how to add one to a react application. I discuss how to make a theme setting globally accessible in a Gatsby app using react context, how use that setting to change style settings with TailwindCSS, and how to create a button that animates between a moon and a sun. This post is partially based on this [blog post by Muhammad Muhsin.](https://www.gatsbyjs.org/blog/2019-01-31-using-react-context-api-with-gatsby/)
+Support for dark mode has gotten pretty good in the last year. Windows, Android, iOS, macOS, and most browsers now all support dark mode. This article talks about the advantages of using a dark theme and walks through how to add one to a react application. I discuss how to make a theme setting globally accessible in a Gatsby app using react context, how use that setting to change style settings with TailwindCSS, and how to create a button that animates between a moon and a sun. This post is partially based on this [blog post by Muhammad Muhsin.](https://www.gatsbyjs.org/blog/2019-01-31-using-react-context-api-with-gatsby/)
 
 ## Why Dark?
 
@@ -186,7 +182,7 @@ const Layout: React.FC<LayoutProps> = ({
 export default Layout
 ```
 
-## Toggling the theme - Day / Night button
+## 3. Toggling the theme - Day / Night button
 
 Now that everything is wired up we need some UI control to manually switch between themes. I was inspired by the theme switcher on the [Gatsby docs](https://www.gatsbyjs.org/). Digging into the source for the site I found [their implementation](https://github.com/gatsbyjs/gatsby/blob/master/www/src/components/dark-mode-toggle.js) and a reference to a [codepen by Aaron Iker](https://codepen.io/aaroniker/pen/KGpXZo).
 
