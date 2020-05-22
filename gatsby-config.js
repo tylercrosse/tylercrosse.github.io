@@ -64,7 +64,7 @@ module.exports = {
       options: {
         develop: true,
         tailwind: true,
-        purgeOnly: ['src/css/index.css'],
+        purgeOnly: ['src/css/tailwindBase.css', 'src/css/index.css'],
       },
     },
     `gatsby-transformer-sharp`,
