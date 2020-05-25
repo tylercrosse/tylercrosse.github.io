@@ -1,0 +1,7 @@
+@tailwind utilities;
+
+@responsive {
+  .text-7xl {
+    font-size: 5rem;
+  }
+}

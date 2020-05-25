@@ -3,7 +3,7 @@ import React from 'react'
 const Layout: React.FC = () => {
   return (
     <svg
-      className="w-6 h-6 m-4"
+      className="w-6 h-6"
       viewBox="0 0 256 256"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

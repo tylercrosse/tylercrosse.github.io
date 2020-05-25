@@ -23,14 +23,16 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
       />
       <Layout
         isWhite={!dark}
-        mainClasses={`pt-32 ${dark ? 'bg-sol-dark-4' : 'bg-white'} flex-grow`}
+        mainClasses={`pt-24 xl:pt-32 ${
+          dark ? 'bg-sol-dark-4' : 'bg-white'
+        } flex-grow`}
       >
         <section>
-          <div className="max-w-2xl py-10 m-auto">
+          <div className="max-w-2xl px-4 py-10 m-auto md:px-0">
             <h1 className="text-5xl leading-tight font-display text-theme-s9">
               {markdownRemark?.frontmatter?.title}
             </h1>
-            <h2 className="pb-2 text-xl text-theme-s8 font-body">
+            <h2 className="pb-2 text-lg sm:text-xl text-theme-s8 font-body">
               {markdownRemark?.frontmatter?.description}
             </h2>
             <div className="text-gray-500 text-theme-s7 font-body">
@@ -39,11 +41,11 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
             </div>
           </div>
           <div
-            className="p-10 pt-0 text-xl text-theme-s8 blog-post-content font-body"
+            className="p-4 pt-0 text-lg sm:text-xl lg:p-10 text-theme-s8 blog-post-content font-body"
             dangerouslySetInnerHTML={{ __html: markdownRemark?.html || '' }}
           />
         </section>
-        <section className="max-w-2xl pt-16 pb-10 mx-auto mt-10 border-t border-theme-p2">
+        <section className="max-w-2xl px-4 pt-16 pb-10 mx-auto mt-10 border-t md:px-0 border-theme-p2">
           <div className="text-xl font-display text-theme-s9">Other Posts</div>
           <BlogPosts />
         </section>
