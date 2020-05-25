@@ -6,7 +6,9 @@ import {
   MarkdownRemarkFrontmatter,
 } from '../../graphql-types'
 
-interface BlogPostsProps {}
+interface BlogPostsProps {
+  limit?: number
+}
 
 interface BlogIndexPageQuery {
   allMarkdownRemark: {
@@ -23,10 +25,13 @@ interface BlogIndexPageQuery {
   }
 }
 
-const BlogPosts: React.FC<BlogPostsProps> = () => {
+const BlogPosts: React.FC<BlogPostsProps> = ({ limit }) => {
   const data: BlogIndexPageQuery = useStaticQuery(graphql`
     query BlogIndexPage {
-      allMarkdownRemark(filter: { frontmatter: { draft: { ne: true } } }) {
+      allMarkdownRemark(
+        filter: { frontmatter: { draft: { ne: true } } }
+        sort: { fields: frontmatter___date, order: DESC }
+      ) {
         edges {
           node {
             id
@@ -42,9 +47,11 @@ const BlogPosts: React.FC<BlogPostsProps> = () => {
       }
     }
   `)
+  const { edges } = data.allMarkdownRemark
+  const posts = limit ? edges.slice(0, limit - 1) : edges
   return (
     <>
-      {data.allMarkdownRemark.edges.map(({ node }) => (
+      {posts.map(({ node }) => (
         <div className="py-4 my-4 group" key={node.id}>
           <Link to={node.frontmatter?.path || '/blog'}>
             <h2 className="text-3xl group-hover:underline font-display text-theme-s9">
