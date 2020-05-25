@@ -37,17 +37,17 @@ const Header: React.FC<HeaderProps> = ({ isWhite = false }) => {
       <nav className="relative flex flex-wrap items-center justify-between max-w-screen-xl px-6 mx-auto">
         <Link
           to="/"
-          className="flex items-center flex-shrink-0 mr-6 text-theme-s9 hover:text-sol-blue"
+          className="flex items-center flex-shrink-0 py-4 mr-6 text-theme-s9 hover:text-sol-blue"
         >
           <TClogo />
-          <span className="text-xl font-semibold tracking-tight font-display">
+          <span className="ml-4 text-xl font-semibold tracking-tight font-display">
             Tyler Crosse
           </span>
         </Link>
         <div
           className={`w-full ${
             isMenuOpen ? 'block' : 'hidden'
-          } md:block flex-grow md:flex md:items-center md:w-auto justify-end`}
+          } md:block md:flex-grow md:flex md:items-center md:w-auto md:justify-end`}
         >
           {menuItems.map(item => (
             <MenuItem key={item.url} {...item} />
