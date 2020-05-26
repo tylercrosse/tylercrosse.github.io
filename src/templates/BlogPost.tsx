@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { graphql } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import { BlogPostQuery } from '../../graphql-types'
 import BlogPosts from '../components/BlogPosts'
 import Layout from '../components/Layout'
@@ -52,7 +52,13 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
         </section>
         <section className="max-w-2xl px-4 pt-16 pb-10 mx-auto mt-10 border-t md:px-0 border-theme-p2">
           <div className="text-xl font-display text-theme-s9">Other Posts</div>
-          <BlogPosts />
+          <BlogPosts limit={2} />
+          <Link
+            to="/blog"
+            className="font-body text-theme-s9 focus:text-sol-blue hover:text-sol-blue"
+          >
+            See More
+          </Link>
         </section>
       </Layout>
     </>
