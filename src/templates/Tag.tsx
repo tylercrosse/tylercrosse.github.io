@@ -18,20 +18,18 @@ const Template: React.FC<TagTemplateProps> = ({ data, pageContext }) => {
     <>
       <SEO title={`Posts tagged with #${pageContext.tag}"`} />
       <Layout>
-        <main className="relative py-10 bg-theme-p5">
-          <section className="max-w-screen-lg p-6 pt-32 mx-auto">
-            <div className="text-xl font-display text-theme-s9">
-              Posts tagged with #{pageContext.tag}
-            </div>
-            {data.allMarkdownRemark.edges.map(edge => (
-              <BlogPostPreview node={edge.node} />
-            ))}
-          </section>
-          <section className="max-w-screen-lg p-6 pt-0 mx-auto">
-            <div className="text-xl font-display text-theme-s9">All Tags</div>
-            <AllTags />
-          </section>
-        </main>
+        <section className="max-w-screen-lg p-6 pt-24 mx-auto xl:pt-32">
+          <div className="text-xl font-display text-theme-s9">
+            Posts tagged with #{pageContext.tag}
+          </div>
+          {data.allMarkdownRemark.edges.map(edge => (
+            <BlogPostPreview node={edge.node} />
+          ))}
+        </section>
+        <section className="max-w-screen-lg p-6 pt-0 mx-auto">
+          <div className="text-xl font-display text-theme-s9">All Tags</div>
+          <AllTags />
+        </section>
       </Layout>
     </>
   )

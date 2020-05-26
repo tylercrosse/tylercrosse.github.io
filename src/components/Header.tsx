@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ isWhite = false }) => {
     <Link
       to={url}
       activeClassName="text-sol-blue border-t-2 border-sol-blue"
-      className="box-border block p-6 border-t-2 text-theme-s8 border-theme-p6 text-md md:inline-block md:mt-0 hover:text-sol-blue font-body"
+      className="box-border block p-6 border-t-2 text-theme-s8 border-theme-p6 text-md md:inline-block md:mt-0 focus:text-sol-blue hover:text-sol-blue font-body"
     >
       {text}
     </Link>
