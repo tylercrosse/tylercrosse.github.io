@@ -4,6 +4,7 @@ import { BlogPostQuery } from '../../graphql-types'
 import BlogPosts from '../components/BlogPosts'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
+import TagPill from '../components/TagPill'
 import ThemeContext from '../context/ThemeContext'
 
 interface BlogPostTemplateProps {
@@ -35,9 +36,12 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
             <h2 className="pb-2 text-lg sm:text-xl text-theme-s8 font-body">
               {markdownRemark?.frontmatter?.description}
             </h2>
-            <div className="text-gray-500 text-theme-s7 font-body">
+            <div className="text-theme-s7 font-body">
               {markdownRemark?.frontmatter?.date} - {markdownRemark?.timeToRead}{' '}
-              min read
+              min read -{' '}
+              {markdownRemark?.frontmatter?.tags?.map(tag => (
+                <TagPill tag={tag} />
+              ))}
             </div>
           </div>
           <div
@@ -66,6 +70,7 @@ export const pageQuery = graphql`
         path
         title
         description
+        tags
       }
     }
   }
