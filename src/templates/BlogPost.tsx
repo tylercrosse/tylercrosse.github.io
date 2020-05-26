@@ -39,9 +39,10 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
             <div className="text-theme-s7 font-body">
               {markdownRemark?.frontmatter?.date} - {markdownRemark?.timeToRead}{' '}
               min read -{' '}
-              {markdownRemark?.frontmatter?.tags?.map(tag => (
-                <TagPill tag={tag} />
-              ))}
+              {markdownRemark?.frontmatter?.tags?.map(tag => {
+                if (typeof tag === 'string') return <TagPill tag={tag} />
+                return null
+              })}
             </div>
           </div>
           <div

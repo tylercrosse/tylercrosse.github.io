@@ -4,12 +4,16 @@ import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import AllTags from '../components/AllTags'
 import { BlogPostPreview } from '../components/BlogPosts'
+import { TagQuery } from '../../graphql-types'
 
 interface TagTemplateProps {
-  // readonly data: BlogPostQuery
+  readonly data: TagQuery
+  readonly pageContext: {
+    tag: string
+  }
 }
 
-const Template: React.FC<any> = ({ data, pageContext }) => {
+const Template: React.FC<TagTemplateProps> = ({ data, pageContext }) => {
   return (
     <>
       <SEO title={`Posts tagged with #${pageContext.tag}"`} />

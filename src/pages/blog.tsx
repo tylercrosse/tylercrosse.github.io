@@ -3,9 +3,7 @@ import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import BlogPosts from '../components/BlogPosts'
 
-interface BlogProps {}
-
-const Blog: React.FC<BlogProps> = ({ data }) => {
+const Blog: React.FC = () => {
   return (
     <>
       <SEO title="Blog" />
