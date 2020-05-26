@@ -36,7 +36,7 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
             <h2 className="pb-2 text-lg sm:text-xl text-theme-s8 font-body">
               {markdownRemark?.frontmatter?.description}
             </h2>
-            <div className="text-theme-s7 font-body">
+            <div className="w-full text-theme-s7 font-body">
               {markdownRemark?.frontmatter?.date} - {markdownRemark?.timeToRead}{' '}
               min read -{' '}
               {markdownRemark?.frontmatter?.tags?.map(tag => {

@@ -32,11 +32,11 @@ export const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({ node }) => (
       <div className="font-body text-theme-s7">
         {node.frontmatter?.date} - {node.timeToRead} min read
       </div>
-      <div className="mt-2">
+      <div className="w-full">
         {node.frontmatter?.tags?.map(tag => (
-          <span className="px-3 py-1 mr-2 text-xs rounded-full bg-theme-s7 text-theme-p9">
+          <div className="inline-block px-3 py-1 mt-2 mr-2 text-xs rounded-full bg-theme-s7 text-theme-p9">
             #{tag}
-          </span>
+          </div>
         ))}
       </div>
     </Link>
