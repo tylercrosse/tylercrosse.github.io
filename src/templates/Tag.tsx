@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
+import AllTags from '../components/AllTags'
 import { BlogPostPreview } from '../components/BlogPosts'
 
 interface TagTemplateProps {
@@ -22,6 +23,10 @@ const Template: React.FC<any> = ({ data, pageContext }) => {
               <BlogPostPreview node={edge.node} />
             ))}
           </section>
+          <section className="max-w-screen-lg p-6 pt-0 mx-auto">
+            <div className="text-xl font-display text-theme-s9">All Tags</div>
+            <AllTags />
+          </section>
         </main>
       </Layout>
     </>
@@ -31,7 +36,7 @@ const Template: React.FC<any> = ({ data, pageContext }) => {
 export default Template
 
 export const pageQuery = graphql`
-  query($tag: String) {
+  query Tag($tag: String) {
     allMarkdownRemark(
       limit: 1000
       sort: { fields: [frontmatter___date], order: DESC }
