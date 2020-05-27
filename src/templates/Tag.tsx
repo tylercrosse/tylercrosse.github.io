@@ -1,5 +1,6 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { Link, graphql } from 'gatsby'
+import capitalize from 'lodash/capitalize'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import AllTags from '../components/AllTags'
@@ -18,7 +19,19 @@ const Template: React.FC<TagTemplateProps> = ({ data, pageContext }) => {
     <>
       <SEO title={`Posts tagged with #${pageContext.tag}"`} />
       <Layout>
-        <section className="max-w-screen-lg p-6 pt-24 mx-auto xl:pt-32">
+        <section className="max-w-screen-lg p-6 pt-12 mx-auto xl:pt-32">
+          <div className="pt-4 pb-8">
+            <Link
+              className="p-2 pl-0 font-body text-theme-s7 focus:text-sol-blue hover:text-sol-blue"
+              to="/tags"
+            >
+              Tags
+            </Link>
+            <span className="p-2 font-body text-theme-s7">/</span>
+            <span className="p-2 font-body text-theme-s7">
+              {capitalize(pageContext.tag)}
+            </span>
+          </div>
           <div className="text-xl font-display text-theme-s9">
             Posts tagged with #{pageContext.tag}
           </div>
