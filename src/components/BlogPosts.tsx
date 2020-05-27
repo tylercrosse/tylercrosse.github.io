@@ -86,7 +86,7 @@ const BlogPostPreviews: React.FC<BlogPostPreviewsProps> = ({ limit }) => {
     }
   `)
   const { edges } = data.allMarkdownRemark
-  const posts = limit ? edges.slice(0, limit - 1) : edges
+  const posts = limit ? edges.slice(0, limit) : edges
   return (
     <>
       {posts.map(({ node }) => (
