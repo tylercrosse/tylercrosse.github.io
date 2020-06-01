@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import DayOrNight from './DayOrNight'
 import TClogo from './TClogo'
+import Search from './Search'
 
 interface HeaderProps {
   isWhite?: boolean
@@ -22,7 +23,7 @@ const Header: React.FC<HeaderProps> = ({ isWhite = false }) => {
     <Link
       to={url}
       activeClassName="text-sol-blue border-t-2 border-sol-blue"
-      className="box-border block p-6 border-t-2 text-theme-s8 border-theme-p6 text-md md:inline-block md:mt-0 focus:text-sol-blue hover:text-sol-blue font-body"
+      className="box-border block p-2 m-4 border-t-2 text-theme-s8 border-theme-p6 text-md md:inline-block focus:text-sol-blue hover:text-sol-blue font-body"
     >
       {text}
     </Link>
@@ -37,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ isWhite = false }) => {
       <nav className="relative flex flex-wrap items-center justify-between max-w-screen-xl px-6 mx-auto">
         <Link
           to="/"
-          className="flex items-center flex-shrink-0 py-4 mr-6 text-theme-s9 hover:text-sol-blue"
+          className="flex items-center flex-shrink-0 py-2 mr-6 text-theme-s9 hover:text-sol-blue"
         >
           <TClogo />
           <span className="ml-4 text-xl font-semibold tracking-tight font-display">
@@ -49,6 +50,7 @@ const Header: React.FC<HeaderProps> = ({ isWhite = false }) => {
             isMenuOpen ? 'block' : 'hidden'
           } md:block md:flex-grow md:flex md:items-center md:w-auto md:justify-end`}
         >
+          <Search />
           {menuItems.map(item => (
             <MenuItem key={item.url} {...item} />
           ))}
@@ -60,7 +62,7 @@ const Header: React.FC<HeaderProps> = ({ isWhite = false }) => {
               onClick={() => {
                 setMenuOpen(isMenuOpen => !isMenuOpen)
               }}
-              className="flex items-center px-3 py-2 border rounded text-theme-s8 border-theme-s8 hover:text-white hover:border-white"
+              className="flex items-center px-3 py-2 border rounded text-theme-s8 border-theme-s8 hover:text-sol-blue hover:border-sol-blue"
             >
               <svg
                 className="w-3 h-3 fill-current"
