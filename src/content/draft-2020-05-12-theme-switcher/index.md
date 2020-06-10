@@ -13,21 +13,28 @@ Support for dark mode has gotten pretty good in the last year. Windows, Android,
 
 So why bother with implementing a dark theme? One of the big draws is the aesthetic. Dark themes are cool. Beyond that dark themes can help reduce eye strain, enable a consistent experience with system settings, and place a greater focus on content.
 
-> Dark themes reduce the luminance emitted by device screens, while still meeting minimum color contrast ratios. They help improve visual ergonomics by reducing eye strain, adjusting brightness to current lighting conditions, and facilitating screen use in dark environments – all while conserving battery power. Devices with OLED screens benefit from the ability to turn off black pixels at any time of day. - [Google's Material Design guidelines](https://material.io/design/color/dark-theme.html)
+> "Dark themes reduce the luminance emitted by device screens, while still meeting minimum color contrast ratios. They help improve visual ergonomics by reducing eye strain, adjusting brightness to current lighting conditions, and facilitating screen use in dark environments – all while conserving battery power. Devices with OLED screens benefit from the ability to turn off black pixels at any time of day." - [Google's Material Design guidelines](https://material.io/design/color/dark-theme.html)
 
-Apple's Worldwide Developer Conference (WWDC) in 2018 [announced](https://www.apple.com/newsroom/2018/06/apple-introduces-macos-mojave/) that macOS Mojave was launching with a dark mode. The [design keynote](https://developer.apple.com/videos/play/wwdc2018/210/) discussed how to approach implementing a dark theme. The key points are to focus on your content, to allow users to choose the theme they want and to respect their choices, to test designs in both light and dark appeareances, and to adopt vibrancy in interfaces. Apple's [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/macos/visual-design/dark-mode/) underline these principles. Another great resource is [Google's Material Design guidelines](https://material.io/design/color/dark-theme.html) which provide another overlapping perspective on implementation.
+During Apple's 2018 Worldwide Developer Conference (WWDC), the company [announced](https://www.apple.com/newsroom/2018/06/apple-introduces-macos-mojave/) that it was launching macOS Mojave with a dark mode. As part of the announcement, the [design keynote](https://developer.apple.com/videos/play/wwdc2018/210/) speaker discussed how to approach implementing a dark theme. He emphasized that people implementing a dark theme should:
+
+- Test designs in both light and dark appearances;
+- Adopt vibrancy in interfaces;
+- Focus on the content of the application; and,
+- Allow users to choose the theme they want and to respect their choices.
+
+Apple's [Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/macos/visual-design/dark-mode/) underline these principles. Another great resource is [Google's Material Design guidelines](https://material.io/design/color/dark-theme.html) which provide another overlapping perspective on implementation.
 
 ## 1. Global Setting - Theme Context
 
-The theme needs to be globally accessible across the site/app. React Context was created to solve the problem of sharing state. Per [the docs](https://reactjs.org/docs/context.html#when-to-use-context):
+A design theme needs to be globally accessible across the site/app. React Context was created to solve the problem of sharing state. Per [the docs](https://reactjs.org/docs/context.html#when-to-use-context):
 
-> Context is designed to share data that can be considered “global” for a tree of React components, such as the current authenticated user, theme, or preferred language.
+> "Context is designed to share data that can be considered “global” for a tree of React components, such as the current authenticated user, theme, or preferred language."
 
 #### A little background on React Context
 
-Context follows a pub/sub model. You first create a context object with `const FooContext = React.createContext(/* defaultFooValue */)`. The context object exposes a Provider React component `<FooContext.Provider value={/* some value */}>` which allows consuming components to subscribe to the context value when it changes.
+Context follows a pub/sub model. You first create a context object with: `const FooContext = React.createContext(/* defaultFooValue */)`. The context object exposes a Provider React component: `<FooContext.Provider value={/* some value */}>`. This allows consuming components to subscribe to the context value when it changes.
 
-Components can consume a context in three main ways. With hooks the easiest way to subscribe to a context is the `useContext` hook which is used like `const value = useContext(FooContext)` hook. The second way components can subscribe is by setting a `contextType` on a class component `MyClass.contextType = FooContext`. The final way is using render props via the Consumer React component that context exposes.
+Components can consume a context in three main ways. In the first, hooks can subscribe to a context as such: `useContext` hook which is used like `const value = useContext(FooContext)`. This is the easiest way to consume context. The second way components can subscribe is by setting a `contextType` on a class component like so: `MyClass.contextType = FooContext`. In the final way, you can use render props via the Consumer React component that context exposes.
 
 ```jsx
 <FooContext.Consumer>
@@ -38,15 +45,15 @@ Components can consume a context in three main ways. With hooks the easiest way 
 
 #### Setting up ThemeContext
 
-We create a `defaultState` with `dark: false` and an empty callback `toggleDark`. It's a binary choice between light and dark and so it makes sense to encode that value with a boolean. When `dark = true` it implies we should show the dark theme.
+In order to set up the ThemeContext, I created a `defaultState` with `dark: false` and an empty callback `toggleDark`. It's a binary choice between light and dark and so it makes sense to encode that value with a boolean. When `dark = true` it implies the site should show the dark theme.
 
-We then create a provider component which will controls the state of the theme. Context is commonly used in conjunction with a wrapping component that holds a piece of state. The sate value is then passed to a Context Provider which allows other components to subscribe anywhere beneath it in the tree.
+I then created a provider component which controls the state of the theme. Context is commonly used in conjunction with a wrapping component that holds a piece of state. The sate value is then passed to a Context Provider which allows other components to subscribe anywhere beneath it in the tree.
 
-To persist the choice of theme between refreshes the site sets `dark` key in local storage with the current theme choice. When the component first mounts we want to do a few things. First we want to load the previous theme choice from local storage if one is available. The `useEffect(callback, [])` gives us the ability to only perform this check on mount.
+To persist the choice of theme between refreshes the site sets `dark` key in local storage with the current theme choice. When the component first mounts we want to do a few things. First, the site tries to load the previous theme choice from local storage if one is available. The `useEffect(callback, [])` gives the ability to only perform this check on mount.
 
-If there is not a previous value in local storage we want to check the [browser media feature](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) `prefers-color-scheme`. As of writing this the query has [support for most browsers](https://caniuse.com/#feat=prefers-color-scheme) outside of IE and will follow the system ui choice.
+If there is not a previous value in local storage the site tries to check the [browser media feature](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) `prefers-color-scheme`. As of writing this the query has [support for most browsers](https://caniuse.com/#feat=prefers-color-scheme) outside of IE and will follow the system ui choice.
 
-The ThemeProvider also contains a function `toggleDark` which it passes to the ThemeContext to toggle the theme and update the setting in local storage.
+The ThemeProvider also contains a function `toggleDark` which it passes to the ThemeContext to toggle the theme and update the setting in local storage. Here's the entire file that creates the context and handles of the logic I just mentioned:
 
 `ThemeContext.tsx`
 
@@ -95,7 +102,7 @@ export { ThemeProvider }
 
 #### Wrapping the root with Context
 
-To make our Context globally accessible we want to wrap the root element of the component tree. This allows any children anywhere in the sie to subscribe. To do this we modify the `gatsby-browser.js`. Gatsby looks for a function called `wrapRootElement` in to be exported form that file, which surprisingly it uses to wrap the root element of the site.
+To make our Context globally accessible I wrapped the root element of the component tree. This allows any children anywhere in the sie to subscribe. To do this I modified the `gatsby-browser.js`. Gatsby looks for a function called `wrapRootElement` in to be exported form that file, which surprisingly it uses to wrap the root element of the site. Here's what that looks like:
 
 `gatsby-browser.js`
 
@@ -111,7 +118,7 @@ export const wrapRootElement = ({ element }) => (
 
 ## 2. Applying the theme - changing the UI
 
-TailwindCSS makes applying themes really easy. I used an approach based off [this example repo by Adam Wathan](https://github.com/adamwathan/theming-tailwind-demo). The gist of approach is we set up some classes like with theme css variables which the tailwind config uses to build it's utility classes.
+TailwindCSS makes applying themes really easy. I used an approach based off [this example repo by Tailwind's creator, Adam Wathan](https://github.com/adamwathan/theming-tailwind-demo). The gist of approach is you set up some classes like with theme css variables which the tailwind config uses to build it's utility classes. Here's the basics of what that looks like:
 
 ```css
 .themeLight {
@@ -137,9 +144,9 @@ module.exports = {
 
 Any child elements of the `.themeLight` class will have the lighter theme variables applied. This same technique could also be used for other css properties you wanted to theme, like font settings or anything else. In the above example tailwind generate classes like `bg-primary-1` and `text-secondary-1`. The [docs](https://tailwindcss.com/docs/theme/#app) go into more detail on theming.
 
-To make the entire site change at the same time we subscribed the Layout component which wraps all of the page layouts to the ThemeContext. We then used the value of the `dark` boolean to conditionally apply either the `themeLight` or `themeDark` classes.
+To make the entire site change at the same time I subscribed the Layout component to the ThemeContext. The Layout component is then used to wrap all of the other pages. I then used the value of the `dark` boolean to conditionally apply either the `themeLight` or `themeDark` classes.
 
-In testing you can manually switch the classes to test the themes ability to change the styles of the site.
+In testing, you can manually switch the classes to test the themes ability to change the styles of the site:
 
 `Layout.tsx`
 
@@ -184,7 +191,7 @@ export default Layout
 
 ## 3. Toggling the theme - Day / Night button
 
-Now that everything is wired up we need some UI control to manually switch between themes. I was inspired by the theme switcher on the [Gatsby docs](https://www.gatsbyjs.org/). Digging into the source for the site I found [their implementation](https://github.com/gatsbyjs/gatsby/blob/master/www/src/components/dark-mode-toggle.js) and a reference to a [codepen by Aaron Iker](https://codepen.io/aaroniker/pen/KGpXZo).
+After wiring everything up I needed a UI control to manually switch between themes. I was inspired by the theme switcher on the [Gatsby docs](https://www.gatsbyjs.org/). While digging into the source for the site, I found [their implementation](https://github.com/gatsbyjs/gatsby/blob/master/www/src/components/dark-mode-toggle.js) and a reference to a [codepen by Aaron Iker](https://codepen.io/aaroniker/pen/KGpXZo). Here's the code for my version of the button:
 
 `DayOrNight.tsx`
 
@@ -210,7 +217,7 @@ const DayOrNight: React.FC = () => {
 export default DayOrNight
 ```
 
-The implementation of Aaron's theme switcher used in Gatsby is written using Emotion and Theme UI. I adapted it back to css and used TailwindCss's `@apply` to add the utility classes. This reduces the amount of css that would have been added. Here's what the styles for my implementation looks like.
+The implementation of Aaron's theme switcher used in Gatsby is written using Emotion and Theme UI. I adapted it back to css and used Tailwind CSS's `@apply` to add the utility classes. This reduces the amount of css that would have been added. Here's what the styles for my implementation looks like:
 
 `dayOrNight.css`
 
