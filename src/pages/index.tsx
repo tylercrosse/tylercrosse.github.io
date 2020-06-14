@@ -15,7 +15,7 @@ const Index: React.FC<IndexProps> = ({ data }) => {
     <>
       <SEO title="Home" />
       <Layout>
-        <section className="max-w-screen-xl p-6 pt-16 mx-auto lg:pt-64 lg:flex">
+        <section className="max-w-screen-xl p-6 mx-auto md:pt-16 lg:pt-64 lg:flex">
           <div className="py-10 lg:pr-8 lg:w-1/2">
             <h1 className="text-5xl lg:text-7xl font-display text-theme-s9">
               Hi, I'm Tyler

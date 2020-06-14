@@ -23,7 +23,7 @@ const Layout: React.FC<LayoutProps> = ({
       <Header isWhite={isWhite} />
       <main
         className={
-          mainClasses ? mainClasses : `relative py-10 bg-theme-p5 flex-grow`
+          mainClasses ? mainClasses : `relative pb-10 bg-theme-p5 flex-grow`
         }
       >
         {children}

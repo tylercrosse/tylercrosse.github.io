@@ -25,12 +25,12 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
       />
       <Layout
         isWhite={!dark}
-        mainClasses={`pt-24 xl:pt-32 ${
+        mainClasses={`pt-12 md:pt-24 xl:pt-32 ${
           dark ? 'bg-sol-dark-4' : 'bg-white'
         } flex-grow`}
       >
         <section>
-          <div className="max-w-2xl px-4 py-10 m-auto md:px-0">
+          <div className="max-w-2xl px-4 pb-10 m-auto md:px-0">
             <h1 className="text-5xl leading-tight font-display text-theme-s9">
               {markdownRemark?.frontmatter?.title}
             </h1>
@@ -42,7 +42,7 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
               {markdownRemark?.frontmatter?.date} - {markdownRemark?.timeToRead}{' '}
               min read
             </div>
-            <div className="flex items-center w-full">
+            <div className="flex flex-wrap items-center w-full">
               <Link to="/tags">
                 <AiOutlineTags className="w-5 h-5 mr-2 text-theme-s7 hover:text-sol-blue" />
               </Link>
