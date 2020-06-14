@@ -82,7 +82,7 @@ const Search: React.FC = () => {
           aria-label="search input"
           autoComplete="off"
           autoFocus={true}
-          className={`block w-full py-3 pl-10 pr-6 leading-normal border border-theme-p2 rounded-lg appearance-none text-theme-s8 placeholder-theme-s7 transition-width duration-100 ease-in-out z-0 ${
+          className={`block w-full py-3 pl-10 pr-6 leading-normal border border-theme-p2 rounded-lg shadow-lg appearance-none text-theme-s8 placeholder-theme-s7 transition-width duration-100 ease-in-out z-0 ${
             dark ? 'bg-theme-p3' : 'bg-white'
           } focus:outline-0`}
           onChange={e => setSearchText(e.target.value)}
@@ -104,7 +104,7 @@ const Search: React.FC = () => {
       </div>
       {searchText ? (
         <div
-          className={`z-10 absolute w-full overflow-hidden border border-transparent rounded-lg shadow-md appearance-none ${
+          className={`z-10 absolute w-full overflow-hidden border border-transparent rounded-lg shadow-lg appearance-none ${
             dark ? 'bg-theme-p3 border-theme-p2' : 'bg-white'
           } focus:outline-0`}
         >
