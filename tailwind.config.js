@@ -6,6 +6,9 @@ module.exports = {
       body: ['Roboto', 'Helvetica', 'sans-serif'],
     },
     extend: {
+      screens: {
+        xs: '375px',
+      },
       transitionProperty: { width: 'width' },
       colors: {
         'sol-yellow': 'var(--sol-yellow)',
