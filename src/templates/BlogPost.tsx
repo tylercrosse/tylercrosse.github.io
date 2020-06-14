@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { Link, graphql } from 'gatsby'
+import { AiOutlineTags, AiOutlineClockCircle } from 'react-icons/ai'
 import { BlogPostQuery } from '../../graphql-types'
 import BlogPosts from '../components/BlogPosts'
 import Layout from '../components/Layout'
@@ -36,13 +37,18 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
             <h2 className="pb-2 text-lg sm:text-xl text-theme-s8 font-body">
               {markdownRemark?.frontmatter?.description}
             </h2>
-            <div className="w-full text-theme-s7 font-body">
+            <div className="flex items-center w-full pb-2 text-theme-s7 font-body">
+              <AiOutlineClockCircle className="w-4 h-4 ml-1 mr-2" />
               {markdownRemark?.frontmatter?.date} - {markdownRemark?.timeToRead}{' '}
-              min read -{' '}
-              {markdownRemark?.frontmatter?.tags?.map(tag => {
-                if (typeof tag === 'string') return <TagPill tag={tag} />
-                return null
-              })}
+              min read
+            </div>
+            <div className="flex items-center w-full">
+              <Link to="/tags">
+                <AiOutlineTags className="w-5 h-5 mr-2 text-theme-s7 hover:text-sol-blue" />
+              </Link>
+              {markdownRemark?.frontmatter?.tags?.map(tag => (
+                <TagPill tag={tag} />
+              ))}
             </div>
           </div>
           <div

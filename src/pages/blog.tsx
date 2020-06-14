@@ -14,7 +14,9 @@ const Blog: React.FC = () => {
           <BlogPosts />
         </section>
         <section className="max-w-screen-lg p-6 pt-0 mx-auto">
-          <div className="text-xl font-display text-theme-s9">All Tags</div>
+          <div className="flex items-center text-xl font-display text-theme-s9">
+            All Tags
+          </div>
           <AllTags />
         </section>
       </Layout>
