@@ -5,6 +5,7 @@ module.exports = {
       body: ['Roboto', 'Helvetica', 'sans-serif'],
     },
     extend: {
+      transitionProperty: { width: 'width' },
       colors: {
         'sol-yellow': 'var(--sol-yellow)',
         'sol-orange': 'var(--sol-orange)',

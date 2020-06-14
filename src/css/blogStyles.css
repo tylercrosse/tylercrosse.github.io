@@ -72,6 +72,10 @@
     word-break: normal;
     word-wrap: normal;
   }
+
+  & p code[class*='language-'] {
+    white-space: break-spaces;
+  }
 }
 
 a.anchor {
