@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link, useStaticQuery, graphql } from 'gatsby'
+import { AiOutlineTags, AiOutlineClockCircle } from 'react-icons/ai'
+import TagPill from './TagPill'
 import {
   Maybe,
   MarkdownRemark,
@@ -21,25 +23,29 @@ interface BlogPostPreviewProps {
 }
 
 export const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({ node }) => (
-  <div className="py-4 my-4 group" key={node.id}>
-    <Link to={node.frontmatter?.path || '/blog'}>
-      <h2 className="text-3xl group-hover:underline font-display text-theme-s9">
-        {node.frontmatter?.title}
-      </h2>
-      <p className="pb-2 font-body text-theme-s8">
-        {node.frontmatter?.description}
-      </p>
-      <div className="font-body text-theme-s7">
-        {node.frontmatter?.date} - {node.timeToRead} min read
-      </div>
-      <div className="w-full">
-        {node.frontmatter?.tags?.map(tag => (
-          <div className="inline-block px-3 py-1 mt-2 mr-2 text-xs rounded-full bg-theme-s7 text-theme-p9">
-            #{tag}
-          </div>
-        ))}
-      </div>
-    </Link>
+  <div className="py-4 my-4">
+    <div className="group" key={node.id}>
+      <Link to={node.frontmatter?.path || '/blog'}>
+        <h2 className="text-3xl group-hover:text-sol-blue font-display text-theme-s9">
+          {node.frontmatter?.title}
+        </h2>
+        <p className="pb-2 font-body text-theme-s8 group-hover:text-sol-blue">
+          {node.frontmatter?.description}
+        </p>
+        <div className="flex items-center w-full pb-2 font-body text-theme-s7">
+          <AiOutlineClockCircle className="w-4 h-4 ml-1 mr-2" />
+          {node.frontmatter?.date} - {node.timeToRead} min read
+        </div>
+      </Link>
+    </div>
+    <div className="flex items-center w-full">
+      <Link to="/tags">
+        <AiOutlineTags className="w-5 h-5 mr-2 text-theme-s7 hover:text-sol-blue" />
+      </Link>
+      {node.frontmatter?.tags?.map(tag => (
+        <TagPill tag={tag} />
+      ))}
+    </div>
   </div>
 )
 
