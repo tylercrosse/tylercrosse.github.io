@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
+import Headroom from 'react-headroom'
 import DayOrNight from './DayOrNight'
 import TClogo from './TClogo'
 import SearchModal from './Search/SearchModal'
@@ -11,19 +12,16 @@ interface HeaderProps {
 const menuItems = [
   { url: '/', text: 'Home' },
   { url: '/blog', text: 'Blog' },
-  // { url: '/projects', text: 'Projects' },
-  // { url: '/resume', text: 'Resume' },
-  // { url: '/about', text: 'About' },
 ]
 
-const Header: React.FC<HeaderProps> = ({ isWhite = false }) => {
+export const Header: React.FC<HeaderProps> = ({ isWhite = false }) => {
   const [isMenuOpen, setMenuOpen] = useState(false)
 
   const MenuItem: React.FC<{ url: string; text: string }> = ({ url, text }) => (
     <Link
       to={url}
-      activeClassName="text-sol-blue border-t-2 border-sol-blue"
-      className="box-border block p-2 m-4 border-t-2 text-theme-s8 border-theme-p6 text-md md:inline-block focus:text-sol-blue hover:text-sol-blue font-body"
+      activeClassName="text-sol-blue"
+      className="box-border block p-4 mx-2 my-1 sm:py-2 sm:my-0 text-theme-s8 text-md sm:inline-block focus:text-sol-blue hover:text-sol-blue font-body"
     >
       {text}
     </Link>
@@ -31,53 +29,71 @@ const Header: React.FC<HeaderProps> = ({ isWhite = false }) => {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-10 border-b border-theme-p2 ${
+      className={`border-b border-theme-p2 ${
         isWhite ? 'bg-white' : 'bg-theme-p6'
       }`}
     >
-      <nav className="relative flex flex-wrap items-center justify-between max-w-screen-xl px-6 mx-auto">
-        <Link
-          to="/"
-          className="flex items-center flex-shrink-0 py-2 mr-6 text-theme-s9 hover:text-sol-blue"
-        >
-          <TClogo />
-          <span className="ml-4 text-xl font-semibold tracking-tight font-display">
-            Tyler Crosse
-          </span>
-        </Link>
-        <div
-          className={`w-full ${
-            isMenuOpen ? 'block' : 'hidden'
-          } md:block md:flex-grow md:flex md:items-center md:w-auto md:justify-end`}
-        >
-          <SearchModal />
+      <nav className="relative max-w-screen-xl py-2 mx-auto">
+        <div className="flex flex-wrap items-center justify-between ">
+          <Link
+            to="/"
+            className="flex items-center flex-shrink-0 px-4 py-2 ml-2 mr-6 text-theme-s9 hover:text-sol-blue"
+          >
+            <TClogo />
+            <span className="hidden ml-4 text-xl font-semibold tracking-tight xs:inline font-display">
+              Tyler Crosse
+            </span>
+          </Link>
+          <div className="sm:flex sm:items-center sm:mr-6">
+            <div className="flex items-center">
+              <SearchModal />
+              <div className="block sm:hidden">
+                <DayOrNight />
+              </div>
+              <button
+                onClick={() => {
+                  setMenuOpen(isMenuOpen => !isMenuOpen)
+                }}
+                className="flex items-center px-2 py-2 mx-3 sm:hidden text-theme-s8 hover:text-sol-blue"
+              >
+                <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                  {isMenuOpen && (
+                    <path
+                      fillRule="evenodd"
+                      d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"
+                    />
+                  )}
+                  {!isMenuOpen && (
+                    <path
+                      fillRule="evenodd"
+                      d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
+                    />
+                  )}
+                </svg>
+              </button>
+            </div>
+            <div className="hidden sm:flex sm:items-center">
+              {menuItems.map(item => (
+                <MenuItem key={item.url} {...item} />
+              ))}
+              <DayOrNight />
+            </div>
+          </div>
+        </div>
+        <div className={`${isMenuOpen ? 'block' : 'hidden'} sm:hidden`}>
           {menuItems.map(item => (
             <MenuItem key={item.url} {...item} />
           ))}
-        </div>
-        <div className="flex items-center">
-          <DayOrNight />
-          <div className="block py-6 ml-6 md:hidden">
-            <button
-              onClick={() => {
-                setMenuOpen(isMenuOpen => !isMenuOpen)
-              }}
-              className="flex items-center px-3 py-2 border rounded text-theme-s8 border-theme-s8 hover:text-sol-blue hover:border-sol-blue"
-            >
-              <svg
-                className="w-3 h-3 fill-current"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <title>Menu</title>
-                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-              </svg>
-            </button>
-          </div>
         </div>
       </nav>
     </header>
   )
 }
 
-export default Header
+const HeadroomHeader: React.FC<HeaderProps> = ({ isWhite }) => (
+  <Headroom>
+    <Header isWhite={isWhite} />
+  </Headroom>
+)
+
+export default HeadroomHeader

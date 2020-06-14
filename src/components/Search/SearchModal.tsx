@@ -14,7 +14,7 @@ const SearchModal: React.FC = () => {
         }}
       >
         <svg
-          className="w-4 h-4 pointer-events-none fill-current text-theme-s8"
+          className="w-4 h-4 pointer-events-none fill-current"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
         >

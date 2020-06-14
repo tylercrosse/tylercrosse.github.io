@@ -38,7 +38,7 @@ export const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({ node }) => (
         </div>
       </Link>
     </div>
-    <div className="flex items-center w-full">
+    <div className="flex flex-wrap items-center w-full">
       <Link to="/tags">
         <AiOutlineTags className="w-5 h-5 mr-2 text-theme-s7 hover:text-sol-blue" />
       </Link>
