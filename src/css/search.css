@@ -1,0 +1,17 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: none;
+  z-index: 11;
+}
+
+.modal {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  right: 0;
+  transform: translate(-50%);
+}

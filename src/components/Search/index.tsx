@@ -69,18 +69,21 @@ const Search: React.FC = () => {
   const formattedPostResults = format(postResults)
 
   return (
-    <div className="relative w-full max-w-2xl rounded-lg md:mx-4">
+    <div
+      className={`relative w-full rounded-lg ${
+        dark ? 'themeDark' : 'themeLight'
+      }`}
+    >
       <div className="relative">
         <input
           aria-autocomplete="list"
-          aria-expanded="false"
+          aria-controls="autocomplete-results"
+          aria-expanded={Boolean(searchText)}
           aria-label="search input"
-          aria-owns="autocomplete-results"
           autoComplete="off"
-          className={`block w-full py-2 pl-10 pr-4 leading-normal border border-theme-p2 rounded-lg appearance-none text-theme-s8 placeholder-theme-s7 transition-width duration-100 ease-in-out z-0 ${
-            dark
-              ? 'bg-theme-p6 focus:bg-theme-p5'
-              : 'bg-theme-p7 focus:bg-white'
+          autoFocus={true}
+          className={`block w-full py-3 pl-10 pr-6 leading-normal border border-theme-p2 rounded-lg appearance-none text-theme-s8 placeholder-theme-s7 transition-width duration-100 ease-in-out z-0 ${
+            dark ? 'bg-theme-p3' : 'bg-white'
           } focus:outline-0`}
           onChange={e => setSearchText(e.target.value)}
           placeholder="Search"
@@ -101,8 +104,8 @@ const Search: React.FC = () => {
       </div>
       {searchText ? (
         <div
-          className={`z-10 absolute w-full max-w-2xl overflow-hidden border border-transparent rounded-lg shadow-md appearance-none ${
-            dark ? 'bg-theme-p5 border-theme-p2' : 'bg-white'
+          className={`z-10 absolute w-full overflow-hidden border border-transparent rounded-lg shadow-md appearance-none ${
+            dark ? 'bg-theme-p3 border-theme-p2' : 'bg-white'
           } focus:outline-0`}
         >
           {formattedPostResults.map(result => (

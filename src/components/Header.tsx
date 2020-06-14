@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import DayOrNight from './DayOrNight'
 import TClogo from './TClogo'
-import Search from './Search'
+import SearchModal from './Search/SearchModal'
 
 interface HeaderProps {
   isWhite?: boolean
@@ -50,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ isWhite = false }) => {
             isMenuOpen ? 'block' : 'hidden'
           } md:block md:flex-grow md:flex md:items-center md:w-auto md:justify-end`}
         >
-          <Search />
+          <SearchModal />
           {menuItems.map(item => (
             <MenuItem key={item.url} {...item} />
           ))}
