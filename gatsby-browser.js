@@ -4,6 +4,7 @@
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
 import React from 'react'
+import 'focus-visible/dist/focus-visible.js'
 import './src/css/tailwindBase.css'
 import './src/css/tailwindComponents.css'
 import './src/css/themeVars.css'

@@ -10,7 +10,7 @@ const TagPill: React.FC<TagPillProps> = ({ tag }) => (
   <Link
     key={tag}
     to={`/tags/${kebabCase(tag)}`}
-    className="mr-2 font-body text-theme-s7 hover:text-sol-blue"
+    className="mr-2 font-body text-theme-s7 focus:text-sol-blue hover:text-sol-blue"
   >
     #{tag}
   </Link>

@@ -19,9 +19,9 @@ const Template: React.FC<TagTemplateProps> = ({ data, pageContext }) => {
       <SEO title={`Posts tagged with #${pageContext.tag}"`} />
       <Layout>
         <section className="max-w-screen-lg p-6 pt-12 mx-auto md:pt-24 xl:pt-32">
-          <div className="text-xl font-display text-theme-s9">
+          <h1 className="text-xl font-display text-theme-s9">
             Posts tagged with #{pageContext.tag}
-          </div>
+          </h1>
           {data.allMarkdownRemark.edges.map(edge => (
             <BlogPostPreview node={edge.node} />
           ))}

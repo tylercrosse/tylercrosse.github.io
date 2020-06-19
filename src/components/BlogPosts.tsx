@@ -26,7 +26,7 @@ export const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({ node }) => (
   <div className="py-4 my-4" key={node.id}>
     <div className="group">
       <Link to={node.frontmatter?.path || '/blog'}>
-        <h2 className="text-3xl group-hover:text-sol-blue font-display text-theme-s9">
+        <h2 className="text-3xl focus:text-sol-blue group-hover:text-sol-blue font-display text-theme-s9">
           {node.frontmatter?.title}
         </h2>
         <p className="pb-2 font-body text-theme-s8 group-hover:text-sol-blue">
@@ -39,8 +39,12 @@ export const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({ node }) => (
       </Link>
     </div>
     <div className="flex flex-wrap items-center w-full">
-      <Link to="/tags">
-        <AiOutlineTags className="w-5 h-5 mr-2 text-theme-s7 hover:text-sol-blue" />
+      <Link
+        to="/tags"
+        className="mr-2 text-theme-s7 focus:text-sol-blue hover:text-sol-blue"
+        aria-label="All Tags"
+      >
+        <AiOutlineTags className="w-5 h-5" />
       </Link>
       {node.frontmatter?.tags?.map(tag => (
         <TagPill tag={tag} />

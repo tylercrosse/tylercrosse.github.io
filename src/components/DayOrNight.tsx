@@ -5,6 +5,7 @@ const DayOrNight: React.FC = () => {
   const { toggleDark } = useContext(ThemeContext)
   return (
     <button
+      aria-label="toggle light or dark theme"
       className="iconWrapper themeToggle"
       onClick={() => {
         toggleDark()
