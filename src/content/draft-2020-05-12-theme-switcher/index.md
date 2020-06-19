@@ -1,6 +1,6 @@
 ---
 title: 'Here comes the Sun 🌞/🌚'
-description: 'Building a theme switcher with TailwindCSS and React.'
+description: 'Building a theme switcher with Tailwind CSS and React.'
 date: '2020-05-09'
 tags: ['gatsby', 'typescript', 'react', 'tailwindcss']
 path: '/blog/theme-switcher'
