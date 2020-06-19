@@ -23,8 +23,8 @@ interface BlogPostPreviewProps {
 }
 
 export const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({ node }) => (
-  <div className="py-4 my-4">
-    <div className="group" key={node.id}>
+  <div className="py-4 my-4" key={node.id}>
+    <div className="group">
       <Link to={node.frontmatter?.path || '/blog'}>
         <h2 className="text-3xl group-hover:text-sol-blue font-display text-theme-s9">
           {node.frontmatter?.title}
