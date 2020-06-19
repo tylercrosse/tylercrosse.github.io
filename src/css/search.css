@@ -13,7 +13,7 @@
   top: 60px;
   left: 0;
   right: 0;
-  @apply px-6 mx-auto max-w-4xl;
+  @apply mx-auto max-w-4xl;
 }
 
 .headroom--unpinned:focus-within {

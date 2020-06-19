@@ -12,6 +12,7 @@ const SearchModal: React.FC = () => {
         onClick={() => {
           setIsOpen(true)
         }}
+        aria-label="open search"
       >
         <svg
           className="w-4 h-4 pointer-events-none fill-current"

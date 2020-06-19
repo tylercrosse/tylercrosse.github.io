@@ -10,7 +10,7 @@ const Tags: React.FC = () => {
       <SEO title="All Tags" />
       <Layout>
         <section className="max-w-screen-lg p-6 pt-12 mx-auto md:pt-24 xl:pt-32">
-          <div className="text-xl font-display text-theme-s9">All Tags</div>
+          <h1 className="text-xl font-display text-theme-s9">All Tags</h1>
           <AllTags />
         </section>
         <section className="max-w-screen-lg p-6 pt-0 mx-auto">

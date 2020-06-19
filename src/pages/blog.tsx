@@ -10,7 +10,7 @@ const Blog: React.FC = () => {
       <SEO title="Blog" />
       <Layout>
         <section className="max-w-screen-lg p-6 pt-12 mx-auto md:pt-24 xl:pt-32">
-          <div className="text-xl font-display text-theme-s9">All Posts</div>
+          <h1 className="text-xl font-display text-theme-s9">All Posts</h1>
           <BlogPosts />
         </section>
         <section className="max-w-screen-lg p-6 pt-0 mx-auto">
