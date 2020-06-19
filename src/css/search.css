@@ -10,7 +10,7 @@
 
 .modal {
   position: absolute;
-  top: 60px;
+  top: 3rem;
   left: 0;
   right: 0;
   @apply mx-auto max-w-4xl;

@@ -1,9 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal'
 import Search from '.'
 
 const SearchModal: React.FC = () => {
   const [modalIsOpen, setIsOpen] = useState(false)
+
+  function onSlashKey(e) {
+    if (e.code === 'Slash' || e.key === '/') setIsOpen(true)
+  }
+
+  useEffect(() => {
+    window.addEventListener('keyup', onSlashKey)
+
+    return () => window.removeEventListener('keyup', onSlashKey)
+  }, [])
 
   return (
     <>
@@ -30,7 +40,7 @@ const SearchModal: React.FC = () => {
         onRequestClose={() => setIsOpen(false)}
         contentLabel="search"
       >
-        <Search />
+        <Search closeModal={() => setIsOpen(false)} />
       </Modal>
     </>
   )
