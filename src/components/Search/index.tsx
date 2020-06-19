@@ -21,6 +21,7 @@ export default function Search({ closeModal }: SearchProps) {
   const [inputItems, setInputItems] = useState(flatPostData)
   const {
     isOpen,
+    getLabelProps,
     getMenuProps,
     getInputProps,
     getComboboxProps,
@@ -69,18 +70,23 @@ export default function Search({ closeModal }: SearchProps) {
 
   return (
     <div
-      className={`relative w-full rounded-lg ${
+      className={`relative w-full rounded-lg border shadow-lg border-theme-s7 ${
         dark ? 'themeDark' : 'themeLight'
       }`}
     >
       <div {...getComboboxProps()} className="relative">
+        <label {...getLabelProps()} hidden>
+          Search the site
+        </label>
         <input
           {...getInputProps()}
-          className={`block w-full py-3 pl-10 pr-6 leading-normal border border-theme-p2 rounded-lg shadow-lg appearance-none text-theme-s8 placeholder-theme-s7 transition-width duration-100 ease-in-out z-0 ${
+          className={`block w-full py-3 pl-10 pr-6 ${
+            isOpen ? 'border-b border-theme-s7' : 'rounded-b-lg'
+          } leading-normal rounded-t-lg outline-none appearance-none text-theme-s8 placeholder-theme-s7 transition-width duration-100 ease-in-out z-0 ${
             dark ? 'bg-theme-p3' : 'bg-white'
           } focus:outline-0`}
           autoFocus={true}
-          aria-label="search input"
+          value={value}
         />
         <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
           <svg
@@ -95,8 +101,8 @@ export default function Search({ closeModal }: SearchProps) {
       {isOpen && (
         <ul
           {...getMenuProps()}
-          className={`z-10 absolute w-full overflow-hidden border border-transparent rounded-lg shadow-lg appearance-none ${
-            dark ? 'bg-theme-p3 border-theme-p2' : 'bg-white'
+          className={`w-full overflow-hidden rounded-b-lg appearance-none ${
+            dark ? 'bg-theme-p3' : 'bg-white'
           } focus:outline-0`}
         >
           {inputItems.map((item, index) => (
