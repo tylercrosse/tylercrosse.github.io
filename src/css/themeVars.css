@@ -10,7 +10,7 @@
   --sol-green: #859900;
   --sol-light-0: #839496;
   --sol-light-1: #93a1a1;
-  --sol-light-2: #CCC4B0;
+  --sol-light-2: #ccc4b0;
   --sol-light-3: #ddd6c1;
   --sol-light-4: #eee8d5;
   --sol-light-5: #fdf6e3;
@@ -80,4 +80,12 @@
   --theme-s8: var(--sol-light-8);
   --theme-s9: var(--sol-light-9);
   --theme-s10: var(--sol-light-10);
+}
+
+/*
+  This will hide the focus indicator if the element receives focus via the mouse,
+  but it will still show up on keyboard focus.
+*/
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
 }

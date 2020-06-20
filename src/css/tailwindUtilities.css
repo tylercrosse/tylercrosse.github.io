@@ -5,7 +5,3 @@
     font-size: 5rem;
   }
 }
-
-.js-focus-visible :focus:not(.focus-visible) {
-  outline: none;
-}
