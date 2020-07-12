@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
-import Img from 'gatsby-image'
+import Img, { FluidObject } from 'gatsby-image'
 import { IndexPageQuery } from '../../graphql-types'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
@@ -11,6 +11,7 @@ interface IndexProps {
 }
 
 const Index: React.FC<IndexProps> = ({ data }) => {
+  const heroImg = data.file?.childImageSharp?.fluid as FluidObject
   return (
     <>
       <SEO title="Home" />
@@ -30,7 +31,7 @@ const Index: React.FC<IndexProps> = ({ data }) => {
             </p>
           </div>
           <div className="w-3/4 mx-auto lg:mx-0 lg:w-1/2 lg:max-w-5xl">
-            <Img fluid={data.file?.childImageSharp?.fluid} />
+            <Img fluid={heroImg} />
           </div>
         </section>
         <section className="max-w-screen-lg p-6 pt-24 mx-auto xl:pt-32">

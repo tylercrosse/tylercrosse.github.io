@@ -36,7 +36,7 @@
     @apply text-2xl leading-none mb-4 mt-6;
   }
   & a {
-    @apply text-sol-blue;
+    @apply text-sol-blue break-all;
   }
   & strong {
     @apply font-bold text-theme-s9;
