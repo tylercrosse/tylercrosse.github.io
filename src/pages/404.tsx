@@ -1,18 +1,23 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Img from 'gatsby-image'
+import Img, { FluidObject } from 'gatsby-image'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import Search from '../components/Search'
+import { NotFoundPageQuery } from '../../graphql-types'
 
-const NotFound: React.FC = ({ data }) => {
+interface NotFoundProps {
+  data: NotFoundPageQuery
+}
+const NotFound: React.FC<NotFoundProps> = ({ data }) => {
+  const heroImg = data.file?.childImageSharp?.fluid as FluidObject
   return (
     <>
       <SEO title="404 Page Not Found" />
       <Layout>
         <section className="max-w-screen-lg p-6 mx-auto md:pt-24">
           <div className="max-w-xl m-auto">
-            <Img fluid={data.file?.childImageSharp?.fluid} />
+            <Img fluid={heroImg} />
           </div>
           <h1 className="my-8 text-3xl text-center font-body text-theme-s8">
             Page Not Found

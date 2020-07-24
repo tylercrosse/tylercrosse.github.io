@@ -27,7 +27,7 @@ const AllTags: React.FC = () => {
     <>
       {allTags.map(tag => (
         <div className="my-2">
-          <TagPill tag={tag.fieldValue} />
+          <TagPill tag={tag.fieldValue} key={tag.fieldValue} />
           <span className="text-theme-s8">{tag.totalCount}</span>
         </div>
       ))}

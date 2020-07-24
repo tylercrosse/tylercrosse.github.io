@@ -1,9 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal'
 import Search from '.'
 
 const SearchModal: React.FC = () => {
   const [modalIsOpen, setIsOpen] = useState(false)
+
+  function onSlashKey(e: KeyboardEvent) {
+    if (e.code === 'Slash' || e.key === '/') setIsOpen(true)
+  }
+
+  useEffect(() => {
+    Modal.setAppElement('#___gatsby')
+    window.addEventListener('keyup', onSlashKey)
+
+    return () => window.removeEventListener('keyup', onSlashKey)
+  }, [])
 
   return (
     <>
@@ -23,14 +34,14 @@ const SearchModal: React.FC = () => {
         </svg>
       </button>
       <Modal
-        autoFocus={false}
+        shouldFocusAfterRender={false}
         className="modal"
         overlayClassName="overlay"
         isOpen={modalIsOpen}
         onRequestClose={() => setIsOpen(false)}
         contentLabel="search"
       >
-        <Search />
+        <Search closeModal={() => setIsOpen(false)} />
       </Modal>
     </>
   )
