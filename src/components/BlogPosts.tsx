@@ -23,7 +23,7 @@ interface BlogPostPreviewProps {
 }
 
 export const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({ node }) => (
-  <div className="py-4 my-4" key={node.id}>
+  <div className="py-4 my-4">
     <div className="group">
       <Link to={node.frontmatter?.path || '/blog'}>
         <h2 className="text-3xl focus:text-sol-blue group-hover:text-sol-blue font-display text-theme-s9">
@@ -47,7 +47,7 @@ export const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({ node }) => (
         <AiOutlineTags className="w-5 h-5" />
       </Link>
       {node.frontmatter?.tags?.map(tag => (
-        <TagPill tag={tag} />
+        <TagPill tag={tag} key={tag} />
       ))}
     </div>
   </div>
@@ -100,7 +100,7 @@ const BlogPostPreviews: React.FC<BlogPostPreviewsProps> = ({ limit }) => {
   return (
     <>
       {posts.map(({ node }) => (
-        <BlogPostPreview node={node} />
+        <BlogPostPreview node={node} key={node.id} />
       ))}
     </>
   )

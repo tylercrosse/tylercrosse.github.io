@@ -36,7 +36,7 @@ const Card: React.FC<CardProps> = () => (
     </div>
     <div className="px-6 py-4">
       {tags.map(tag => (
-        <TagPill tag={tag} />
+        <TagPill tag={tag} key={tag} />
       ))}
     </div>
   </div>

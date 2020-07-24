@@ -10,7 +10,6 @@ const TagPill: React.FC<TagPillProps> = ({ tag }) => {
   if (tag === null) return tag
   return (
     <Link
-      key={tag}
       to={`/tags/${kebabCase(tag)}`}
       className="mr-2 font-body text-theme-s7 focus:text-sol-blue hover:text-sol-blue"
     >
