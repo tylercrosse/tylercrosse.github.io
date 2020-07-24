@@ -1,14 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { navigate } from 'gatsby'
-import {
-  useCombobox,
-  UseComboboxState,
-  UseComboboxStateChangeOptions,
-} from 'downshift'
+import { useCombobox } from 'downshift'
 import format from 'format-fuse.js'
 import ThemeContext from '../../context/ThemeContext'
-import Highlighter from './Highlighter'
-import usePostSearch from './usePostSearch'
+import Results from './Results'
+import useFuseSearch from './useFuseSearch'
 
 export interface SearchProps {
   closeModal?(): void
@@ -16,9 +12,9 @@ export interface SearchProps {
 
 export default function Search({ closeModal }: SearchProps) {
   const { dark } = useContext(ThemeContext)
-  const { flatPostData, postFuse } = usePostSearch()
+  const { postFuse, tagFuse } = useFuseSearch()
   const [value] = useState()
-  const [inputItems, setInputItems] = useState(flatPostData)
+  const [inputItems, setInputItems] = useState([])
   const {
     isOpen,
     getLabelProps,
@@ -32,17 +28,24 @@ export default function Search({ closeModal }: SearchProps) {
     defaultHighlightedIndex: 0,
     items: inputItems,
     onInputValueChange: ({ inputValue }) => {
-      const postResults = postFuse.search(inputValue)
-      const formattedPostResults = format(postResults)
-      setInputItems(formattedPostResults)
+      if (typeof inputValue === 'string') {
+        const postResults = postFuse.search(inputValue)
+        const formattedPostResults = format(postResults)
+        const tagResults = tagFuse.search(inputValue)
+        const formattedTagResults = format(tagResults)
+        const combinedResults = formattedPostResults.concat(formattedTagResults)
+        console.log({
+          formattedPostResults,
+          formattedTagResults,
+          combinedResults,
+        })
+        if (Array.isArray(combinedResults)) setInputItems(combinedResults)
+      }
     },
     stateReducer,
   })
 
-  function stateReducer(
-    state: UseComboboxState<T>,
-    actionAndChanges: UseComboboxStateChangeOptions<I>
-  ) {
+  function stateReducer(state, actionAndChanges) {
     const { type, changes } = actionAndChanges
     switch (type) {
       case useCombobox.stateChangeTypes.InputKeyDownEnter:
@@ -59,13 +62,6 @@ export default function Search({ closeModal }: SearchProps) {
       default:
         return changes // otherwise business as usual.
     }
-  }
-
-  function getHighlightedItemClass(index: number) {
-    if (highlightedIndex === index) {
-      return dark ? 'bg-theme-p2' : 'bg-blue-100'
-    }
-    return ''
   }
 
   return (
@@ -98,42 +94,26 @@ export default function Search({ closeModal }: SearchProps) {
           </svg>
         </div>
       </div>
-      {isOpen && (
-        <ul
-          {...getMenuProps()}
-          className={`w-full overflow-hidden rounded-b-lg appearance-none ${
-            dark ? 'bg-theme-p3' : 'bg-white'
-          } focus:outline-0`}
-        >
-          {inputItems.map((item, index) => (
-            <li
-              key={`${item}${index}`}
-              {...getItemProps({ item, index })}
-              className={`p-4 bg-opacity-50 ${getHighlightedItemClass(index)}`}
-            >
-              <div className="font-display text-theme-s9">
-                <Highlighter
-                  resultKey={item.title}
-                  highlightClasses={`${
-                    dark ? 'text-sol-cyan' : 'text-sol-blue'
-                  } bg-transparent`}
-                />
-              </div>
-              <div className="font-body text-theme-s8">
-                <Highlighter
-                  resultKey={item.description}
-                  highlightClasses={`${
-                    dark ? 'text-sol-cyan' : 'text-sol-blue'
-                  } font-bold bg-transparent`}
-                />
-              </div>
-            </li>
-          ))}
-          {isOpen && inputItems.length === 0 ? (
-            <li className="p-4 text-theme-s7">No results found</li>
-          ) : null}
-        </ul>
-      )}
+      <ul
+        {...getMenuProps()}
+        className={`w-full overflow-hidden rounded-b-lg appearance-none ${
+          dark ? 'bg-theme-p3' : 'bg-white'
+        } focus:outline-0`}
+      >
+        {isOpen && (
+          <>
+            <Results
+              inputItems={inputItems}
+              getItemProps={getItemProps}
+              highlightedIndex={highlightedIndex}
+              dark={dark}
+            />
+            {isOpen && inputItems.length === 0 ? (
+              <li className="p-4 text-theme-s7">No results found</li>
+            ) : null}
+          </>
+        )}
+      </ul>
     </div>
   )
 }

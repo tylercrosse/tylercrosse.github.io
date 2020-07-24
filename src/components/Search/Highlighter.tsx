@@ -1,12 +1,7 @@
 import React from 'react'
+import Fuse from 'fuse.js'
 
-interface IFormattedResult {
-  text: string
-  matches: boolean
-}
-type FormattedResult<T> = T | IFormattedResult[]
-
-const Highlighter: React.FC<FormattedResult> = ({
+const Highlighter: React.FC<Fuse.FuseResult[]> = ({
   resultKey,
   highlightClasses,
 }) => {
@@ -14,7 +9,13 @@ const Highlighter: React.FC<FormattedResult> = ({
   return (
     <>
       {resultKey.map(({ matches, text }) =>
-        matches ? <mark className={highlightClasses}>{text}</mark> : text
+        matches ? (
+          <mark key={text} className={highlightClasses}>
+            {text}
+          </mark>
+        ) : (
+          text
+        )
       )}
     </>
   )
