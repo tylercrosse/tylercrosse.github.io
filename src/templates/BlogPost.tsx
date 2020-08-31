@@ -62,7 +62,7 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
         </section>
         <section className="max-w-2xl px-4 pt-16 pb-10 mx-auto mt-10 border-t md:px-0 border-theme-p2">
           <div className="text-xl font-display text-theme-s9">Other Posts</div>
-          <BlogPosts limit={2} />
+          <BlogPosts limit={2} excludeId={markdownRemark?.id} />
           <Link
             to="/blog"
             className="font-body text-theme-s9 focus:text-sol-blue hover:text-sol-blue"
@@ -80,6 +80,7 @@ export default BlogPostTemplate
 export const pageQuery = graphql`
   query BlogPost($path: String!) {
     markdownRemark(frontmatter: { path: { eq: $path } }) {
+      id
       html
       timeToRead
       frontmatter {

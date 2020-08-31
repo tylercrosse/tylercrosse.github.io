@@ -55,6 +55,7 @@ export const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({ node }) => (
 
 interface BlogPostPreviewsProps {
   limit?: number
+  excludeId?: string
 }
 
 interface BlogIndexPageQuery {
@@ -72,7 +73,10 @@ interface BlogIndexPageQuery {
   }
 }
 
-const BlogPostPreviews: React.FC<BlogPostPreviewsProps> = ({ limit }) => {
+const BlogPostPreviews: React.FC<BlogPostPreviewsProps> = ({
+  limit,
+  excludeId,
+}) => {
   const data: BlogIndexPageQuery = useStaticQuery(graphql`
     query BlogIndexPage {
       allMarkdownRemark(
@@ -96,7 +100,9 @@ const BlogPostPreviews: React.FC<BlogPostPreviewsProps> = ({ limit }) => {
     }
   `)
   const { edges } = data.allMarkdownRemark
-  const posts = limit ? edges.slice(0, limit) : edges
+  const posts = limit
+    ? edges.filter(edge => edge.node.id !== excludeId).slice(0, limit)
+    : edges
   return (
     <>
       {posts.map(({ node }) => (
