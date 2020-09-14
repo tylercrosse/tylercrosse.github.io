@@ -1,10 +1,14 @@
 import React, { useState, useContext } from 'react'
 import { navigate } from 'gatsby'
-import { useCombobox } from 'downshift'
+import {
+  useCombobox,
+  UseComboboxState,
+  UseComboboxStateChangeOptions,
+} from 'downshift'
 import format from 'format-fuse.js'
 import ThemeContext from '../../context/ThemeContext'
 import Results from './Results'
-import useFuseSearch from './useFuseSearch'
+import useFuseSearch, { IResult } from './useFuseSearch'
 
 export interface SearchProps {
   closeModal?(): void
@@ -14,7 +18,7 @@ export default function Search({ closeModal }: SearchProps) {
   const { dark } = useContext(ThemeContext)
   const { postFuse, tagFuse } = useFuseSearch()
   const [value] = useState()
-  const [inputItems, setInputItems] = useState([])
+  const [inputItems, setInputItems] = useState<IResult[]>([])
   const {
     isOpen,
     getLabelProps,
@@ -30,22 +34,20 @@ export default function Search({ closeModal }: SearchProps) {
     onInputValueChange: ({ inputValue }) => {
       if (typeof inputValue === 'string') {
         const postResults = postFuse.search(inputValue)
-        const formattedPostResults = format(postResults)
+        const formattedPostResults = format(postResults) as IResult[]
         const tagResults = tagFuse.search(inputValue)
-        const formattedTagResults = format(tagResults)
+        const formattedTagResults = format(tagResults) as IResult[]
         const combinedResults = formattedPostResults.concat(formattedTagResults)
-        console.log({
-          formattedPostResults,
-          formattedTagResults,
-          combinedResults,
-        })
         if (Array.isArray(combinedResults)) setInputItems(combinedResults)
       }
     },
     stateReducer,
   })
 
-  function stateReducer(state, actionAndChanges) {
+  function stateReducer(
+    state: UseComboboxState<any>,
+    actionAndChanges: UseComboboxStateChangeOptions<any>
+  ): UseComboboxState<any> {
     const { type, changes } = actionAndChanges
     switch (type) {
       case useCombobox.stateChangeTypes.InputKeyDownEnter:

@@ -2,23 +2,30 @@ import { useStaticQuery, graphql } from 'gatsby'
 import Fuse from 'fuse.js'
 import { SearchQuery, Maybe } from '../../../graphql-types'
 
-type ResultType = 'Blog Posts' | 'Tags'
+export type ResultType = 'Blog Posts' | 'Tags'
+
+export interface IFormattedResult {
+  text: string
+  matches: boolean
+}
 
 export interface PostResult {
   resultType: ResultType
-  description: string | null | undefined
+  description: string | null | undefined | IFormattedResult[]
   id: string
   path: string | null | undefined
   tags: Maybe<string>[] | null | undefined
-  title: string | null | undefined
+  title: string | null | undefined | IFormattedResult[]
 }
 
 export interface TagResult {
   resultType: ResultType
   id: string
-  tag: string | null | undefined
+  tag: string | null | undefined | IFormattedResult[]
   path: string | null | undefined
 }
+
+export type IResult = PostResult | TagResult
 
 export default function useFuseSearch() {
   const data: SearchQuery = useStaticQuery(graphql`
