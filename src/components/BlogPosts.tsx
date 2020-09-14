@@ -55,7 +55,7 @@ export const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({ node }) => (
 
 interface BlogPostPreviewsProps {
   limit?: number
-  excludeId?: string
+  excludeId?: string | null
 }
 
 interface BlogIndexPageQuery {

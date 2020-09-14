@@ -50,9 +50,11 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
               >
                 <AiOutlineTags className="w-5 h-5" />
               </Link>
-              {markdownRemark?.frontmatter?.tags?.map(tag => (
-                <TagPill tag={tag} key={tag} />
-              ))}
+              {markdownRemark?.frontmatter?.tags?.map(tag => {
+                if (typeof tag === 'string') {
+                  return <TagPill tag={tag} key={tag} />
+                }
+              })}
             </div>
           </div>
           <div

@@ -1,11 +1,13 @@
 import React from 'react'
-import Fuse from 'fuse.js'
+import { IFormattedResult } from './useFuseSearch'
 
-const Highlighter: React.FC<Fuse.FuseResult[]> = ({
-  resultKey,
-  highlightClasses,
-}) => {
-  if (!Array.isArray(resultKey)) return resultKey
+interface HighlighterProps {
+  resultKey: string | undefined | null | IFormattedResult[]
+  highlightClasses: string
+}
+
+const Highlighter = ({ resultKey, highlightClasses }: HighlighterProps) => {
+  if (!Array.isArray(resultKey)) return <>{resultKey}</>
   return (
     <>
       {resultKey.map(({ matches, text }) =>
