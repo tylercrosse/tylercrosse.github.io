@@ -25,7 +25,7 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
       />
       <Layout
         isWhite={!dark}
-        mainClasses={`pt-12 md:pt-24 xl:pt-32 ${
+        mainClasses={`pt-10 md:pt-16 lg:pt-24 xl:pt-32 ${
           dark ? 'bg-sol-dark-4' : 'bg-white'
         } flex-grow`}
       >

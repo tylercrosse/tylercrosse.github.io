@@ -36,7 +36,7 @@ const Index: React.FC<IndexProps> = ({ data }) => {
         </section>
         <section className="max-w-screen-lg p-6 pt-24 mx-auto xl:pt-32">
           <div className="text-xl font-display text-theme-s9">Recent Posts</div>
-          <BlogPosts />
+          <BlogPosts limit={3} />
           <Link
             to="/blog"
             className="font-body text-theme-s9 focus:text-sol-blue hover:text-sol-blue"
