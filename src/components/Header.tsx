@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import Headroom from 'react-headroom'
 import DayOrNight from './DayOrNight'
 import TClogo from './TClogo'
-import SearchModal from './Search/SearchModal'
+import SearchModal from './SearchModal'
 
 interface HeaderProps {
   isWhite?: boolean
