@@ -15,13 +15,6 @@ export function getHighlightedItemClass(
   return ''
 }
 
-interface ResultsProps {
-  inputItems: IResult[]
-  getItemProps: (options: UseComboboxGetItemPropsOptions<any>) => any
-  highlightedIndex: number
-  dark: boolean
-}
-
 interface ResultProps {
   item: IResult
   index: number
@@ -35,7 +28,7 @@ const isPostResult = (result: IResult): result is PostResult =>
 const isTagResult = (result: IResult): result is TagResult =>
   result.resultType === 'Tags'
 
-function Result({
+export default function Result({
   item,
   index,
   getItemProps,
@@ -104,46 +97,4 @@ function Result({
     )
   }
   return null
-}
-
-export default function Results({
-  inputItems,
-  getItemProps,
-  highlightedIndex,
-  dark,
-}: ResultsProps) {
-  const RenderedItems = []
-  let currentResultType = ''
-  for (let i = 0; i < inputItems.length; i++) {
-    if (inputItems[i].resultType !== currentResultType) {
-      RenderedItems.push(
-        <>
-          <div className="px-4 py-1 text-xs font-body text-theme-s8">
-            {inputItems[i].resultType}
-          </div>
-          <Result
-            item={inputItems[i]}
-            index={i}
-            key={`${i}-${inputItems[i].id}`}
-            getItemProps={getItemProps}
-            highlightedIndex={highlightedIndex}
-            dark={dark}
-          />
-        </>
-      )
-    } else {
-      RenderedItems.push(
-        <Result
-          item={inputItems[i]}
-          index={i}
-          key={`${i}-${inputItems[i].id}`}
-          getItemProps={getItemProps}
-          highlightedIndex={highlightedIndex}
-          dark={dark}
-        />
-      )
-    }
-    currentResultType = inputItems[i].resultType
-  }
-  return <>{RenderedItems}</>
 }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal'
-import Search from '.'
+import Search from './Search'
 
-const SearchModal: React.FC = () => {
+export default function SearchModal() {
   const [modalIsOpen, setIsOpen] = useState(false)
 
   function onSlashKey(e: KeyboardEvent) {
@@ -46,5 +46,3 @@ const SearchModal: React.FC = () => {
     </>
   )
 }
-
-export default SearchModal

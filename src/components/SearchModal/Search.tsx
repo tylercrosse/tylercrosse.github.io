@@ -5,7 +5,6 @@ import {
   UseComboboxState,
   UseComboboxStateChangeOptions,
 } from 'downshift'
-import format from 'format-fuse.js'
 import ThemeContext from '../../context/ThemeContext'
 import Results from './Results'
 import useFuseSearch, { IResult } from './useFuseSearch'
@@ -16,7 +15,7 @@ export interface SearchProps {
 
 export default function Search({ closeModal }: SearchProps) {
   const { dark } = useContext(ThemeContext)
-  const { postFuse, tagFuse } = useFuseSearch()
+  const fuseSearch = useFuseSearch()
   const [value] = useState()
   const [inputItems, setInputItems] = useState<IResult[]>([])
   const {
@@ -33,12 +32,8 @@ export default function Search({ closeModal }: SearchProps) {
     items: inputItems,
     onInputValueChange: ({ inputValue }) => {
       if (typeof inputValue === 'string') {
-        const postResults = postFuse.search(inputValue)
-        const formattedPostResults = format(postResults) as IResult[]
-        const tagResults = tagFuse.search(inputValue)
-        const formattedTagResults = format(tagResults) as IResult[]
-        const combinedResults = formattedPostResults.concat(formattedTagResults)
-        if (Array.isArray(combinedResults)) setInputItems(combinedResults)
+        const results = fuseSearch(inputValue)
+        if (Array.isArray(results)) setInputItems(results)
       }
     },
     stateReducer,
@@ -85,6 +80,7 @@ export default function Search({ closeModal }: SearchProps) {
           } focus:outline-0`}
           autoFocus={true}
           value={value}
+          placeholder="Search for blog posts, tags, and more"
         />
         <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
           <svg

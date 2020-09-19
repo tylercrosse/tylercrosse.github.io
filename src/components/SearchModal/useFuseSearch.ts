@@ -1,5 +1,6 @@
 import { useStaticQuery, graphql } from 'gatsby'
 import Fuse from 'fuse.js'
+import format from 'format-fuse.js'
 import { SearchQuery, Maybe } from '../../../graphql-types'
 
 export type ResultType = 'Blog Posts' | 'Tags'
@@ -99,5 +100,12 @@ export default function useFuseSearch() {
     minMatchCharLength: 3,
     threshold: 0.3,
   })
-  return { flatPostData, flatTagData, postFuse, tagFuse }
+  function fuseSearch(query: string) {
+    const postResults = postFuse.search(query).slice(0, 3) // top 3 posts
+    const formattedPostResults = format(postResults) as IResult[]
+    const tagResults = tagFuse.search(query).slice(0, 3) // top 3 tags
+    const formattedTagResults = format(tagResults) as IResult[]
+    return formattedPostResults.concat(formattedTagResults)
+  }
+  return fuseSearch
 }
