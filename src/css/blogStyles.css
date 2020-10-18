@@ -36,7 +36,7 @@
     @apply text-2xl leading-none mb-4 mt-6;
   }
   & a {
-    @apply text-sol-blue break-all;
+    @apply text-sol-blue break-words;
   }
   & strong {
     @apply font-bold text-theme-s9;
@@ -86,6 +86,10 @@ a.anchor {
   height: 80%;
   display: flex;
   align-items: center;
+}
+
+.gatsby-resp-image-wrapper {
+  margin: 3rem auto 4rem;
 }
 
 /*
