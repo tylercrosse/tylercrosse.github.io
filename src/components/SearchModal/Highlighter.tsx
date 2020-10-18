@@ -1,5 +1,5 @@
 import React from 'react'
-import { IFormattedResult } from './useFuseSearch'
+import { IFormattedResult } from './useSearch'
 
 interface HighlighterProps {
   resultKey: string | undefined | null | IFormattedResult[]

@@ -7,7 +7,7 @@ import {
 } from 'downshift'
 import ThemeContext from '../../context/ThemeContext'
 import Results from './Results'
-import useFuseSearch, { IResult } from './useFuseSearch'
+import useSearch, { IResult } from './useSearch'
 
 export interface SearchProps {
   closeModal?(): void
@@ -15,7 +15,7 @@ export interface SearchProps {
 
 export default function Search({ closeModal }: SearchProps) {
   const { dark } = useContext(ThemeContext)
-  const fuseSearch = useFuseSearch()
+  const search = useSearch()
   const [value] = useState()
   const [inputItems, setInputItems] = useState<IResult[]>([])
   const {
@@ -32,7 +32,7 @@ export default function Search({ closeModal }: SearchProps) {
     items: inputItems,
     onInputValueChange: ({ inputValue }) => {
       if (typeof inputValue === 'string') {
-        const results = fuseSearch(inputValue)
+        const results = search(inputValue)
         if (Array.isArray(results)) setInputItems(results)
       }
     },

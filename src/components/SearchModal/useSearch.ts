@@ -28,7 +28,7 @@ export interface TagResult {
 
 export type IResult = PostResult | TagResult
 
-export default function useFuseSearch() {
+export default function useSearch() {
   const data: SearchQuery = useStaticQuery(graphql`
     query Search {
       posts: allMarkdownRemark(
@@ -100,12 +100,12 @@ export default function useFuseSearch() {
     minMatchCharLength: 3,
     threshold: 0.3,
   })
-  function fuseSearch(query: string) {
+  function search(query: string) {
     const postResults = postFuse.search(query).slice(0, 3) // top 3 posts
     const formattedPostResults = format(postResults) as IResult[]
     const tagResults = tagFuse.search(query).slice(0, 3) // top 3 tags
     const formattedTagResults = format(tagResults) as IResult[]
     return formattedPostResults.concat(formattedTagResults)
   }
-  return fuseSearch
+  return search
 }

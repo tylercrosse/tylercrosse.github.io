@@ -1,7 +1,7 @@
 import React from 'react'
 import { UseComboboxGetItemPropsOptions } from 'downshift'
 import Result from './Result'
-import { IResult } from './useFuseSearch'
+import { IResult } from './useSearch'
 
 interface ResultsProps {
   inputItems: IResult[]
