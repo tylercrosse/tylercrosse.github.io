@@ -1,0 +1,312 @@
+---
+title: 'Search Part 2 - Implementation'
+description: 'Adding search to a static site with accessibility in mind using Fuse.js and Downshift'
+date: '2020-09-14'
+tags: ['typescript', 'search', 'tailwindcss', 'react', 'gatsby']
+path: '/blog/search-part2-implementation'
+draft: false
+---
+
+The objective of this post is to discuss the implementation used to add static search to this blog. I also touch on some pros and cons of my implementation vs. other approaches. For background on how I selected the search library to use and user experience research see [part 1](/blog/search-part1-research-and-ux).
+
+## Code structure
+
+I split the code into a couple files each focused on a specific set of responsibilites.
+
+- `useSearch.ts` - Handles constructing an index and returns a function to perform searches.
+- `Search.tsx` - handles the bulk of the user interactions with search. Processes keyboard + mouse events + stores state. This is hugely aided by Downshift.
+- `Results.tsx`, `Result.tsx`, & `Highlighter.tsx` handle the rendering of results.
+
+Building software is all about compromises. There are tradeoffs to every design decision.
+
+### Search Index - Implementing Fuse.js
+
+#### 1. Get the data - graphql query
+
+Since this was implemented in a Gatsby app, I used `useStaticQuery` to pull in the data needed to construct the index from a graphql query.
+
+```ts
+// 1️⃣ Get the data
+const data: SearchQuery = useStaticQuery(graphql`
+  query Search {
+    posts: allMarkdownRemark(filter: { frontmatter: { draft: { ne: true } } }) {
+      edges {
+        node {
+          id
+          frontmatter {
+            date
+            description
+            path
+            tags
+            title
+          }
+        }
+      }
+    }
+    tags: allMarkdownRemark(filter: { frontmatter: { draft: { ne: true } } }) {
+      group(field: frontmatter___tags) {
+        fieldValue
+        totalCount
+      }
+    }
+  }
+`)
+```
+
+#### 2. Normalize the shape of the data
+
+The shape of the data wasn't in quite the shape I wanted for the results. Fuse.js has a fair amount of flexibility when constructing an index to access properties of deeply nested objects. The catch is when it returns a hit it passes back the original object. Instead of reformating the data on each render I've decided to reshape it just once when creating the index.
+
+```ts
+// 2️⃣ Normalize the shape of the data
+const flatPostData = data.posts.edges.map(({ node }) => ({
+  resultType: 'Blog Posts',
+  description: node?.frontmatter?.description,
+  id: node.id,
+  path: node?.frontmatter?.path,
+  tags: node?.frontmatter?.tags,
+  title: node?.frontmatter?.title,
+}))
+const flatTagData = data.tags.group.map(node => ({
+  resultType: 'Tags',
+  id: node.fieldValue,
+  tag: node.fieldValue,
+  path: `tags/${node.fieldValue}`,
+}))
+```
+
+#### 3. Use the data to create an index
+
+I actually create two indexes, one for each category of data I want to return as part of the results set. I massaged the `location` and `threshold` options passed to fuse to help get the results I was expecting from some test queries. They've got a good section in their docs about [how these options impact result scores](https://fusejs.io/concepts/scoring-theory.html).
+
+```ts
+// 3️⃣ Use the data to create an index
+const postFuse = new Fuse(flatPostData, {
+  keys: [
+    {
+      name: 'title',
+      weight: 2,
+    },
+    {
+      name: 'description',
+      weight: 2,
+    },
+    {
+      name: 'tags',
+      weight: 2,
+    },
+  ],
+  distance: 500,
+  includeMatches: true,
+  includeScore: true,
+  minMatchCharLength: 3,
+  threshold: 0.3,
+})
+const tagFuse = new Fuse(flatTagData, {
+  keys: ['tag'],
+  distance: 100,
+  includeMatches: true,
+  includeScore: true,
+  minMatchCharLength: 3,
+  threshold: 0.3,
+})
+```
+
+#### 4. Return the search function from the hook
+
+Finally, I return a search function from the hook. This search function accepts a query string, performs a search on both of the indexes and then returns a joined set of results. There's more I could do here to dynamically rank the results using the score Fuse returns but I decided to consistently keep the blog posts results above the tag ones on the first pass of adding it here. Keep it simple and enhance as needed.
+
+```typescript
+// Custom hook to use in search
+export default function useSearch() {
+  // 1️⃣ Get the data
+  const data: SearchQuery = useStaticQuery(...graphqlStuff)
+
+  // 2️⃣ Normalize the shape of the data
+  const flatPostData = data.posts.edges.map(({ node }) => ({
+    ...yadaYada,
+  }))
+  const flatTagData = data.tags.group.map(node => ({
+    ...fromAbove,
+  }))
+
+  // 3️⃣ Use the data to create an index
+  const postFuse = new Fuse(flatPostData, {
+    ...seeAbove,
+  })
+  const tagFuse = new Fuse(flatTagData, {
+    ...againHere,
+  })
+
+  // 4️⃣ Return the search function from the hook
+  function search(query: string) {
+    const postResults = postFuse.search(query).slice(0, 3) // top 3 posts
+    const formattedPostResults = format(postResults) as IResult[]
+    const tagResults = tagFuse.search(query).slice(0, 3) // top 3 tags
+    const formattedTagResults = format(tagResults) as IResult[]
+    return formattedPostResults.concat(formattedTagResults)
+  }
+  return search
+}
+```
+
+Here's [all the pieces of `useSearch.ts` together](https://github.com/tylercrosse/tylercrosse.github.io/blob/master/src/components/SearchModal/useFuseSearch.ts).
+
+### User Interactions - Integrating Fuse with downshift
+
+I chose to use Downshift 🏎 to handle the UI interactions with search. The library is designed for exactly this use case and provides "primitives to build simple, flexible, WAI-ARIA compliant React autocomplete/combobox" components.
+
+#### 1. Set up component state
+
+There are few things going on here. I pull in the theme context I use for controlling dark mode, which you can read more about in [my post on adding a dark mode](http://localhost:8000/blog/theme-switcher).
+
+```tsx
+export default function Search({ closeModal }: SearchProps) {
+  // 1️⃣ set up component state
+  const { dark } = useContext(ThemeContext)
+  const search = useSearch() // custom hook
+  const [value] = useState()
+  const [inputItems, setInputItems] = useState<IResult[]>([])
+  const {
+    isOpen,
+    getLabelProps,
+    getMenuProps,
+    getInputProps,
+    getComboboxProps,
+    highlightedIndex,
+    getItemProps,
+  } = useCombobox({
+    selectedItem: value,
+    defaultHighlightedIndex: 0,
+    items: inputItems,
+    onInputValueChange: ({ inputValue }) => {
+      if (typeof inputValue === 'string') {
+        // Where the magic happens 🔮 Use the hook from the first snippet.
+        const results = search(inputValue)
+        if (Array.isArray(results)) setInputItems(results)
+      }
+    },
+    stateReducer,
+  })
+
+  // continued below
+```
+
+#### 2. Override the default Downshift state changes
+
+I wanted slightly different behavior than what Downshift does out of the box. To do this they allow you to [pass in a custom stateReducer](https://www.downshift-js.com/use-combobox#state-reducer). From their docs:
+
+> When `stateReducer` is called it will receive the previous state and the `actionAndChanges` object. `actionAndChanges` contains the change type, which explains why the state is being changed. It also contains the changes proposed by Downshift that should occur as a consequence of that change type. You are supposed to return the new state according to your needs.
+
+The main goal of search on my site was to improve navigation and the discoverability of site contents. The main interaction pattern is to have the search bar open in a modal, return results that map to pages, and then navigate a user to the page the select when picking a result. I also wanted the modal to close and clear at the same time since the users goal presumably has been accomplished.
+
+```tsx
+// 2️⃣ handle state changes
+function stateReducer(
+  state: UseComboboxState<any>,
+  actionAndChanges: UseComboboxStateChangeOptions<any>
+): UseComboboxState<any> {
+  const { type, changes } = actionAndChanges
+  switch (type) {
+    case useCombobox.stateChangeTypes.InputKeyDownEnter:
+    case useCombobox.stateChangeTypes.ItemClick:
+      // onSelect, close the modal, reset the state and navigate
+      closeModal && closeModal()
+      navigate(changes.selectedItem.path)
+      return {
+        ...changes,
+        isOpen: false,
+        selectedItem: null,
+        inputValue: '',
+      }
+    default:
+      return changes // otherwise business as usual.
+  }
+}
+```
+
+#### 3. Rendering Results & ARIA support
+
+The markup I used doesn't differ much from the [basic usage spelled out in the downshift docs](https://www.downshift-js.com/use-combobox#basic-usage). The key bits are the spreading of the `get...Props()` downshift functions which help manage downshifts internal state and provide ARIA compliant attributes.
+
+```tsx
+export default function Search({ closeModal }: SearchProps) {
+  // 1️⃣ state stuff
+
+  // 2️⃣ stateReducer - handle state changes
+
+  // 3️⃣ Rendering Results
+  return (
+    <div
+      className={`relative w-full rounded-lg border shadow-lg border-theme-s7 ${
+        dark ? 'themeDark' : 'themeLight'
+      }`}
+    >
+      <div {...getComboboxProps()} className="relative">
+        <label {...getLabelProps()} hidden>
+          Search the site
+        </label>
+        <input
+          {...getInputProps()}
+          className={`block w-full py-3 pl-10 pr-6 ${
+            isOpen ? 'border-b border-theme-s7' : 'rounded-b-lg'
+          } leading-normal rounded-t-lg outline-none appearance-none 
+          text-theme-s8 placeholder-theme-s7 transition-width duration-100
+          ease-in-out z-0 ${dark ? 'bg-theme-p3' : 'bg-white'} focus:outline-0`}
+          autoFocus={true}
+          value={value}
+        />
+        <div
+          className="absolute inset-y-0 left-0 flex items-center pl-4
+        pointer-events-none"
+        >
+          <svg
+            className="w-4 h-4 pointer-events-none fill-current text-theme-s8"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.4
+              1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <ul
+        {...getMenuProps()}
+        className={`w-full overflow-hidden rounded-b-lg appearance-none ${
+          dark ? 'bg-theme-p3' : 'bg-white'
+        } focus:outline-0`}
+      >
+        {isOpen && (
+          <>
+            <Results
+              inputItems={inputItems}
+              getItemProps={getItemProps}
+              highlightedIndex={highlightedIndex}
+              dark={dark}
+            />
+            {isOpen && inputItems.length === 0 ? (
+              <li className="p-4 text-theme-s7">No results found</li>
+            ) : null}
+          </>
+        )}
+      </ul>
+    </div>
+  )
+}
+```
+
+## Finishing Touches
+
+The `Search` component is rendered inside an instance of [react-modal](http://reactcommunity.org/react-modal/) that opens when the search button is clicked. This helps focus the user on the search bar and is similar to the omnibar on many applications like Slack and VS Code. This component also adds a global event listener for the `/` (forward slash) key to open up the search modal. Give it a go!
+
+The results do some fancy rendering to categorize the search results and tags. They also handle applying the highlighted text from the results.
+
+The full source can been seen on the [github repo for my site](https://github.com/tylercrosse/tylercrosse.github.io/tree/master/src/components/SearchModal). I hope these two posts have inspired to you add search to your site!
+
+### Additional Resources
+
+- [Designing Multiple Layers into Search](https://www.thoughtspot.com/thoughtspot-blog/designing-multiple-layers-search)
+- The official [W3 Spec for a dialog modal](https://www.w3.org/TR/wai-aria-practices/#dialog_modal) and the [W3 example of one](https://www.w3.org/TR/wai-aria-practices/examples/dialog-modal/dialog.html).
+- The official [W3 Spec for a combobox](https://www.w3.org/TR/wai-aria-practices/#combobox) and the [W3 example](https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html) of that too.
