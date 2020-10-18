@@ -48,8 +48,10 @@ export default function Search({ closeModal }: SearchProps) {
       case useCombobox.stateChangeTypes.InputKeyDownEnter:
       case useCombobox.stateChangeTypes.ItemClick:
         // onSelect, close the modal, reset the state and navigate
-        closeModal && closeModal()
-        navigate(changes.selectedItem.path)
+        if (changes.selectedItem) {
+          closeModal && closeModal()
+          navigate(changes.selectedItem.path)
+        }
         return {
           ...changes,
           isOpen: false,
