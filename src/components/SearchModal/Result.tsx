@@ -2,7 +2,7 @@ import React from 'react'
 import { UseComboboxGetItemPropsOptions } from 'downshift'
 import { AiOutlineTag, AiOutlineRead } from 'react-icons/ai'
 import Highlighter from './Highlighter'
-import { IResult, PostResult, TagResult } from './useFuseSearch'
+import { IResult, PostResult, TagResult } from './useSearch'
 
 export function getHighlightedItemClass(
   highlightedIndex: number,

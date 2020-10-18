@@ -45,11 +45,13 @@ module.exports = {
         footnotes: true,
         pedantic: true,
         plugins: [
+          `gatsby-remark-unwrap-images`,
           {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 900,
             },
+            showCaptions: true,
           },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
