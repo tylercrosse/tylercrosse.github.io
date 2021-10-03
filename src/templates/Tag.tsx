@@ -4,10 +4,25 @@ import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import AllTags from '../components/AllTags'
 import { BlogPostPreview } from '../components/BlogPosts'
-import { TagQuery } from '../../graphql-types'
 
 interface TagTemplateProps {
-  readonly data: TagQuery
+  readonly data: {
+    allMarkdownRemark: {
+      edges: Array<{
+        node: {
+          id: string
+          timeToRead?: number | null | undefined
+          frontmatter?: {
+            path: string
+            title: string
+            description: string
+            date: string
+            tags: string[]
+          }
+        }
+      }>
+    }
+  }
   readonly pageContext: {
     tag: string
   }

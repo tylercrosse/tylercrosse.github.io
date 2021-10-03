@@ -2,11 +2,6 @@ import React from 'react'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import { AiOutlineTags, AiOutlineClockCircle } from 'react-icons/ai'
 import TagPill from './TagPill'
-import {
-  Maybe,
-  MarkdownRemark,
-  MarkdownRemarkFrontmatter,
-} from '../../graphql-types'
 
 interface BlogPostPreviewProps {
   node: {
@@ -61,13 +56,16 @@ interface BlogPostPreviewsProps {
 interface BlogIndexPageQuery {
   allMarkdownRemark: {
     edges: Array<{
-      node: Pick<MarkdownRemark, 'id' | 'timeToRead'> & {
-        frontmatter?: Maybe<
-          Pick<
-            MarkdownRemarkFrontmatter,
-            'date' | 'path' | 'title' | 'description'
-          >
-        >
+      node: {
+        id: string
+        timeToRead?: number | null | undefined
+        frontmatter?: {
+          path: string
+          title: string
+          description: string
+          date: string
+          tags: string[]
+        }
       }
     }>
   }
