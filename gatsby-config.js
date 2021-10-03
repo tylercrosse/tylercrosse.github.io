@@ -6,7 +6,6 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-typescript`,
-    // `gatsby-plugin-graphql-codegen`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -51,7 +50,6 @@ module.exports = {
             options: {
               maxWidth: 900,
             },
-            showCaptions: true,
           },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
@@ -87,6 +85,7 @@ module.exports = {
         icon: `src/images/favicon-512.png`, // This path is relative to the root of the site.
       },
     },
+    // `gatsby-plugin-graphql-codegen`,
     {
       resolve: 'gatsby-plugin-eslint',
       options: {
