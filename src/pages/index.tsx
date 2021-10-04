@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, graphql } from 'gatsby'
-import Img, { FluidObject } from 'gatsby-image'
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { IndexPageQuery } from '../../graphql-types'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
@@ -11,7 +11,8 @@ interface IndexProps {
 }
 
 const Index: React.FC<IndexProps> = ({ data }) => {
-  const heroImg = data.file?.childImageSharp?.fluid as FluidObject
+  const heroImg = data.file?.childImageSharp
+    ?.gatsbyImageData as IGatsbyImageData
   return (
     <>
       <SEO title="Home" />
@@ -31,7 +32,10 @@ const Index: React.FC<IndexProps> = ({ data }) => {
             </p>
           </div>
           <div className="w-3/4 mx-auto lg:mx-0 lg:w-1/2 lg:max-w-5xl">
-            <Img fluid={heroImg} />
+            <GatsbyImage
+              image={heroImg}
+              alt="Building great software products."
+            />
           </div>
         </section>
         <section className="max-w-screen-lg p-6 pt-24 mx-auto xl:pt-32">
@@ -55,9 +59,11 @@ export const query = graphql`
   query IndexPage {
     file(relativePath: { eq: "Computer-Hero.png" }) {
       childImageSharp {
-        fluid(maxWidth: 480) {
-          ...GatsbyImageSharpFluid_tracedSVG
-        }
+        gatsbyImageData(
+          width: 480
+          placeholder: TRACED_SVG
+          layout: CONSTRAINED
+        )
       }
     }
   }

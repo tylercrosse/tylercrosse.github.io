@@ -54,6 +54,7 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
                 if (typeof tag === 'string') {
                   return <TagPill tag={tag} key={tag} />
                 }
+                return null
               })}
             </div>
           </div>

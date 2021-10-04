@@ -71,16 +71,17 @@ module.exports = {
         ],
       },
     },
+    `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Tyler Crosse`,
+        short_name: `TC`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `--theme-p10`,
+        theme_color: `--theme-p10`,
         display: `minimal-ui`,
         icon: `src/images/favicon-512.png`, // This path is relative to the root of the site.
       },

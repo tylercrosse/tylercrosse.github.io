@@ -17,7 +17,7 @@ To use the changes again, call `git stash apply`, which applies all the stashed 
 
 I will frequently stash, switch to master, pull down the latest changes from the remote, switch back to my feature branch, rebase master, and re-apply my WIP changes.
 
-```sh
+```bash
 git stash           // save local changes so I can safely switch branches
 git checkout master // switch branches
 git pull            // fetch and merge the latest changes
@@ -34,7 +34,7 @@ By default, the saving commands are all or nothing. You can also stash changes t
 
 Occasionally, when I get caught up with several issues, I stash changes on a few different branches. To see all the other saved stashes, I can call `git stash list`.
 
-```sh
+```bash
 $ git stash list
 stash@{0}: WIP on foo-branch: 453ab21 Add some foo change
 stash@{1}: WIP on bar-branch: 123cd45 Fix some bar issue
@@ -53,7 +53,7 @@ Older stashes can be applied by calling `git stash apply n`. A pretty common tri
 
 ### TL;DR - Cheatsheet
 
-```sh
+```bash
 git stash push -m "whatever stash message" // stash changes with a message
 git stash push -- [<pathspec>...]          // stash changes for individual files or directories
 git stash list                             // show list of previous stashes
