@@ -7,17 +7,28 @@ import {
 } from 'downshift'
 import ThemeContext from '../../context/ThemeContext'
 import Results from './Results'
-import useSearch, { IResult } from './useSearch'
+import useSearch from './useSearch'
+import { CombinedResult } from './formatFuseResult'
 
 export interface SearchProps {
   closeModal?(): void
 }
 
-export default function Search({ closeModal }: SearchProps) {
+export type SelectedItemChange = {
+  selectedItem: {
+    path: string
+    score: number
+  }
+}
+
+const hasSelectedItem = (changes: unknown): changes is SelectedItemChange =>
+  (changes as SelectedItemChange).selectedItem !== undefined
+
+export default function Search({ closeModal }: SearchProps): JSX.Element {
   const { dark } = useContext(ThemeContext)
   const search = useSearch()
   const [value] = useState()
-  const [inputItems, setInputItems] = useState<IResult[]>([])
+  const [inputItems, setInputItems] = useState<CombinedResult[]>([])
   const {
     isOpen,
     getLabelProps,
@@ -40,16 +51,17 @@ export default function Search({ closeModal }: SearchProps) {
   })
 
   function stateReducer(
-    state: UseComboboxState<any>,
-    actionAndChanges: UseComboboxStateChangeOptions<any>
-  ): UseComboboxState<any> {
+    state: UseComboboxState<unknown>,
+    actionAndChanges: UseComboboxStateChangeOptions<unknown>
+  ): UseComboboxState<unknown> {
     const { type, changes } = actionAndChanges
     switch (type) {
       case useCombobox.stateChangeTypes.InputKeyDownEnter:
       case useCombobox.stateChangeTypes.ItemClick:
         // onSelect, close the modal, reset the state and navigate
-        if (changes.selectedItem) {
+        if (hasSelectedItem(changes)) {
           closeModal && closeModal()
+          console.log('navigate', changes.selectedItem)
           navigate(changes.selectedItem.path)
         }
         return {

@@ -2,7 +2,11 @@ import React from 'react'
 import { UseComboboxGetItemPropsOptions } from 'downshift'
 import { AiOutlineTag, AiOutlineRead } from 'react-icons/ai'
 import Highlighter from './Highlighter'
-import { IResult, PostResult, TagResult } from './useSearch'
+import {
+  CombinedResult,
+  FormattedPostResult,
+  FormattedTagResult,
+} from './formatFuseResult'
 
 export function getHighlightedItemClass(
   highlightedIndex: number,
@@ -16,16 +20,16 @@ export function getHighlightedItemClass(
 }
 
 interface ResultProps {
-  item: IResult
+  item: CombinedResult
   index: number
-  getItemProps: (options: UseComboboxGetItemPropsOptions<any>) => any
+  getItemProps: (options: UseComboboxGetItemPropsOptions<unknown>) => unknown
   highlightedIndex: number
   dark: boolean
 }
 
-const isPostResult = (result: IResult): result is PostResult =>
+const isPostResult = (result: CombinedResult): result is FormattedPostResult =>
   result.resultType === 'Blog Posts'
-const isTagResult = (result: IResult): result is TagResult =>
+const isTagResult = (result: CombinedResult): result is FormattedTagResult =>
   result.resultType === 'Tags'
 
 export default function Result({
@@ -34,11 +38,11 @@ export default function Result({
   getItemProps,
   highlightedIndex,
   dark,
-}: ResultProps) {
+}: ResultProps): JSX.Element | null {
   if (isPostResult(item)) {
     return (
       <li
-        key={item.id}
+        key={`${item.id}-${index}`}
         {...getItemProps({ item, index })}
         className={`px-4 py-2 md:p-4 bg-opacity-50 ${getHighlightedItemClass(
           highlightedIndex,
@@ -73,7 +77,7 @@ export default function Result({
   if (isTagResult(item)) {
     return (
       <li
-        key={item.id}
+        key={`${item.id}-${index}`}
         {...getItemProps({ item, index })}
         className={`px-4 py-2 md:p-4 bg-opacity-50 ${getHighlightedItemClass(
           highlightedIndex,
