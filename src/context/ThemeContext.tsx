@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 
 const defaultState = {
   dark: false,
-  toggleDark: () => {},
+  toggleDark: function() {
+    return
+  },
 }
 /** Originally based off this blog post {@link https://www.gatsbyjs.org/blog/2019-01-31-using-react-context-api-with-gatsby/} */
 const ThemeContext = React.createContext(defaultState)

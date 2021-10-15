@@ -1,11 +1,11 @@
 import React from 'react'
 import { UseComboboxGetItemPropsOptions } from 'downshift'
 import Result from './Result'
-import { IResult } from './useSearch'
+import { CombinedResult } from './formatFuseResult'
 
 interface ResultsProps {
-  inputItems: IResult[]
-  getItemProps: (options: UseComboboxGetItemPropsOptions<any>) => any
+  inputItems: CombinedResult[]
+  getItemProps: (options: UseComboboxGetItemPropsOptions<unknown>) => unknown
   highlightedIndex: number
   dark: boolean
 }
@@ -15,7 +15,7 @@ export default function Results({
   getItemProps,
   highlightedIndex,
   dark,
-}: ResultsProps) {
+}: ResultsProps): JSX.Element {
   const RenderedItems = []
   let currentResultType = ''
   for (let i = 0; i < inputItems.length; i++) {
