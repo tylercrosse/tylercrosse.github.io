@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Modal from 'react-modal'
 import Search from './Search'
 
-export default function SearchModal() {
+export default function SearchModal(): JSX.Element {
   const [modalIsOpen, setIsOpen] = useState(false)
 
   function onSlashKey(e: KeyboardEvent) {

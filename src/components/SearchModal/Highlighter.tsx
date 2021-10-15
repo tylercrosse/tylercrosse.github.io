@@ -6,13 +6,16 @@ interface HighlighterProps {
   highlightClasses: string
 }
 
-const Highlighter = ({ resultKey, highlightClasses }: HighlighterProps) => {
+const Highlighter = ({
+  resultKey,
+  highlightClasses,
+}: HighlighterProps): JSX.Element => {
   if (!Array.isArray(resultKey)) return <>{resultKey}</>
   return (
     <>
-      {resultKey.map(({ matches, text }) =>
+      {resultKey.map(({ matches, text }, index) =>
         matches ? (
-          <mark key={text} className={highlightClasses}>
+          <mark key={`${text}-${index}`} className={highlightClasses}>
             {text}
           </mark>
         ) : (
