@@ -2,7 +2,7 @@
 title: 'Search Part 1 - Research & UX'
 description: 'Search UX and comparing options for search on a static site'
 date: '2020-09-12'
-tags: ['search', 'gatsby', 'javascript', 'algorithms']
+tags: ['search', 'gatsby', 'javascript', 'algorithms', 'evergreen-🌲']
 path: '/blog/search-part1-research-and-ux'
 draft: false
 ---
