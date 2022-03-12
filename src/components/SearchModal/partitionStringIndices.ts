@@ -16,6 +16,7 @@ type PartitionStringIndices<T> = {
 /**
  * Partitions a string based on character indices.
  *
+ * Adapted from [strind by metonym](https://github.com/metonym/strind)
  * @param {string} str - string to partition
  * @param {[number,number][]} indices - array of tuples to match [start, end] indices
  * @param {function} callback - callback function called with matching characters
