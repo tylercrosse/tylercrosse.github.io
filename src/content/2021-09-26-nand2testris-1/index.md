@@ -2,18 +2,22 @@
 title: 'From Boolean Logic Gates to an Assembler'
 description: 'The first half of the Nand2Tetris course'
 date: '2021-09-26'
-updated: '2022-03-11'
+updated: '2022-03-12'
 status: 'budding'
 tags: ['computer-science', 'learning-in-public', 'budding-🌿']
 path: '/ideas/nand2tetris-part1'
 draft: false
 ---
 
-This weekend I completed the first half of the infamous [Nand2Tetris](https://www.nand2tetris.org/) course. This course is a Massively Open Online Course (MOOC) delivered in two parts [on Coursera](https://www.coursera.org/learn/build-a-computer/home).
+This weekend I completed the first half of the infamous [Nand2Tetris](https://www.nand2tetris.org/) course. This course is a Massively Open Online Course (MOOC) delivered in two parts [on Coursera](https://www.coursera.org/learn/build-a-computer/home). All of the screenshots were taken from the coursea course.
+
+As a largerly self taught deveoloper I've been actively working on strengethening my knowledge of [computer science fundamentals](https://teachyourselfcs.com/). For people seeking to do the same, this post serves to provide a very high level overview of what they would learn by taking this course. Admittedly, it's also a bit of show and tell to make me feel like less of an imposter amoung peers who have had a rigours traditional education in computer-science. Taking this course has made me a better software developer.
 
 ## What's covered
 
 This whirlwind course tries to build a modern computer from first principles. Most of the course is taught through 12 projects that stack on one another. The first half encompasses Boolean Logic Gates, Boolean Arithmetic Chips, Memory, Machine Language, Computer Architecture, and an Assembler.
+
+![Nand2Tetris Part 1 Roadmap](nand2tetris-part1.png)
 
 ### Boolean Logic
 
@@ -78,6 +82,8 @@ Function:
         if (out < 0) set ng = 1       // two's complement comparison
 ```
 
+![alu architecture](alu.png)
+
 ### Memory
 
 The course then introduced the notion of time and sequential logic. The course provides a data flip-flip (DFF) as fundamental chip. Using the DFF as a starting point I build a hierarchy of registers and RAM. The small registers are used to build larger registers, which in tern can then get stacked to create any size memory unit.
@@ -86,32 +92,25 @@ The course then introduced the notion of time and sequential logic. The course p
 Data Flip-Flop -> 1-bit register -> 16-bit register -> RAMn
 ```
 
+![1 bit register](1-bit-register.png)
+
+![multi bit register](multi-bit-register.png)
+
+![n bit ram](n-bit-ram.png)
+
 ### Computer Architecture
 
 The course presented computer architecture after the unit on machine language, an order that makes sense pedagogically. I've reversed the order of these two topics because it makes more sense hierarchically. You need a working CPU to run the machine language, which dovetails into the section on the assembler.
 
 This unit dances through the stored program concept, von Neumann Architecture, the theory of Memory, the role of th e CPU, and finally input and output. The project was one of the more difficult ones of the course and involved building a CPU from the chips built in previous units. You can [see my finished HDL code](https://github.com/tylercrosse/nand2tetris/blob/main/projects/05/CPU.hdl) for the CPU.
 
-### Machine Language
+![cpu architecture](cpu-architecture.png)
 
-Machine language is the point where hardware meets software. A machine language is a hardware dependent formalism for coding instructions. It provides a way of controlling hardware to perform arithmetic, logical operations, read and write values from and to the computer's memory, and decide which instruction to fetch and execute next.
-
-Here's an example of a very simple program written in the hack machine language. At the end of this the value 5 gets stored in RAM[0]:
+Here is the Hack instruction set, with symbolic mnemonics and the corresponding binary. This represents all of the operations the CPU is able to perform.
 
 ```nasm
-// Computes R0 = 2 + 3  (R0 refers to RAM[0])
+// Adapted from Figure 4.5 in The Elements of Computing Systems.
 
-@2      // A instruction - set the A register (reg) to the value 2
-D=A     // D instruction - set the D reg to the value of the A reg (2)
-@3      // A instruction - set the A reg to the value 3
-D=D+A   // D instruction - set the D reg to D plus the value of the A reg (3)
-@0      // A instruction - set the A reg to the value 0
-M=D     // Store the value of the D reg to the current memory address (0)
-```
-
-Here is the Hack instruction set, with symbolic mnemonics and the corresponding binary. Adapted from Figure 4.5 in The Elements of Computing Systems.
-
-```
 A-instruction
         Symbolic: @xxx - (xxx is a decimal value ranging from 0 to 32767,
                           or a symbol bound o such a decimal value)
@@ -144,7 +143,29 @@ C-instruction
  A-D  M-D    0 0 0 1 1 1     JLT  1 0 0  if comp < 0 jump
  D&A  D&M    0 0 0 0 0 0     JNE  1 0 1  if comp != 0 jump
  D|A  D|M    0 1 0 1 0 1     JMP  1 1 1  unconditional jump
+```
 
+#### Putting the pieces together
+
+The Hack chipset that is created as part of this course follows a Von Neumann Architecture. It consists of a input and output mechanisms, memory that stores data and instructions, a control unit that contains a instruction register and program counter, and a processing unit that contains an arithemetic logic unit (ALU) and processor registers.
+
+![von neumann architecture](von-neumann-architecture.png)
+
+### Machine Language
+
+Machine language is the point where hardware meets software. A machine language is a hardware dependent formalism for coding instructions. It provides a way of controlling hardware to perform arithmetic, logical operations, read and write values from and to the computer's memory, and decide which instruction to fetch and execute next.
+
+Here's an example of a very simple program written in the hack machine language. At the end of this the value 5 gets stored in RAM[0]:
+
+```nasm
+// Computes R0 = 2 + 3  (R0 refers to RAM[0])
+
+@2      // A instruction - set the A register (reg) to the value 2
+D=A     // D instruction - set the D reg to the value of the A reg (2)
+@3      // A instruction - set the A reg to the value 3
+D=D+A   // D instruction - set the D reg to D plus the value of the A reg (3)
+@0      // A instruction - set the A reg to the value 0
+M=D     // Store the value of the D reg to the current memory address (0)
 ```
 
 ### Assembler
