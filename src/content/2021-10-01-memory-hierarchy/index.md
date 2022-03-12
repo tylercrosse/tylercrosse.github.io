@@ -3,7 +3,7 @@ title: 'Mental Models - Memory Hierarchy '
 description: 'Ways to think about memory'
 date: '2021-09-01'
 tags: ['computer-science', 'short', 'systems']
-path: '/blog/memory-hierarchy'
+path: '/ideas/memory-hierarchy'
 draft: true
 ---
 

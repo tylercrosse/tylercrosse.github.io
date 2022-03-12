@@ -11,7 +11,7 @@ interface HeaderProps {
 
 const menuItems = [
   { url: '/', text: 'Home' },
-  { url: '/blog', text: 'Blog' },
+  { url: '/ideas', text: 'Ideas' },
 ]
 
 export const Header: React.FC<HeaderProps> = ({ isWhite = false }) => {

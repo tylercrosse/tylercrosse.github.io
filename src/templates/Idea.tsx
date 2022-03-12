@@ -1,18 +1,18 @@
 import React, { useContext } from 'react'
 import { Link, graphql } from 'gatsby'
 import { AiOutlineTags, AiOutlineClockCircle } from 'react-icons/ai'
-import { BlogPostQuery } from '../../graphql-types'
-import BlogPosts from '../components/BlogPosts'
+import { IdeaQuery } from '../../graphql-types'
+import Ideas from '../components/Ideas'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import TagPill from '../components/TagPill'
 import ThemeContext from '../context/ThemeContext'
 
-interface BlogPostTemplateProps {
-  readonly data: BlogPostQuery
+interface IdeaTemplateProps {
+  readonly data: IdeaQuery
 }
 
-const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
+const IdeaTemplate: React.FC<IdeaTemplateProps> = ({
   data, // this prop will be injected by the GraphQL query below.
 }) => {
   const { dark } = useContext(ThemeContext)
@@ -59,15 +59,15 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
             </div>
           </div>
           <div
-            className="p-4 pt-0 text-lg sm:text-xl lg:p-10 text-theme-s8 blog-post-content font-body"
+            className="p-4 pt-0 text-lg sm:text-xl lg:p-10 text-theme-s8 post-content font-body"
             dangerouslySetInnerHTML={{ __html: markdownRemark?.html || '' }}
           />
         </section>
         <section className="max-w-2xl px-4 pt-16 pb-10 mx-auto mt-10 border-t md:px-0 border-theme-p2">
           <div className="text-xl font-display text-theme-s9">Other Posts</div>
-          <BlogPosts limit={2} excludeId={markdownRemark?.id} />
+          <Ideas limit={2} excludeId={markdownRemark?.id} />
           <Link
-            to="/blog"
+            to="/ideas"
             className="font-body text-theme-s9 focus:text-sol-blue hover:text-sol-blue"
           >
             See More
@@ -78,10 +78,10 @@ const BlogPostTemplate: React.FC<BlogPostTemplateProps> = ({
   )
 }
 
-export default BlogPostTemplate
+export default IdeaTemplate
 
 export const pageQuery = graphql`
-  query BlogPost($path: String!) {
+  query Idea($path: String!) {
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       id
       html

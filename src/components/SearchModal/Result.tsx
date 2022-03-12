@@ -28,7 +28,7 @@ interface ResultProps {
 }
 
 const isPostResult = (result: CombinedResult): result is FormattedPostResult =>
-  result.resultType === 'Blog Posts'
+  result.resultType === 'Ideas'
 const isTagResult = (result: CombinedResult): result is FormattedTagResult =>
   result.resultType === 'Tags'
 

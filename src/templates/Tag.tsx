@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import AllTags from '../components/AllTags'
-import { BlogPostPreview } from '../components/BlogPosts'
+import { IdeaPreview } from '../components/Ideas'
 
 interface TagTemplateProps {
   readonly data: {
@@ -38,7 +38,7 @@ const Template: React.FC<TagTemplateProps> = ({ data, pageContext }) => {
             Posts tagged with #{pageContext.tag}
           </h1>
           {data.allMarkdownRemark.edges.map(edge => (
-            <BlogPostPreview node={edge.node} />
+            <IdeaPreview node={edge.node} />
           ))}
         </section>
         <section className="max-w-2xl px-4 pb-10 m-auto md:px-0">

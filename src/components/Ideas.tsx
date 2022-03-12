@@ -3,7 +3,7 @@ import { Link, useStaticQuery, graphql } from 'gatsby'
 import { AiOutlineTags, AiOutlineClockCircle } from 'react-icons/ai'
 import TagPill from './TagPill'
 
-interface BlogPostPreviewProps {
+interface IdeaPreviewProps {
   node: {
     id: string
     timeToRead?: number | null | undefined
@@ -17,10 +17,10 @@ interface BlogPostPreviewProps {
   }
 }
 
-export const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({ node }) => (
+export const IdeaPreview: React.FC<IdeaPreviewProps> = ({ node }) => (
   <div className="py-4 my-4">
     <div className="group">
-      <Link to={node.frontmatter?.path || '/blog'}>
+      <Link to={node.frontmatter?.path || '/ideas'}>
         <h2 className="text-3xl focus:text-sol-blue group-hover:text-sol-blue font-display text-theme-s9">
           {node.frontmatter?.title}
         </h2>
@@ -48,12 +48,12 @@ export const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({ node }) => (
   </div>
 )
 
-interface BlogPostPreviewsProps {
+interface IdeaPreviewsProps {
   limit?: number
   excludeId?: string | null
 }
 
-interface BlogIndexPageQuery {
+interface IdeasIndexPageQuery {
   allMarkdownRemark: {
     edges: Array<{
       node: {
@@ -71,12 +71,9 @@ interface BlogIndexPageQuery {
   }
 }
 
-const BlogPostPreviews: React.FC<BlogPostPreviewsProps> = ({
-  limit,
-  excludeId,
-}) => {
-  const data: BlogIndexPageQuery = useStaticQuery(graphql`
-    query BlogIndexPage {
+const IdeaPreviews: React.FC<IdeaPreviewsProps> = ({ limit, excludeId }) => {
+  const data: IdeasIndexPageQuery = useStaticQuery(graphql`
+    query IdeasIndexPage {
       allMarkdownRemark(
         filter: { frontmatter: { draft: { ne: true } } }
         sort: { fields: frontmatter___date, order: DESC }
@@ -104,10 +101,10 @@ const BlogPostPreviews: React.FC<BlogPostPreviewsProps> = ({
   return (
     <>
       {posts.map(({ node }) => (
-        <BlogPostPreview node={node} key={node.id} />
+        <IdeaPreview node={node} key={node.id} />
       ))}
     </>
   )
 }
 
-export default BlogPostPreviews
+export default IdeaPreviews

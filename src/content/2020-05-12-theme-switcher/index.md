@@ -3,11 +3,11 @@ title: 'Here comes the Sun 🌞/🌚'
 description: 'Building a theme switcher with Tailwind CSS and React.'
 date: '2020-05-09'
 tags: ['gatsby', 'typescript', 'react', 'tailwindcss', 'evergreen-🌲']
-path: '/blog/theme-switcher'
+path: '/ideas/theme-switcher'
 draft: false
 ---
 
-Support for dark mode has gotten pretty good in the last year. Windows, Android, iOS, macOS, and most browsers now all support dark mode. This article talks about the advantages of using a dark theme and walks through how to add one to a react application. I discuss how to make a theme setting globally accessible in a Gatsby app using react context, how use that setting to change style settings with TailwindCSS, and how to create a button that animates between a moon and a sun. This post is partially based on this [blog post by Muhammad Muhsin.](https://www.gatsbyjs.org/blog/2019-01-31-using-react-context-api-with-gatsby/)
+Support for dark mode has gotten pretty good in the last year. Windows, Android, iOS, macOS, and most browsers now all support dark mode. This article talks about the advantages of using a dark theme and walks through how to add one to a react application. I discuss how to make a theme setting globally accessible in a Gatsby app using react context, how use that setting to change style settings with TailwindCSS, and how to create a button that animates between a moon and a sun. This post is partially based on this [blog post by Muhammad Muhsin.](https://www.gatsbyjs.org/ideas/2019-01-31-using-react-context-api-with-gatsby/)
 
 ## Why Dark?
 

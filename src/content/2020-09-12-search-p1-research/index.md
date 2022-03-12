@@ -3,11 +3,11 @@ title: 'Search Part 1 - Research & UX'
 description: 'Search UX and comparing options for search on a static site'
 date: '2020-09-12'
 tags: ['search', 'gatsby', 'javascript', 'algorithms', 'evergreen-🌲']
-path: '/blog/search-part1-research-and-ux'
+path: '/ideas/search-part1-research-and-ux'
 draft: false
 ---
 
-Adding search to a site or application can greatly impact how easy it is to navigate. This has a positive impact on how many pages users may navigate and the time they spend on pages because they can find content that is relevant to what they are looking for. This post discusses some of the design decisions I made when determining how to add search to this site. It also touches on some research I did when trying to approach this problem. To see how I implemented it [jump to part 2](/blog/search-part2-implementation).
+Adding search to a site or application can greatly impact how easy it is to navigate. This has a positive impact on how many pages users may navigate and the time they spend on pages because they can find content that is relevant to what they are looking for. This post discusses some of the design decisions I made when determining how to add search to this site. It also touches on some research I did when trying to approach this problem. To see how I implemented it [jump to part 2](/ideas/search-part2-implementation).
 
 ## Background
 
@@ -84,17 +84,17 @@ After an initial broad search for libraries based on their features, Fuse and Fl
 
 From all of these data points, it felt like fuse was the choice that made the most sense for my desired requirements. It's easy to implement, can be set up with minimal configuration, works well on the client-side, quickly returns results, supports fuzzy queries (approximate string matching), is well maintained, thoroughly documented, and popular. The most significant downsides to it seem to be that it will occasionally return false positives or results that don't make sense. For example, when searching for '**react**,' it registers a partial hit on '**creat**e'. This slight negative felt like an acceptable tradeoff.
 
-Check out how the nuts and bolts of how I added a Fuse.js powered search to my site in [part two](/blog/search-part2-implementation) on this series of posts on search.
+Check out how the nuts and bolts of how I added a Fuse.js powered search to my site in [part two](/ideas/search-part2-implementation) on this series of posts on search.
 
 ## References & Additional Resources
 
-- [13 Design Patterns for Autocomplete Suggestions (27% Get it Wrong)](https://baymard.com/blog/autocomplete-design)
+- [13 Design Patterns for Autocomplete Suggestions (27% Get it Wrong)](https://baymard.com/ideas/autocomplete-design)
 - [Mobile UX Design: User-Friendly Search](https://uxplanet.org/mobile-ux-design-user-friendly-search-51e5f78f5a1e)
 - [Best Practices for Search Results](https://uxplanet.org/best-practices-for-search-results-1bbed9d7a311)
 - [Design a Perfect Search Box](https://uxplanet.org/design-a-perfect-search-box-b6baaf9599c)
 - [5 important things you need to consider when designing for search](https://blog.prototypr.io/5-easy-and-effective-tips-to-get-more-out-of-your-search-f53d55d063de)
 - [Designing Search](https://blog.prototypr.io/designing-search-c96cc5d05ddf)
 - [Search interface: 20 things to consider](https://uxplanet.org/search-interface-20-things-to-consider-4b1466e98881)
-- [Best UX Practices for Search Interface](https://qubstudio.com/blog/best-ux-practices-for-search-interface/)
+- [Best UX Practices for Search Interface](https://qubstudio.com/ideas/best-ux-practices-for-search-interface/)
 - [UX Psychology: Google Search](https://jonyablonski.com/articles/2020/ux-psychology-google-search/)
 - [Search UI Patterns: Elements](https://medium.com/@ddsky/search-ui-patterns-elements-80ea9d241f97)

@@ -6,7 +6,7 @@ const defaultState = {
     return
   },
 }
-/** Originally based off this blog post {@link https://www.gatsbyjs.org/blog/2019-01-31-using-react-context-api-with-gatsby/} */
+/** Originally based off this blog post {@link https://www.gatsbyjs.org/ideas/2019-01-31-using-react-context-api-with-gatsby/} */
 const ThemeContext = React.createContext(defaultState)
 // Getting dark mode information from the OS!
 const supportsDarkMode = () =>

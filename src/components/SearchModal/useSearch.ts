@@ -8,7 +8,7 @@ import {
   MarkdownRemarkGroupConnection,
 } from '../../../graphql-types'
 
-export type ResultType = 'Blog Posts' | 'Tags'
+export type ResultType = 'Ideas' | 'Tags'
 
 type SearchQuery = {
   posts: {
@@ -90,7 +90,7 @@ export default function useSearch(): (query: string) => CombinedResult[] {
     }
   `)
   const flatPostData = data.posts.edges.map(({ node }) => ({
-    resultType: 'Blog Posts',
+    resultType: 'Ideas',
     description: node?.frontmatter?.description,
     id: node.id,
     path: node?.frontmatter?.path,

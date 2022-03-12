@@ -3,7 +3,7 @@ title: 'Overview of Information Retrieval'
 description: '??????'
 date: '2020-09-12'
 tags: ['search', 'algorithms', 'nlp']
-path: '/blog/information-retrieval-overview'
+path: '/ideas/information-retrieval-overview'
 draft: true
 ---
 
@@ -41,7 +41,7 @@ Search is hard. Search is valuable. Google built a business that earned 160 bill
 
 ## Alternative solutions
 
-https://baymard.com/blog/autocomplete-design
+https://baymard.com/ideas/autocomplete-design
 
 - Algolia
 - [swiftype](https://swiftype.com/) elasic site search

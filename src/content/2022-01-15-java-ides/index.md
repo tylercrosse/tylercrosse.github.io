@@ -3,7 +3,7 @@ title: 'Java'
 description: '??????'
 date: '2022-01-15'
 tags: []
-path: '/blog/why-learn-java'
+path: '/ideas/why-learn-java'
 draft: true
 ---
 

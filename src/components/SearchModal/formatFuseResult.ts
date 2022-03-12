@@ -33,7 +33,7 @@ export interface IFormatted {
 
 export type FormattedResults<T> = (T | IFormatted)[]
 
-export type ResultType = 'Blog Posts' | 'Tags'
+export type ResultType = 'Ideas' | 'Tags'
 
 export interface FormattedPostResult {
   resultType: ResultType
