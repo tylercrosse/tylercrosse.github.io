@@ -9,19 +9,21 @@ path: '/ideas/nand2tetris-part1'
 draft: false
 ---
 
-This weekend I completed the first half of the infamous [Nand2Tetris](https://www.nand2tetris.org/) course. This course is a Massively Open Online Course (MOOC) delivered in two parts [on Coursera](https://www.coursera.org/learn/build-a-computer/home). All of the screenshots were taken from the coursea course.
+I completed the first half of the infamous [Nand2Tetris](https://www.nand2tetris.org/) course in September of 2020. This course, taught by Noam Nisan and Shimon Schocken, is a Massively Open Online Course (MOOC) delivered in two parts [on Coursera](https://www.coursera.org/learn/build-a-computer/home). I took all of the screenshots from the Coursera course.
 
-As a largerly self taught deveoloper I've been actively working on strengethening my knowledge of [computer science fundamentals](https://teachyourselfcs.com/). For people seeking to do the same, this post serves to provide a very high level overview of what they would learn by taking this course. Admittedly, it's also a bit of show and tell to make me feel like less of an imposter amoung peers who have had a rigours traditional education in computer-science. Taking this course has made me a better software developer.
+As a largely self-taught developer, I've been actively strengthening my knowledge of [computer science fundamentals](https://teachyourselfcs.com/). For people seeking to do the same, this post provides a very high-level overview of what they would learn by taking this course. Admittedly, it's also a bit of show-and-tell to make me feel like less of an imposter among peers who have had a rigorous traditional education in computer science. Taking this course has made me a better software developer.
 
 ## What's covered
 
-This whirlwind course tries to build a modern computer from first principles. Most of the course is taught through 12 projects that stack on one another. The first half encompasses Boolean Logic Gates, Boolean Arithmetic Chips, Memory, Machine Language, Computer Architecture, and an Assembler.
+This whirlwind course tries to build a modern computer from first principles. Noam and Shimon teach this course through 12 projects that stack sequentially. The first half encompasses Boolean Logic Gates, Boolean Arithmetic Chips, Memory, Machine Language, Computer Architecture, and an Assembler.
 
 ![Nand2Tetris Part 1 Roadmap](nand2tetris-part1.png)
 
+The remainder of this post loosely follows the order that topics were presented in the course.
+
 ### Boolean Logic
 
-All digital devices rely on boolean logic to process binary information. All boolean operations can be constructed using Nand. Here's a simple truth table for the Nand operation.
+All digital devices rely on boolean logic to process binary information. Nand gates can be used to construct all boolean operations. Here's a simple truth table for the Nand operation.
 
 ```txt
 a  b  |  Nand(a,b)
@@ -51,7 +53,7 @@ CHIP Xor {
 }
 ```
 
-The full list of gates I constructed includes, And, And16, DMux, DMux4Way, DMux8Way Mux, Mux4Way, Mux8Way, Mux16, Not, Not16, Or, Or8Way, Or16, and Xor.
+The complete list of gates I constructed includes, And, And16, DMux, DMux4Way, DMux8Way Mux, Mux4Way, Mux8Way, Mux16, Not, Not16, Or, Or8Way, Or16, and Xor.
 
 ### Boolean Arithmetic
 
@@ -86,7 +88,7 @@ Function:
 
 ### Memory
 
-The course then introduced the notion of time and sequential logic. The course provides a data flip-flip (DFF) as fundamental chip. Using the DFF as a starting point I build a hierarchy of registers and RAM. The small registers are used to build larger registers, which in tern can then get stacked to create any size memory unit.
+Next, Noam & Shimon introduced the notion of time and sequential logic. The course provides a data flip-flop (DFF), a fundamental chip and building block. Using the DFF as a starting point, I build a hierarchy of registers and RAM. The small registers are used to construct larger registers, which can then get stacked to create any size memory unit.
 
 ```
 Data Flip-Flop -> 1-bit register -> 16-bit register -> RAMn
@@ -102,11 +104,11 @@ Data Flip-Flop -> 1-bit register -> 16-bit register -> RAMn
 
 The course presented computer architecture after the unit on machine language, an order that makes sense pedagogically. I've reversed the order of these two topics because it makes more sense hierarchically. You need a working CPU to run the machine language, which dovetails into the section on the assembler.
 
-This unit dances through the stored program concept, von Neumann Architecture, the theory of Memory, the role of th e CPU, and finally input and output. The project was one of the more difficult ones of the course and involved building a CPU from the chips built in previous units. You can [see my finished HDL code](https://github.com/tylercrosse/nand2tetris/blob/main/projects/05/CPU.hdl) for the CPU.
+This unit dances through the stored program concept, von Neumann Architecture, the theory of memory, the role of the CPU, and finally, input and output. The project was one of the more difficult ones of the course and involved building a CPU from the chips made in previous units. You can [see my finished HDL code](https://github.com/tylercrosse/nand2tetris/blob/main/projects/05/CPU.hdl) for the CPU.
 
 ![cpu architecture](cpu-architecture.png)
 
-Here is the Hack instruction set, with symbolic mnemonics and the corresponding binary. This represents all of the operations the CPU is able to perform.
+Here is the Hack instruction set, with symbolic mnemonics and the corresponding binary. The instruction set represents all of the operations the CPU can perform.
 
 ```nasm
 // Adapted from Figure 4.5 in The Elements of Computing Systems.
@@ -147,15 +149,15 @@ C-instruction
 
 #### Putting the pieces together
 
-The Hack chipset that is created as part of this course follows a Von Neumann Architecture. It consists of a input and output mechanisms, memory that stores data and instructions, a control unit that contains a instruction register and program counter, and a processing unit that contains an arithemetic logic unit (ALU) and processor registers.
+The Hack chipset that is created as part of this course follows a Von Neumann Architecture. It consists of input and output mechanisms, memory that stores data and instructions, a control unit containing an instruction register and program counter, and a processing unit containing an arithmetic logic unit (ALU) and processor registers.
 
 ![von neumann architecture](von-neumann-architecture.png)
 
 ### Machine Language
 
-Machine language is the point where hardware meets software. A machine language is a hardware dependent formalism for coding instructions. It provides a way of controlling hardware to perform arithmetic, logical operations, read and write values from and to the computer's memory, and decide which instruction to fetch and execute next.
+Machine language is the point where hardware meets software. A machine language is a hardware-dependent formalism for coding instructions. It provides a way of controlling hardware to perform logical arithmetic operations, read and write values from and to the computer's memory, and decide which instruction to fetch and execute next.
 
-Here's an example of a very simple program written in the hack machine language. At the end of this the value 5 gets stored in RAM[0]:
+Here's an example of an elementary program written in the Hack machine language. At the end of this, the value 5 gets stored in RAM[0]:
 
 ```nasm
 // Computes R0 = 2 + 3  (R0 refers to RAM[0])
@@ -170,7 +172,7 @@ M=D     // Store the value of the D reg to the current memory address (0)
 
 ### Assembler
 
-The first half of this course culminated in writing an assembler that's able to take hack machine language and translate it from its symbolic form into its binary form which can be loaded onto the hack computer. Here's the output of the above example hack machine language from the assembler:
+The first half of this course culminated in writing an assembler that can take hack machine language and translate it from its symbolic form into its binary format, which can be loaded onto the Hack computer. Here's the output of the above example hack machine language from the assembler:
 
 ```
 0000000000010000 // @2
@@ -181,6 +183,6 @@ The first half of this course culminated in writing an assembler that's able to 
 1110001100001000 // M=D
 ```
 
-I added in comments to make it easier to map this output back to the instruction set.
+I added comments to make it easier to map this output back to the instruction set.
 
-For this project I wrote a [simple parser and symbol table in Typescript](https://github.com/tylercrosse/nand2tetris/blob/main/projects/06/AssemblerTS) and had a lot of fun along the way. I'm looking forward to the last half of this course.
+I wrote a [simple parser and symbol table in Typescript](https://github.com/tylercrosse/nand2tetris/blob/main/projects/06/AssemblerTS) and had a lot of fun along the way. I'm looking forward to the last half of this course.
