@@ -5,7 +5,7 @@ date: '2021-09-26'
 updated: '2022-03-11'
 status: 'budding'
 tags: ['computer-science', 'learning-in-public', 'budding-🌿']
-path: '/blog/nand2tetris-part1'
+path: '/ideas/nand2tetris-part1'
 draft: false
 ---
 

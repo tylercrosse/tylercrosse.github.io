@@ -3,7 +3,7 @@ title: 'A foray in Ditigal Gardens 👨‍🌾'
 description: 'Planting the seeds of my own digital garden'
 date: '2022-03-11'
 tags: ['digital-gardens', 'learning-in-public', 'seedling-🌱']
-path: '/blog/planting-sseds'
+path: '/ideas/planting-sseds'
 status: 'seedling'
 draft: false
 ---

@@ -1,4 +1,4 @@
-.blog-post-content {
+.post-content {
   & > * {
     @apply max-w-2xl mt-0 mb-4 mx-auto;
   }

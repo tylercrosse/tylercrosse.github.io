@@ -94,7 +94,7 @@ export default function Search({ closeModal }: SearchProps): JSX.Element {
           } focus:outline-0`}
           autoFocus={true}
           value={value}
-          placeholder="Search for blog posts, tags, and more"
+          placeholder="Search for posts, tags, and more"
         />
         <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
           <svg

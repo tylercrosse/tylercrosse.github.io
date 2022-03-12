@@ -86,7 +86,7 @@ module.exports = {
         icon: `src/images/favicon-512.png`, // This path is relative to the root of the site.
       },
     },
-    // `gatsby-plugin-graphql-codegen`,
+    // `gatsby-plugin-graphql-codegen`, // generates graphql-types - turn on/off
     {
       resolve: 'gatsby-plugin-eslint',
       options: {

@@ -11,7 +11,7 @@ tags:
     'tailwindcss',
     'evergreen-🌲',
   ]
-path: '/blog/redoing-my-portfolio-site-with-gatsby'
+path: '/ideas/redoing-my-portfolio-site-with-gatsby'
 draft: false
 ---
 
@@ -55,7 +55,7 @@ For the site's typography, I wanted to find something that expressed my personal
 ![](font-and-colors.png)
 A style guide of my chosen fonts and colors.
 
-Before writing any code I used a pencil and paper and then [Figma](https://www.figma.com/) to prototype designs. This was my first time using Figma and I'm impressed. I've got a good amount of experience with Adobe XD, Illustrator, Photoshop, and Sketch, and wanted to experiment with a new tool. I found Figma to be intuitive, fast, have all of the features I needed, and - best of all - it was free. I'm definitely inspired to do a project with [WebAssembly](https://www.figma.com/blog/webassembly-cut-figmas-load-time-by-3x/) now too!
+Before writing any code I used a pencil and paper and then [Figma](https://www.figma.com/) to prototype designs. This was my first time using Figma and I'm impressed. I've got a good amount of experience with Adobe XD, Illustrator, Photoshop, and Sketch, and wanted to experiment with a new tool. I found Figma to be intuitive, fast, have all of the features I needed, and - best of all - it was free. I'm definitely inspired to do a project with [WebAssembly](https://www.figma.com/ideas/webassembly-cut-figmas-load-time-by-3x/) now too!
 
 ### 2. Styling - Tailwind CSS
 

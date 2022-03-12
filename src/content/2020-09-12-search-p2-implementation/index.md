@@ -3,11 +3,11 @@ title: 'Search Part 2 - Implementation'
 description: 'Adding search to a static site with accessibility in mind using Fuse.js and Downshift'
 date: '2020-09-14'
 tags: ['typescript', 'search', 'tailwindcss', 'react', 'gatsby', 'evergreen-🌲']
-path: '/blog/search-part2-implementation'
+path: '/ideas/search-part2-implementation'
 draft: false
 ---
 
-The objective of this post is to discuss the implementation used to add static search to this blog. I also touch on some pros and cons of my implementation vs. other approaches. For background on how I selected the search library to use and user experience research see [part 1](/blog/search-part1-research-and-ux).
+The objective of this post is to discuss the implementation used to add static search to this blog. I also touch on some pros and cons of my implementation vs. other approaches. For background on how I selected the search library to use and user experience research see [part 1](/ideas/search-part1-research-and-ux).
 
 ## Code structure
 
@@ -60,7 +60,7 @@ The shape of the data wasn't in quite the shape I wanted for the results. Fuse.j
 ```ts
 // 2️⃣ Normalize the shape of the data
 const flatPostData = data.posts.edges.map(({ node }) => ({
-  resultType: 'Blog Posts',
+  resultType: 'Ideas',
   description: node?.frontmatter?.description,
   id: node.id,
   path: node?.frontmatter?.path,
@@ -158,7 +158,7 @@ I chose to use Downshift 🏎 to handle the UI interactions with search. The lib
 
 #### 1. Set up component state
 
-There are few things going on here. I pull in the theme context I use for controlling dark mode, which you can read more about in [my post on adding a dark mode](http://localhost:8000/blog/theme-switcher).
+There are few things going on here. I pull in the theme context I use for controlling dark mode, which you can read more about in [my post on adding a dark mode](http://localhost:8000/ideas/theme-switcher).
 
 ```tsx
 export default function Search({ closeModal }: SearchProps) {

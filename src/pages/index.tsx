@@ -4,7 +4,7 @@ import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { IndexPageQuery } from '../../graphql-types'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
-import BlogPosts from '../components/BlogPosts'
+import Ideas from '../components/Ideas'
 
 interface IndexProps {
   data: IndexPageQuery
@@ -40,9 +40,9 @@ const Index: React.FC<IndexProps> = ({ data }) => {
         </section>
         <section className="max-w-screen-lg p-6 pt-24 mx-auto xl:pt-32">
           <div className="text-xl font-display text-theme-s9">Recent Posts</div>
-          <BlogPosts limit={3} />
+          <Ideas limit={3} />
           <Link
-            to="/blog"
+            to="/ideas"
             className="font-body text-theme-s9 focus:text-sol-blue hover:text-sol-blue"
           >
             See More

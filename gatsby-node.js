@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const _ = require('lodash')
 const path = require(`path`)
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
-  const blogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
+  const postTemplate = path.resolve(`src/templates/Idea.tsx`)
   const result = await graphql(`
     {
       allMarkdownRemark(
@@ -27,11 +28,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return
   }
 
-  // Create blog post pages.
+  // Create idea post pages.
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
       path: node.frontmatter.path,
-      component: blogPostTemplate,
+      component: postTemplate,
       context: {
         highlight: node.frontmatter.highlight,
         shadow: node.frontmatter.shadow,

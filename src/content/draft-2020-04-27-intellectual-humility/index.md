@@ -1,5 +1,5 @@
 ---
-path: '/blog/intellectual-humility'
+path: '/ideas/intellectual-humility'
 date: '2020-04-27'
 title: 'Intellectual Humility'
 description: 'Being ok with not knowing something helps with learning it.'
