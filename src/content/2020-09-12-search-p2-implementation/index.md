@@ -2,7 +2,7 @@
 title: 'Search Part 2 - Implementation'
 description: 'Adding search to a static site with accessibility in mind using Fuse.js and Downshift'
 date: '2020-09-14'
-tags: ['typescript', 'search', 'tailwindcss', 'react', 'gatsby']
+tags: ['typescript', 'search', 'tailwindcss', 'react', 'gatsby', 'evergreen-🌲']
 path: '/blog/search-part2-implementation'
 draft: false
 ---

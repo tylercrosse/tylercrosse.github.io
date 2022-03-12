@@ -2,7 +2,7 @@
 title: 'Git Stash, save work for winter 🐿'
 description: 'Quick tips for using git stash.'
 date: '2020-08-30'
-tags: ['git', 'short']
+tags: ['git', 'tips', 'evergreen-🌲']
 path: '/blog/git-stash-tips'
 draft: false
 ---

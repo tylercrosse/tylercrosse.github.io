@@ -2,7 +2,9 @@
 title: 'From Boolean Logic Gates to an Assembler'
 description: 'The first half of the Nand2Tetris course'
 date: '2021-09-26'
-tags: ['computer-science', 'short', 'learning-in-public']
+updated: '2022-03-11'
+status: 'budding'
+tags: ['computer-science', 'learning-in-public', 'budding-🌿']
 path: '/blog/nand2tetris-part1'
 draft: false
 ---
@@ -49,7 +51,7 @@ The full list of gates I constructed includes, And, And16, DMux, DMux4Way, DMux8
 
 ### Boolean Arithmetic
 
-Using the simple logic gates I wrote the specification for a simple ALU, an incrementor, and a few adders. The ALU or Arithmetic Logic Unit, acts as the computational centerpiece of the CPU. This unit also gave a brief overview of binary math and two's complement. Here's an outline of the interface and functionality of the ALU I constructed using HDL:
+Using the simple logic gates I wrote the [specification for a simple ALU](https://github.com/tylercrosse/nand2tetris/blob/main/projects/02/ALU.hdl), an incrementor, and a few adders. The ALU or Arithmetic Logic Unit, acts as the computational centerpiece of the CPU. This unit also gave a brief overview of binary math and two's complement. Here's an outline of the interface and functionality of the ALU I constructed using HDL:
 
 ```VHDL
 Input:  x[16], y[16],   // Two 16-bit inputs
@@ -78,7 +80,7 @@ Function:
 
 ### Memory
 
-The course then introduced the notion of time and sequential logic. The course provides a data flip-flip (DFF) as fundamental chip. Using the DFF as a starting point I build a hierarchy of registers and RAM.
+The course then introduced the notion of time and sequential logic. The course provides a data flip-flip (DFF) as fundamental chip. Using the DFF as a starting point I build a hierarchy of registers and RAM. The small registers are used to build larger registers, which in tern can then get stacked to create any size memory unit.
 
 ```
 Data Flip-Flop -> 1-bit register -> 16-bit register -> RAMn
@@ -88,23 +90,61 @@ Data Flip-Flop -> 1-bit register -> 16-bit register -> RAMn
 
 The course presented computer architecture after the unit on machine language, an order that makes sense pedagogically. I've reversed the order of these two topics because it makes more sense hierarchically. You need a working CPU to run the machine language, which dovetails into the section on the assembler.
 
-This unit dances through the stored program concept, von Neumann Architecture, the theory of Memory, the role of th e CPU, and finally input and output. The project was one of the more difficult ones of the course and involved building a CPU from the chips built in previous units.
+This unit dances through the stored program concept, von Neumann Architecture, the theory of Memory, the role of th e CPU, and finally input and output. The project was one of the more difficult ones of the course and involved building a CPU from the chips built in previous units. You can [see my finished HDL code](https://github.com/tylercrosse/nand2tetris/blob/main/projects/05/CPU.hdl) for the CPU.
 
 ### Machine Language
 
 Machine language is the point where hardware meets software. A machine language is a hardware dependent formalism for coding instructions. It provides a way of controlling hardware to perform arithmetic, logical operations, read and write values from and to the computer's memory, and decide which instruction to fetch and execute next.
 
-Here's an example of a very simple program written in the hack machine language:
+Here's an example of a very simple program written in the hack machine language. At the end of this the value 5 gets stored in RAM[0]:
 
 ```nasm
 // Computes R0 = 2 + 3  (R0 refers to RAM[0])
 
-@2
-D=A
-@3
-D=D+A
-@0
-M=D
+@2      // A instruction - set the A register (reg) to the value 2
+D=A     // D instruction - set the D reg to the value of the A reg (2)
+@3      // A instruction - set the A reg to the value 3
+D=D+A   // D instruction - set the D reg to D plus the value of the A reg (3)
+@0      // A instruction - set the A reg to the value 0
+M=D     // Store the value of the D reg to the current memory address (0)
+```
+
+Here is the Hack instruction set, with symbolic mnemonics and the corresponding binary. Adapted from Figure 4.5 in The Elements of Computing Systems.
+
+```
+A-instruction
+        Symbolic: @xxx - (xxx is a decimal value ranging from 0 to 32767,
+                          or a symbol bound o such a decimal value)
+        Binary    0vvvvvvvvvvvvvvv
+
+C-instruction
+        Symbolic: dest = comp; jump   (comp is mandatory.
+                                       If dest is empty, = is omitted;
+                                       If jump is empty, the ; is omitted)
+        Binary    111accccccdddjjj
+
+    comp
+ a==0  a==1  c c c c c c    dest  d d d  Effect: store comp in
+ -----------------------   --------------------------------------
+  0          1 0 1 0 1 0    null  0 0 0  the value is not stored
+  1          1 1 1 1 1 1      M   0 0 1  RAM[A]
+ -1          1 1 1 0 1 0      D   0 1 0  D register (reg)
+  D          0 0 1 1 0 0     DM   0 1 1  D reg and RAM[A]
+  A    M     1 1 0 0 0 0      A   1 0 0  A reg
+ !D          0 0 1 1 0 1     AM   1 0 1  A reg and RAM[A]
+ !A   !M     1 1 0 0 0 1     AD   1 1 0  A reg and D reg
+ -D          0 0 1 1 1 1    ADM   1 1 1  A reg, D reg, & RAM[A]
+ -A   -M     1 1 0 0 1 1
+ D+1         0 1 1 1 1 1    jump  j j j  Effect
+ A+1  M+1    1 1 0 1 1 1   ----------------------------------
+ D-1         0 0 1 1 1 0    null  0 0 0  no jump
+ A-1  M-1    1 1 0 0 1 0     JGT  0 0 1  if comp > 0 jump
+ D+A  D+M    0 0 0 0 1 0     JEQ  0 1 0  if comp = 0 jump
+ D-A  D-M    0 1 0 0 1 1     JGE  0 1 1  if comp >= 0 jump
+ A-D  M-D    0 0 0 1 1 1     JLT  1 0 0  if comp < 0 jump
+ D&A  D&M    0 0 0 0 0 0     JNE  1 0 1  if comp != 0 jump
+ D|A  D|M    0 1 0 1 0 1     JMP  1 1 1  unconditional jump
+
 ```
 
 ### Assembler
@@ -112,12 +152,14 @@ M=D
 The first half of this course culminated in writing an assembler that's able to take hack machine language and translate it from its symbolic form into its binary form which can be loaded onto the hack computer. Here's the output of the above example hack machine language from the assembler:
 
 ```
-0000000000010000
-1110110000010000
-0000000000010001
-1110000010010000
-0000000000010010
-1110001100001000
+0000000000010000 // @2
+1110110000010000 // D=m
+0000000000010001 // @3
+1110000010010000 // D=D+A
+0000000000010010 // @0
+1110001100001000 // M=D
 ```
 
-For this project I wrote a simple parser and symbol table in Typescript and had a lot of fun along the way. I'm looking forward to the last half of this course.
+I added in comments to make it easier to map this output back to the instruction set.
+
+For this project I wrote a [simple parser and symbol table in Typescript](https://github.com/tylercrosse/nand2tetris/blob/main/projects/06/AssemblerTS) and had a lot of fun along the way. I'm looking forward to the last half of this course.

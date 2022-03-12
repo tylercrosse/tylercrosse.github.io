@@ -2,7 +2,15 @@
 title: 'New blog who dis?'
 description: 'Creating a blog with Figma, Tailwind CSS, Typescript, and Gatsby (React).'
 date: '2020-04-27'
-tags: ['gatsby', 'javascript', 'typescript', 'graphql', 'tailwindcss']
+tags:
+  [
+    'gatsby',
+    'javascript',
+    'typescript',
+    'graphql',
+    'tailwindcss',
+    'evergreen-🌲',
+  ]
 path: '/blog/redoing-my-portfolio-site-with-gatsby'
 draft: false
 ---
