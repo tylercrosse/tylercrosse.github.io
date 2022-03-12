@@ -1,5 +1,5 @@
 ---
-title: 'A foray in Ditigal Gardens 👨‍🌾'
+title: 'A foray in Digital Gardens 👨‍🌾'
 description: 'Planting the seeds of my own digital garden'
 date: '2022-03-11'
 tags: ['digital-gardens', 'learning-in-public', 'seedling-🌱']
