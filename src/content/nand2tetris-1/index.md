@@ -4,7 +4,7 @@ description: 'The first half of the Nand2Tetris course'
 date: '2021-09-26'
 updated: '2022-03-12'
 status: 'budding'
-tags: ['computer-science', 'learning-in-public', 'budding-🌿']
+tags: ['computer-science', 'learning-in-public', 'typescript', 'budding-🌿']
 path: '/ideas/nand2tetris-part1'
 draft: false
 ---
@@ -174,7 +174,7 @@ M=D     // Store the value of the D reg to the current memory address (0)
 
 The first half of this course culminated in writing an assembler that can take hack machine language and translate it from its symbolic form into its binary format, which can be loaded onto the Hack computer. Here's the output of the above example hack machine language from the assembler:
 
-```
+```nasm
 0000000000010000 // @2
 1110110000010000 // D=m
 0000000000010001 // @3
