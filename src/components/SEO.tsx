@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Helmet from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
+import ThemeContext from '../context/ThemeContext'
 
 interface MetaVal {
   content: string
@@ -75,6 +76,7 @@ const SEO: React.FC<SEOProps> = ({
         }
       : []
   )
+  const { dark } = useContext(ThemeContext)
 
   return (
     <Helmet
@@ -85,6 +87,11 @@ const SEO: React.FC<SEOProps> = ({
       titleTemplate={`%s | ${data.site.siteMetadata.title}`}
       meta={metaContent}
     >
+      <style type="text/css">{`${
+        dark /* scrollbar css */
+          ? `html{color-scheme:dark}*::-webkit-scrollbar{width:16px;}*::-webkit-scrollbar-track{background-color:#002b36;border:1px solid #073642;}*::-webkit-scrollbar-thumb{background-color:#003847;border:3px solid transparent;border-radius:9px;background-clip:content-box;}*::-webkit-scrollbar-thumb:hover{background-color:#657b83;}`
+          : ''
+      }`}</style>
       <link rel="icon" href="/images/favicon.svg" />
     </Helmet>
   )
