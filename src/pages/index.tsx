@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, graphql } from 'gatsby'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { IndexPageQuery } from '../../graphql-types'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import Ideas from '../components/Ideas'
+import ThemeContext from '../context/ThemeContext'
 
 interface IndexProps {
   data: IndexPageQuery
@@ -13,22 +14,30 @@ interface IndexProps {
 const Index: React.FC<IndexProps> = ({ data }) => {
   const heroImg = data.file?.childImageSharp
     ?.gatsbyImageData as IGatsbyImageData
+  const { dark } = useContext(ThemeContext)
   return (
     <>
       <SEO title="Home" />
-      <Layout>
+      <Layout isWhite={!dark}>
         <section className="max-w-screen-xl p-6 mx-auto md:pt-16 lg:pt-64 lg:flex">
           <div className="py-10 lg:pr-8 lg:w-1/2">
             <h1 className="text-5xl lg:text-7xl font-display text-theme-s9">
               Hi, I'm Tyler
             </h1>
             <p className="pb-5 text-xl font-body text-theme-s8">
-              I'm a <span className="font-bold">Software Developer </span> in
-              Seattle WA.
-            </p>
-            <p className="text-xl font-body text-theme-s8">
               I'm passionate about crafting high quality products that excite
               users and are easy to maintain.
+            </p>
+            <p className="text-xl font-body text-theme-s8">
+              I currently lead a software team at{' '}
+              <a
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-sol-blue"
+                href="http://www.knowable.com/"
+              >
+                Knowable
+              </a>
             </p>
           </div>
           <div className="w-3/4 mx-auto lg:mx-0 lg:w-1/2 lg:max-w-5xl">

@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import AllTags from '../components/AllTags'
 import { IdeaPreview } from '../components/Ideas'
+import ThemeContext from '../context/ThemeContext'
 
 interface TagTemplateProps {
   readonly data: {
@@ -29,10 +30,11 @@ interface TagTemplateProps {
 }
 
 const Template: React.FC<TagTemplateProps> = ({ data, pageContext }) => {
+  const { dark } = useContext(ThemeContext)
   return (
     <>
       <SEO title={`Posts tagged with #${pageContext.tag}"`} />
-      <Layout>
+      <Layout isWhite={!dark}>
         <section className="max-w-2xl px-4 pb-10 m-auto md:px-0 md:pt-24 xl:pt-32">
           <h1 className="text-xl font-display text-theme-s9">
             Posts tagged with #{pageContext.tag}
