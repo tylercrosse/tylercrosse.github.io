@@ -8,6 +8,8 @@ status: 'seedling'
 draft: false
 ---
 
+![Flowers Harmony by tubik.arts](garden.webp)
+
 ## Planting seeds
 
 I recently read Maggie Appleton's [essay about digital gardens](https://maggieappleton.com/garden-history) and was deeply inspired. Her words shone like a beacon as a way to publicly share ideas without the gravity of traditional publishing. She spends much of her essay contextualizing how the term came to be and doesn't ascribe ownership.
@@ -19,7 +21,7 @@ Maggie defines digital gardens by describing six attributes commonly attached to
 3. Gardens are imperfect by design. They exist as a way to learn in public. The status of the level of imperfection should also be made clear to readers.
    This wonderful illustration by Maggie perfectly contextualizes this:
 
-![Digitial Garden](digital-garden.png)
+![Digitial Garden by Maggie Appleton](digital-garden.png)
 
 4. Gardens should be unique personal play spaces full of quirks, contradictions, and complexity.
 5. Gardens exhibit a density of content that embraces the abundance of content and media that the web can offer.

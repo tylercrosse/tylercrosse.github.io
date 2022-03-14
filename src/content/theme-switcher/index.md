@@ -7,6 +7,8 @@ path: '/ideas/theme-switcher'
 draft: false
 ---
 
+![A Solar Eclipse Seen from Earth by Wilhelm Kranz](wilhelm-kranz-a-solar-eclipse-seen-from-earth.jpeg)
+
 Support for dark mode has gotten pretty good in the last year. Windows, Android, iOS, macOS, and most browsers now all support dark mode. This article talks about the advantages of using a dark theme and walks through how to add one to a react application. I discuss how to make a theme setting globally accessible in a Gatsby app using react context, how use that setting to change style settings with TailwindCSS, and how to create a button that animates between a moon and a sun. This post is partially based on this [blog post by Muhammad Muhsin.](https://www.gatsbyjs.org/ideas/2019-01-31-using-react-context-api-with-gatsby/)
 
 ## Why Dark?

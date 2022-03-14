@@ -7,6 +7,8 @@ path: '/ideas/search-part2-implementation'
 draft: false
 ---
 
+![Hubble Diagram by Lockheed Martin](hubble-diagram-cropped.jpg)
+
 The objective of this post is to discuss the implementation used to add static search to this blog. I also touch on some pros and cons of my implementation vs. other approaches. For background on how I selected the search library to use and user experience research see [part 1](/ideas/search-part1-research-and-ux).
 
 ## Code structure

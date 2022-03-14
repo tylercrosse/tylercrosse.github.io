@@ -89,7 +89,7 @@ const SEO: React.FC<SEOProps> = ({
     >
       <style type="text/css">{`${
         dark /* scrollbar css */
-          ? `html{color-scheme:dark}*::-webkit-scrollbar{width:16px;}*::-webkit-scrollbar-track{background-color:#002b36;border:1px solid #073642;}*::-webkit-scrollbar-thumb{background-color:#003847;border:3px solid transparent;border-radius:9px;background-clip:content-box;}*::-webkit-scrollbar-thumb:hover{background-color:#657b83;}`
+          ? `*{scrollbar-color:hsla(0,0%,100%,0.25) transparent;color-scheme:dark;}*::-webkit-scrollbar{width:16px;}*::-webkit-scrollbar-track{background-color:#002b36;border:1px solid #073642;}*::-webkit-scrollbar-thumb{background-color:#586e75;border:3px solid transparent;border-radius:9px;background-clip:content-box;}*::-webkit-scrollbar-thumb:hover{background-color:#839496;}`
           : ''
       }`}</style>
       <link rel="icon" href="/images/favicon.svg" />

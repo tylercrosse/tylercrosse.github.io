@@ -9,6 +9,8 @@ path: '/ideas/nand2tetris-part1'
 draft: false
 ---
 
+![A Tetris Skyline by Dan Allison](tetris.jpeg)
+
 I completed the first half of the infamous [Nand2Tetris](https://www.nand2tetris.org/) course in September of 2020. This course, taught by Noam Nisan and Shimon Schocken, is a Massively Open Online Course (MOOC) delivered in two parts [on Coursera](https://www.coursera.org/learn/build-a-computer/home). I took all of the screenshots from the Coursera course.
 
 As a largely self-taught developer, I've been actively strengthening my knowledge of [computer science fundamentals](https://teachyourselfcs.com/). For people seeking to do the same, this post provides a very high-level overview of what they would learn by taking this course. Admittedly, it's also a bit of show-and-tell to make me feel like less of an imposter among peers who have had a rigorous traditional education in computer science. Taking this course has made me a better software developer.

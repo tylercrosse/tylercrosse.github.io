@@ -15,7 +15,7 @@ path: '/ideas/redoing-my-portfolio-site-with-gatsby'
 draft: false
 ---
 
-![](blog-home-light.png)
+![Hompeage Screenshot](blog-home-light.png)
 
 This is the first post of my new blog. Welcome!
 
