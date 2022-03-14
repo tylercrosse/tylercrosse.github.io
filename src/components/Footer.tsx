@@ -12,10 +12,7 @@ const Footer: React.FC<FooterProps> = ({ children, isWhite = false }) => {
         isWhite ? 'bg-white' : 'bg-theme-p6'
       }`}
     >
-      <div className="mr-10 text-theme-s7">
-        &copy; Tyler Crosse - All rights reserved.
-      </div>
-      <div className="block md:flex">
+      <div className="block mr-32 md:flex">
         <a
           className="flex items-center p-4 mx-4 text-theme-s7 hover:text-theme-s8"
           href="https://linkedin.com/in/tylercrosse/"
@@ -35,6 +32,20 @@ const Footer: React.FC<FooterProps> = ({ children, isWhite = false }) => {
           href="mailto:tylerscottcrosse@gmail.com?Subject=You're Hired!"
         >
           <FaRegEnvelope className="mr-2 fill-current" /> Email
+        </a>
+      </div>
+      <div className="block md:flex">
+        <a
+          className="flex items-center p-4 mx-4 text-theme-s7 hover:text-theme-s8"
+          href="/ideas"
+        >
+          Ideas
+        </a>
+        <a
+          className="flex items-center p-4 mx-4 text-theme-s7 hover:text-theme-s8"
+          href="/tags"
+        >
+          Tags
         </a>
       </div>
     </footer>

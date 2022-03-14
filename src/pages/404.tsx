@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { graphql } from 'gatsby'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 import { NotFoundPageQuery } from '../../graphql-types'
+import ThemeContext from '../context/ThemeContext'
 
 interface NotFoundProps {
   data: NotFoundPageQuery
@@ -11,10 +12,11 @@ interface NotFoundProps {
 const NotFound: React.FC<NotFoundProps> = ({ data }) => {
   const heroImg = data.file?.childImageSharp
     ?.gatsbyImageData as IGatsbyImageData
+  const { dark } = useContext(ThemeContext)
   return (
     <>
       <SEO title="404 Page Not Found" />
-      <Layout>
+      <Layout isWhite={!dark}>
         <section className="max-w-screen-lg p-6 mx-auto md:pt-20">
           <div className="max-w-xl m-auto">
             <GatsbyImage

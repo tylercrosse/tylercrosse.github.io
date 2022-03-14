@@ -7,6 +7,8 @@ path: '/ideas/search-part1-research-and-ux'
 draft: false
 ---
 
+![Search Illustration - unknown author](search-illustration.jpg)
+
 Adding search to a site or application can greatly impact how easy it is to navigate. This has a positive impact on how many pages users may navigate and the time they spend on pages because they can find content that is relevant to what they are looking for. This post discusses some of the design decisions I made when determining how to add search to this site. It also touches on some research I did when trying to approach this problem. To see how I implemented it [jump to part 2](/ideas/search-part2-implementation).
 
 ## Background

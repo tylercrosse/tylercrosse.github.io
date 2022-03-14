@@ -57,7 +57,10 @@
     @apply border-b border-t px-4 py-2;
   }
   & blockquote {
-    @apply border-l-8 pl-6 pr-4 italic border-theme-p5;
+    @apply text-3xl px-12 my-8 italic;
+  }
+  & blockquote p {
+    @apply py-6 border-theme-p5 border-t-2 border-b-2
   }
   & code[class*='language-'],
   & pre[class*='language-'] {

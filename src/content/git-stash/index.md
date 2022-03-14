@@ -7,6 +7,8 @@ path: '/ideas/git-stash-tips'
 draft: false
 ---
 
+![Squirrel Stash by Franco Matticchio](squirrel-matticchio.jpg)
+
 Pretend you're developing a new feature and have some work in progress. Meanwhile, something comes up, and you need to switch branches. The problem is you don't want to commit your unfinished work. Fortunately, `git stash` exists to solve precisely this and similar situations.
 
 ### Stashing work
