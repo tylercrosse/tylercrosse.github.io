@@ -45,11 +45,30 @@ A stack is a sequence of memory that can grow and shrink as needed. The two key 
 
 ![push and pop](push-pop.png)
 
-The hack VM model is stack-based in which all of the operations take their operand either from the stack or store their results on the stack. In the example above f
+The hack VM model is stack-based in which all of the operations take their operand either from the stack or store their results on the stack. The Hack VM uses eight different virtual segments. Each of the segments acts like it's own stack and is accesed via push and pop commands.
 
 ## Virtual Memory Segments
 
+Separating out memory into different virtual segments allows the meaning of different variables to be preserved. Memory segments make the virtual machine easier to reason about.
+
+```
+// virtual memory segments
+
+Segment   Role
+---------------------------------------------------------------
+argument  Represents the function's arguments
+local     Represents the function's local variables
+static    Represents the static variables seen by the function
+constant  Represents the constant values 0,1,2,3,..., 32767
+this      Used to store 'this' of the caller
+that      Used to store 'that' of the caller
+pointer   Used to manipulate this & that. More detail below
+temp      Mapped directly on RAM locations 5-12
+```
+
 ## Semantics
+
+I've included the specification for what the VM commands are supposed to do below. These specs are directly from Ehe Elements of Computing Systems.
 
 #### Push / Pop Commands
 
