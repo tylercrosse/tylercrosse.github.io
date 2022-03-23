@@ -12,6 +12,7 @@ interface IdeaPreviewProps {
       title: string
       description: string
       date: string
+      updated?: string
       tags: string[]
     }
   }
@@ -29,7 +30,11 @@ export const IdeaPreview: React.FC<IdeaPreviewProps> = ({ node }) => (
         </p>
         <div className="flex items-center w-full pb-2 font-body text-theme-s7">
           <AiOutlineClockCircle className="w-4 h-4 ml-1 mr-2" />
-          {node.frontmatter?.date} - {node.timeToRead} min read
+          {node?.frontmatter?.date} -{' '}
+          {node?.frontmatter?.updated
+            ? `Updated ${node?.frontmatter?.updated} - `
+            : ''}
+          {node?.timeToRead} min read
         </div>
       </Link>
     </div>
@@ -83,7 +88,8 @@ const IdeaPreviews: React.FC<IdeaPreviewsProps> = ({ limit, excludeId }) => {
             id
             timeToRead
             frontmatter {
-              date(formatString: "MMMM DD, YYYY")
+              date(fromNow: true)
+              updated(fromNow: true)
               path
               title
               description

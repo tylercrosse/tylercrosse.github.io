@@ -67,7 +67,8 @@ export const pageQuery = graphql`
           id
           timeToRead
           frontmatter {
-            date(formatString: "MMMM DD, YYYY")
+            date(fromNow: true)
+            updated(fromNow: true)
             path
             title
             description

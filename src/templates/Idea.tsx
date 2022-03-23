@@ -40,7 +40,11 @@ const IdeaTemplate: React.FC<IdeaTemplateProps> = ({
             </h2>
             <div className="flex items-center w-full pb-2 text-theme-s7 font-body">
               <AiOutlineClockCircle className="w-4 h-4 ml-1 mr-2" />
-              {mdx?.frontmatter?.date} - {mdx?.timeToRead} min read
+              {mdx?.frontmatter?.date} -{' '}
+              {mdx?.frontmatter?.updated
+                ? `Updated ${mdx?.frontmatter?.updated} - `
+                : ''}
+              {mdx?.timeToRead} min read
             </div>
             <div className="flex flex-wrap items-center w-full">
               <Link
@@ -86,7 +90,8 @@ export const pageQuery = graphql`
       body
       timeToRead
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
+        date(fromNow: true)
+        updated(fromNow: true)
         path
         title
         description
