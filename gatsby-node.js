@@ -7,10 +7,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const postTemplate = path.resolve(`src/templates/Idea.tsx`)
   const result = await graphql(`
     {
-      allMarkdownRemark(
-        sort: { order: DESC, fields: [frontmatter___date] }
-        limit: 1000
-      ) {
+      allMdx(sort: { order: DESC, fields: [frontmatter___date] }, limit: 1000) {
         edges {
           node {
             frontmatter {
@@ -29,7 +26,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   // Create idea post pages.
-  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+  result.data.allMdx.edges.forEach(({ node }) => {
     createPage({
       path: node.frontmatter.path,
       component: postTemplate,
@@ -43,7 +40,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // Create Tag pages
   const tagPagesTemplate = path.resolve('src/templates/Tag.tsx')
   let tags = []
-  result.data.allMarkdownRemark.edges.forEach(edge => {
+  result.data.allMdx.edges.forEach(edge => {
     if (_.get(edge, `node.frontmatter.tags`)) {
       tags = tags.concat(edge.node.frontmatter.tags)
     }

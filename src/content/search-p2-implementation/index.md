@@ -31,7 +31,7 @@ Since this was implemented in a Gatsby app, I used `useStaticQuery` to pull in t
 // 1️⃣ Get the data
 const data: SearchQuery = useStaticQuery(graphql`
   query Search {
-    posts: allMarkdownRemark(filter: { frontmatter: { draft: { ne: true } } }) {
+    posts: allMdx(filter: { frontmatter: { draft: { ne: true } } }) {
       edges {
         node {
           id
@@ -45,7 +45,7 @@ const data: SearchQuery = useStaticQuery(graphql`
         }
       }
     }
-    tags: allMarkdownRemark(filter: { frontmatter: { draft: { ne: true } } }) {
+    tags: allMdx(filter: { frontmatter: { draft: { ne: true } } }) {
       group(field: frontmatter___tags) {
         fieldValue
         totalCount

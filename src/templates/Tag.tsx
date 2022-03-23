@@ -8,7 +8,7 @@ import ThemeContext from '../context/ThemeContext'
 
 interface TagTemplateProps {
   readonly data: {
-    allMarkdownRemark: {
+    allMdx: {
       edges: Array<{
         node: {
           id: string
@@ -39,7 +39,7 @@ const Template: React.FC<TagTemplateProps> = ({ data, pageContext }) => {
           <h1 className="text-xl font-display text-theme-s9">
             Posts tagged with #{pageContext.tag}
           </h1>
-          {data.allMarkdownRemark.edges.map(edge => (
+          {data.allMdx.edges.map(edge => (
             <IdeaPreview node={edge.node} />
           ))}
         </section>
@@ -56,7 +56,7 @@ export default Template
 
 export const pageQuery = graphql`
   query Tag($tag: String) {
-    allMarkdownRemark(
+    allMdx(
       limit: 1000
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { tags: { in: [$tag] }, draft: { ne: true } } }

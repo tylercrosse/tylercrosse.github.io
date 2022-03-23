@@ -61,7 +61,6 @@ export default function Search({ closeModal }: SearchProps): JSX.Element {
         // onSelect, close the modal, reset the state and navigate
         if (hasSelectedItem(changes)) {
           closeModal && closeModal()
-          console.log('navigate', changes.selectedItem)
           navigate(changes.selectedItem.path)
         }
         return {

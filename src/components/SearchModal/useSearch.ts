@@ -3,9 +3,9 @@ import Fuse from 'fuse.js'
 import format, { FuseResults, CombinedResult } from './formatFuseResult'
 import {
   Maybe,
-  MarkdownRemark,
-  MarkdownRemarkFrontmatter,
-  MarkdownRemarkGroupConnection,
+  Mdx,
+  MdxFrontmatter,
+  MdxGroupConnection,
 } from '../../../graphql-types'
 
 export type ResultType = 'Ideas' | 'Tags'
@@ -13,24 +13,22 @@ export type ResultType = 'Ideas' | 'Tags'
 type SearchQuery = {
   posts: {
     edges: Array<{
-      node: Pick<MarkdownRemark, 'id'> & {
+      node: Pick<Mdx, 'id'> & {
         frontmatter?: Maybe<
           Pick<
-            MarkdownRemarkFrontmatter,
+            MdxFrontmatter,
             'date' | 'description' | 'path' | 'tags' | 'title'
           >
         >
         headings?: {
-          [id: string]: string
-        }
-        rawMarkdownBody?: string
+          value: string
+        }[]
+        rawBody?: string
       }
     }>
   }
   tags: {
-    group: Array<
-      Pick<MarkdownRemarkGroupConnection, 'fieldValue' | 'totalCount'>
-    >
+    group: Array<Pick<MdxGroupConnection, 'fieldValue' | 'totalCount'>>
   }
 }
 export interface IFormattedResult {
@@ -46,7 +44,7 @@ export interface PostItem {
   tags: string[] | null | undefined
   title: string | null | undefined | IFormattedResult[]
   headings: string[] | null | undefined
-  rawMarkdownBody: string | null | undefined | IFormattedResult[]
+  rawBody: string | null | undefined | IFormattedResult[]
 }
 
 export interface TagItem {
@@ -57,11 +55,10 @@ export interface TagItem {
 }
 
 export default function useSearch(): (query: string) => CombinedResult[] {
+  // export default function useSearch(): (query: string) => CombinedResult[] {
   const data: SearchQuery = useStaticQuery(graphql`
     query Search {
-      posts: allMarkdownRemark(
-        filter: { frontmatter: { draft: { ne: true } } }
-      ) {
+      posts: allMdx(filter: { frontmatter: { draft: { ne: true } } }) {
         edges {
           node {
             id
@@ -73,15 +70,13 @@ export default function useSearch(): (query: string) => CombinedResult[] {
               title
             }
             headings {
-              id
+              value
             }
-            rawMarkdownBody
+            rawBody
           }
         }
       }
-      tags: allMarkdownRemark(
-        filter: { frontmatter: { draft: { ne: true } } }
-      ) {
+      tags: allMdx(filter: { frontmatter: { draft: { ne: true } } }) {
         group(field: frontmatter___tags) {
           fieldValue
           totalCount
@@ -97,7 +92,7 @@ export default function useSearch(): (query: string) => CombinedResult[] {
     tags: node?.frontmatter?.tags,
     title: node?.frontmatter?.title,
     headings: node.headings,
-    rawMarkdownBody: node.rawMarkdownBody,
+    rawBody: node.rawBody,
   }))
   const flatTagData = data.tags.group.map(node => ({
     resultType: 'Tags',
@@ -120,11 +115,11 @@ export default function useSearch(): (query: string) => CombinedResult[] {
         weight: 0.8,
       },
       {
-        name: 'headings.id',
+        name: 'headings.value',
         weight: 0.8,
       },
       {
-        name: 'rawMarkdownBody',
+        name: 'rawBody',
         weight: 0.4,
       },
     ],
@@ -147,12 +142,6 @@ export default function useSearch(): (query: string) => CombinedResult[] {
     const formattedPostResults = format(postResults)
     const tagResults = tagFuse.search(query) as FuseResults<TagItem>
     const formattedTagResults = format(tagResults)
-    console.log('search', {
-      postResults,
-      formattedPostResults,
-      tagResults,
-      formattedTagResults,
-    })
     const combinedResults = formattedPostResults.concat(
       formattedTagResults
     ) as CombinedResult[]

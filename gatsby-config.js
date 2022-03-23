@@ -37,13 +37,11 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        gfm: true,
         commonmark: true,
-        footnotes: true,
-        pedantic: true,
-        plugins: [
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
           `gatsby-remark-unwrap-images`,
           {
             resolve: `gatsby-remark-images`,
@@ -80,8 +78,8 @@ module.exports = {
         name: `Tyler Crosse`,
         short_name: `TC`,
         start_url: `/`,
-        background_color: `--theme-p10`,
-        theme_color: `--theme-p10`,
+        background_color: `var(--theme-p10)`,
+        theme_color: `var(--theme-p10)`,
         display: `minimal-ui`,
         icon: `src/images/favicon-512.png`, // This path is relative to the root of the site.
       },

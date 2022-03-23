@@ -54,7 +54,7 @@ interface IdeaPreviewsProps {
 }
 
 interface IdeasIndexPageQuery {
-  allMarkdownRemark: {
+  allMdx: {
     edges: Array<{
       node: {
         id: string
@@ -74,7 +74,7 @@ interface IdeasIndexPageQuery {
 const IdeaPreviews: React.FC<IdeaPreviewsProps> = ({ limit, excludeId }) => {
   const data: IdeasIndexPageQuery = useStaticQuery(graphql`
     query IdeasIndexPage {
-      allMarkdownRemark(
+      allMdx(
         filter: { frontmatter: { draft: { ne: true } } }
         sort: { fields: frontmatter___date, order: DESC }
       ) {
@@ -94,7 +94,7 @@ const IdeaPreviews: React.FC<IdeaPreviewsProps> = ({ limit, excludeId }) => {
       }
     }
   `)
-  const { edges } = data.allMarkdownRemark
+  const { edges } = data.allMdx
   const posts = limit
     ? edges.filter(edge => edge.node.id !== excludeId).slice(0, limit)
     : edges

@@ -43,7 +43,7 @@ export interface FormattedPostResult {
   tags?: string[] | null | undefined
   title?: string | null | undefined | IFormattedResult[]
   headings?: string[] | null | undefined
-  rawMarkdownBody?: string | null | undefined | IFormattedResult[]
+  rawBody?: string | null | undefined | IFormattedResult[]
   score: number
 }
 

@@ -6,10 +6,7 @@ import TagPill from './TagPill'
 const AllTags: React.FC = () => {
   const data = useStaticQuery(graphql`
     query GroupedTags {
-      allMarkdownRemark(
-        limit: 2000
-        filter: { frontmatter: { draft: { ne: true } } }
-      ) {
+      allMdx(limit: 2000, filter: { frontmatter: { draft: { ne: true } } }) {
         group(field: frontmatter___tags) {
           fieldValue
           totalCount
@@ -18,7 +15,7 @@ const AllTags: React.FC = () => {
     }
   `)
   const allTags = orderBy(
-    data.allMarkdownRemark.group,
+    data.allMdx.group,
     ['totalCount', 'fieldValue'],
     ['desc', 'asc']
   )
