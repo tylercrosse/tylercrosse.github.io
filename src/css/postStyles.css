@@ -1,3 +1,11 @@
+
+.anchor.before {
+  position: absolute;
+  top: 0.4em;
+  left: 0.5em;
+  display: none;
+}
+
 .post-content {
   & > * {
     @apply max-w-2xl mt-0 mb-4 mx-auto;
@@ -21,7 +29,11 @@
   & h4,
   & h5,
   & h6 {
-    @apply font-display text-theme-s9;
+    @apply font-display text-theme-s9 max-w-3xl px-12;
+
+    &:hover > .anchor.before {
+      display: block;
+    }
   }
   & h1 {
     @apply text-5xl leading-tight mb-4 mt-6 pb-2;
@@ -84,11 +96,6 @@
 a.anchor {
   color: inherit;
   fill: var(--sol-blue);
-}
-.anchor.before {
-  height: 80%;
-  display: flex;
-  align-items: center;
 }
 
 .gatsby-resp-image-wrapper {

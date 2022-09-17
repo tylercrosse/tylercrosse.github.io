@@ -12,6 +12,7 @@ interface IdeaPreviewProps {
       title: string
       description: string
       date: string
+      updated?: string
       tags: string[]
     }
   }
@@ -29,7 +30,11 @@ export const IdeaPreview: React.FC<IdeaPreviewProps> = ({ node }) => (
         </p>
         <div className="flex items-center w-full pb-2 font-body text-theme-s7">
           <AiOutlineClockCircle className="w-4 h-4 ml-1 mr-2" />
-          {node.frontmatter?.date} - {node.timeToRead} min read
+          {node?.frontmatter?.date} -{' '}
+          {node?.frontmatter?.updated
+            ? `Updated ${node?.frontmatter?.updated} - `
+            : ''}
+          {node?.timeToRead} min read
         </div>
       </Link>
     </div>
@@ -54,7 +59,7 @@ interface IdeaPreviewsProps {
 }
 
 interface IdeasIndexPageQuery {
-  allMarkdownRemark: {
+  allMdx: {
     edges: Array<{
       node: {
         id: string
@@ -74,7 +79,7 @@ interface IdeasIndexPageQuery {
 const IdeaPreviews: React.FC<IdeaPreviewsProps> = ({ limit, excludeId }) => {
   const data: IdeasIndexPageQuery = useStaticQuery(graphql`
     query IdeasIndexPage {
-      allMarkdownRemark(
+      allMdx(
         filter: { frontmatter: { draft: { ne: true } } }
         sort: { fields: frontmatter___date, order: DESC }
       ) {
@@ -83,7 +88,8 @@ const IdeaPreviews: React.FC<IdeaPreviewsProps> = ({ limit, excludeId }) => {
             id
             timeToRead
             frontmatter {
-              date(formatString: "MMMM DD, YYYY")
+              date(fromNow: true)
+              updated(fromNow: true)
               path
               title
               description
@@ -94,7 +100,7 @@ const IdeaPreviews: React.FC<IdeaPreviewsProps> = ({ limit, excludeId }) => {
       }
     }
   `)
-  const { edges } = data.allMarkdownRemark
+  const { edges } = data.allMdx
   const posts = limit
     ? edges.filter(edge => edge.node.id !== excludeId).slice(0, limit)
     : edges
