@@ -20,7 +20,7 @@
     "react-icons": "^3.10.0",
     "react-modal": "^3.11.2",
     "set-value": "^4.1.0",
-    "sharp": "^0.29.1"
+    "sharp": "^0.30.5"
   },
   "devDependencies": {
     "@types/react": "16.9.34",
