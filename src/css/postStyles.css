@@ -29,10 +29,18 @@
   & h4,
   & h5,
   & h6 {
-    @apply font-display text-theme-s9 max-w-3xl px-12;
+    @apply font-display text-theme-s9 max-w-3xl;
 
     &:hover > .anchor.before {
       display: block;
+    }
+
+    @screen sm {
+      @apply px-4;
+    }
+
+    @screen md {
+      @apply px-12;
     }
   }
   & h1 {
