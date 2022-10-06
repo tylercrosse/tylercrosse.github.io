@@ -55,7 +55,6 @@ export interface TagItem {
 }
 
 export default function useSearch(): (query: string) => CombinedResult[] {
-  // export default function useSearch(): (query: string) => CombinedResult[] {
   const data: SearchQuery = useStaticQuery(graphql`
     query Search {
       posts: allMdx(filter: { frontmatter: { draft: { ne: true } } }) {

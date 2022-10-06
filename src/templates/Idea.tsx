@@ -31,7 +31,7 @@ const IdeaTemplate: React.FC<IdeaTemplateProps> = ({
         } flex-grow`}
       >
         <section>
-          <div className="max-w-2xl px-4 pb-10 m-auto md:px-0">
+          <div className="max-w-2xl px-4 m-auto md:px-0">
             <h1 className="text-5xl leading-tight font-display text-theme-s9">
               {mdx?.frontmatter?.title}
             </h1>
