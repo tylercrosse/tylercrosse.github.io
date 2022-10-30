@@ -1,0 +1,186 @@
+---
+title: 'Bitwise Operators on Python dicts and sets'
+description: 'Bitwise or getting a bit wise?'
+date: '2022-10-27'
+tags:
+  [
+    'python',
+    'short',
+    'seedling-🌱',
+  ]
+path: '/ideas/python-bitwise-sets-and-dicts'
+draft: false
+---
+
+![Galatea of the Spheres by by Salvador Dalí](galatea-of-the-spheres.jpg)
+
+As journeyman python developer, I was surprised to find that Python has bitwise operators for sets. I was even more surprised to find that they work on dicts as well. So, here's a quick post on how to use them.
+
+## Bitwise Operations on sets
+
+I'm assuming most folks that find this article have seen bitwise operators before and included a primer for those that haven't at the bottom of this article. The bitwise operators OR `|`, AND `&`, as well as XOR `^` work on sets in the same way they work on integers. I also included subtraction `-` here because it's a common set operation with a similar shorthand, although it is not a bitwise operation. For example, the following code:
+
+```py
+a = {1, 2, 3}
+b = {2, 3, 4}
+print(a | b) # {1, 2, 3, 4}
+print(a & b) # {2, 3}
+print(a ^ b) # {1, 4}
+print(b ^ a) # {1, 4}
+# |, &, ^ are commutative, while - is not
+print(a - b) # {1}
+print(b - a) # {4}
+``` 
+
+<div style="max-width: 560px">
+  <img src="./sets.png" alt="Operations on sets" />
+</div>
+
+The same is true regardless of the data type of the elements in the sets. Additionally, sets support updates using the bitwise assignment operations `|=`, `&=`, as well as `^=`. I also included the equivalent methods for comparison. The methods are not commutative, but the operators are.
+
+```py
+mammals = {"cat", "dog", "bat"}
+flying_animals = {"bat", "bird"}
+
+# OR is equivalent to union
+print(mammals | flying_animals) # {"cat", "dog", "bat", "bird"}
+print(mammals.union(flying_animals)) # {"cat", "dog", "bat", "bird"}
+
+# OR assignment is equivalent to update
+print(mammals |= flying_animals) # {"cat", "dog", "bat", "bird"}
+print(mammals.update(flying_animals)) # {"cat", "dog", "bat", "bird"}
+
+# AND is equivalent to intersection
+print(mammals & flying_animals) # {"bat"}
+print(mammals.intersection(flying_animals)) # {"bat"}
+
+# AND assignment is equivalent to intersection_update
+print(mammals &= flying_animals) # {"bat"}
+print(mammals.intersection_update(flying_animals)) # {"bat"}
+
+# XOR is equivalent to symmetric difference
+print(mammals ^ flying_animals) # {"cat", "dog", "bird"}
+print(mammals.symmetric_difference(flying_animals)) # {"cat", "dog", "bird"}
+
+# XOR assignment is equivalent to symmetric_difference_update
+print(mammals ^= flying_animals) # {"cat", "dog", "bird"}
+print(mammals.symmetric_difference_update(flying_animals)) # {"cat", "dog", "bird"}
+```
+
+## Bitwise Operations on dicts
+
+Bitwise operations on dicts are a little more interesting. The bitwise operators `|`, `&`, and `^` work on dicts in the same way they work on sets. The only difference is that the result is a dict instead of a set. The bitwise assignment operators `|=`, `&=`, and `^=` also work on dicts, but they are not equivalent to the methods. The methods are commutative, but the operators are not. The methods are also not equivalent to the bitwise operators on sets. The bitwise operators on dicts are equivalent to the bitwise operators on sets, but the methods are not. The methods are equivalent to the methods on sets. I know, it's confusing. Here's an example:
+
+```py
+a = {1: "one", 2: "two", 3: "three"}
+b = {2: "two", 3: "three", 4: "four"}
+print(a | b) # {1: "one", 2: "two", 3: "three", 4: "four"}
+
+# OR is equivalent to union
+print(a | b) # {1: "one", 2: "two", 3: "three"}
+print(a.union(b)) # {1: "one", 2: "two", 3: "three"}
+
+# OR assignment is not equivalent to update
+print(a |= b) # {1: "one", 2: "two", 3: "three"}
+print(a.update(b)) # None
+
+# AND is equivalent to intersection
+print(a & b) # {2: "two"}
+print(a.intersection(b)) # {2: "two"}
+
+# AND assignment is not equivalent to intersection_update
+print(a &= b) # {2: "two"}
+print(a.intersection_update(b)) # None
+
+# XOR is equivalent to symmetric difference
+print(a ^ b) # {1: "one", 3: "three"}
+print(a.symmetric_difference(b)) # {1: "one", 3: "three"}
+
+# XOR assignment is not equivalent to symmetric_difference_update
+print(a ^= b) # {1: "one", 3: "three"}
+print(a.symmetric_difference_update(b)) # None
+```
+
+## Tl;DR
+
+In python, the bitwise `|`, `&`, `^`, and `~` operators can be used to perform set operations. The `<<` and `>>` operators can be used to shift the bits of a number. The `|` operator can be used to perform a union. The `&` operator can be used to perform an intersection. The `^` operator can be used to perform a symmetric difference. 
+
+
+### Appendix A - Bitwise Operators
+
+For folks that haven't seen them before. Python has the following bitwise operators:
+
+```py
+| # OR
+1 | 0 = 1
+1 | 1 = 1
+0 | 1 = 1
+0 | 0 = 0
+
+& # AND
+1 & 0 = 0
+1 & 1 = 1
+0 & 1 = 0
+0 & 0 = 0
+
+^ # XOR
+1 ^ 0 = 1
+1 ^ 1 = 0
+0 ^ 1 = 1
+0 ^ 0 = 0
+
+~ # NOT
+~1 = 0
+~0 = 1
+
+<< # Left Shift
+1 << 1 = 10
+1 << 2 = 100
+
+>> # Right Shift
+1 >> 1 = 0
+10 >> 2 = 1
+100 >> 2 = 10
+```
+
+### Appendix B - Differences in Bitwise Opcodes
+
+Out of curiosity I ran the following code to see how the bitwise operators are implemented in CPython (version 3.10.8). Interestingly :
+
+```py
+# Given sets
+a = {1, 2, 3}
+b = {2, 3, 4}
+
+print(dis.dis("a | b"))
+#  1           0 LOAD_NAME                0 (a)
+#              2 LOAD_NAME                1 (b)
+#              4 BINARY_OR
+#              6 RETURN_VALUE
+
+print(dis.dis("a.union(b)"))
+#  1           0 LOAD_NAME                0 (a)
+#              2 LOAD_NAME                1 (b)
+#              4 LOAD_METHOD              2 (union)
+#              6 CALL_METHOD              1
+#              8 RETURN_VALUE
+
+print(dis.dis("a & b"))
+#  1           0 LOAD_NAME                0 (a)
+#              2 LOAD_NAME                1 (b)
+#              4 BINARY_AND
+#              6 RETURN_VALUE
+
+print(dis.dis("a ^ b"))
+#  1           0 LOAD_NAME                0 (a)
+#              2 LOAD_NAME                1 (b)
+#              4 BINARY_XOR
+#              6 RETURN_VALUE
+
+
+```
+
+### Additional Resources
+
+- Detailed post on all things bitwise in Python: [Bitwise Operators in Python](https://realpython.com/python-bitwise-operators/)
+- 
