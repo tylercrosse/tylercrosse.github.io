@@ -5,15 +5,23 @@ import Search from './Search'
 export default function SearchModal(): JSX.Element {
   const [modalIsOpen, setIsOpen] = useState(false)
 
-  function onSlashKey(e: KeyboardEvent) {
+  function onKeyup(e: KeyboardEvent) {
     if (e.code === 'Slash' || e.key === '/') setIsOpen(true)
+  }
+
+  function onKeydown(e: KeyboardEvent) {
+    if (e.metaKey && e.key === 'k') setIsOpen(true)
   }
 
   useEffect(() => {
     Modal.setAppElement('#___gatsby')
-    window.addEventListener('keyup', onSlashKey)
+    window.addEventListener('keyup', onKeyup)
+    window.addEventListener('keydown', onKeydown)
 
-    return () => window.removeEventListener('keyup', onSlashKey)
+    return () => {
+      window.removeEventListener('keyup', onKeyup)
+      window.removeEventListener('keydown', onKeydown)
+    }
   }, [])
 
   return (
