@@ -1,8 +1,8 @@
 ---
 title: 'Search Engine Fundamentals'
-description: 'Simple'
+description: 'Essential terms and concepts'
 date: '2022-11-20'
-tags: ['algorithms', 'information-retrieval', 'search', 'seedling-🌱']
+tags: ['algorithms', 'information-retrieval', 'search', 'budding-🌿']
 path: '/ideas/search-engine-fundamentals'
 hero:
   alt: 'The Persistence of Memory by Salvador Dalí'
