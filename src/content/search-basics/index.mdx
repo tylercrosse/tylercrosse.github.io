@@ -1,8 +1,8 @@
 ---
 title: 'Search Engine Fundamentals'
-description: 'Simple'
+description: 'Essential terms and concepts of how search works. Queries, indexes, & relevance.'
 date: '2022-11-20'
-tags: ['algorithms', 'information-retrieval', 'search', 'seedling-🌱']
+tags: ['algorithms', 'information-retrieval', 'nlp', 'search', 'budding-🌿']
 path: '/ideas/search-engine-fundamentals'
 hero:
   alt: 'The Persistence of Memory by Salvador Dalí'
@@ -27,23 +27,23 @@ There are three basic components of a search engine, the query, the document, an
 
 **Query** - The text entered into the search box. This is the front door to how users interact with search engines. Queries represent an intent for information and the way a user decides to form the query is a topic of its own.
 
-**Document** - The thing returned from the search engine. Each result is a document. This is also the basic piece of information that gets fed into the search engine. Documents can be anything from a web page to a product to a word file. Documents are the building blocks of the index.
+**Document** - The thing returned from the search engine. Each result is a document. This is also the basic piece of information that gets fed into the search engine. Documents can be anything from a web page to a product to a Word file. Documents are the building blocks of the index.
 
 **Index** - The place where the magic happens. Indexes can be thought of abstractly like the index in the back of a book - it's the thing that holds references to all the documents and is the thing that gets searched. Indexes are the reason that search engines can return results so quickly.
 
 Putting these three together helps to pin down what a search engine is.
 
-**Search Engine** - A tool for informatin retrieval that takes a query and returns a list of documents from an index. This broad definition encompasses systems that operate at very different scales and includes systems like Google that have billions of documents, to ones that span a single website or organization's data with often tens of thousands to millions of documents, to the local search on your single computer or phone.
+**Search Engine** - A tool for information retrieval that takes a query and returns a list of documents from an index. This broad definition encompasses systems that operate at very different scales and includes systems like Google that have billions of documents, to ones that span a single website or organization's data with often tens of thousands to millions of documents, to the local search on your single computer or phone.
 
 ## Relevance
 
-With the basics defined we can start to look at more of the nuances of search engines.
+With the basics defined, we can start to look at more of the nuances of search engines.
 
-How effective a search engine is can be measured by how relevant the results it returns are. [Relevance](<https://en.wikipedia.org/wiki/Relevance_(information_retrieval)>) is the most important way of evaluating how effective a search engine is. Unfortuantely it's also quite difficult to automatically measure.
+How effective a search engine is can be measured by how relevant the results it returns are. [Relevance](<https://en.wikipedia.org/wiki/Relevance_(information_retrieval)>) is the most important way of evaluating how effective a search engine is. Unfortunately, it's also quite difficult to automatically measure.
 
 > Relevance is a measure of how well the documents retrieved by a search engine meet the information need of the user.
 
-The more a document matches what you were looking for the more relevant it is. A perfect search would return only relevant documents and all of the ones that possibly exist. Unfortunately we don't live in a perfect world.
+The more a document matches what you were looking for the more relevant it is. A perfect search would return only relevant documents and all of the ones that possibly exist. Unfortunately, we don't live in a perfect world.
 
 To help quantify this search practitioners call any document that is relevant and returned by a search a true positive. If it is returned and not relevant it is a false positive. Relevant documents not returned are called false negatives - they were missed. Non-relevant docs not returned are true negatives.
 
@@ -61,7 +61,7 @@ Search engines can be tuned to improve the relevance of results and try to impro
 
 ## An example - Looking for a Daschund
 
-As an example, imagine we're searching for a daschund. Yeah those two little guys right in the middle.
+As an example, imagine we're searching for a Daschund. Yeah, those two little guys right in the middle.
 
 ![A bunch of animals, including a few daschunds](relevance-docs.png)
 
@@ -69,9 +69,9 @@ Now let's say for whatever reason you searched for "brown" and this is what you 
 
 ![An example search for a daschund](relevance-example.png)
 
-As luck would have it we found one of the two daschunds but missed the other - maybe the striped seater got in the way. Of the nine results returned, our gal is a true positive and the other eight are false positives. The missed daschund is a false negative and the remaining nine animnals are true negatives. From that we can determine the precision and recall of our query.
+As luck would have it we found one of the two Daschunds but missed the other - maybe the striped seater got in the way. Of the nine results returned, our gal is a true positive and the other eight are false positives. The missed Daschund is a false negative and the remaining nine animals are true negatives. From that, we can determine the precision and recall of our query.
 
-Fortunately the greatest tool search engines have to get around the see-saw between precision and recall is their ranking. By putting the most relevant documents first it matters a lot less if a chunk of the results aren't relevant.
+Fortunately, the greatest tool search engines have to get around the see-saw between precision and recall is their ranking. By putting the most relevant documents first it matters a lot less if a chunk of the results aren't relevant.
 
 ![A ranking of results](relevance-ranking.png)
 
@@ -95,11 +95,11 @@ How documents get into the index and the type of metadata that gets stored in th
 
 ### Querying the Index
 
-Assuming the heavy lifting was done up-front, the query is the easy part. The search engine takes the query and looks up the documents that match. The search engine then ranks the documents based on how well they match the query and returns the top results. Exactly how they use queies to find documents and orders the results depends on how the index was created and a ranking function.
+Assuming the heavy lifting was done up-front, the query is the easy part. The search engine takes the query and looks up the documents that match. The search engine then ranks the documents based on how well they match the query and returns the top results. Exactly how they use queries to find documents and order the results depends on how the index was created and a ranking function.
 
-Search engines are dumb machines and all of the functionality they are capable of has to be carefully crafted. They have to determine which documents match a query. To do this they often performa similar analysis on queries as was performed the documents when they were added to the index. If all the docs were turned into round holes the query needs to be turned into a round peg to match.
+Search engines are dumb machines and all of the functionality they are capable of has to be carefully crafted. They have to determine which documents match a query. To do this they often perform a similar analysis on queries as was performed on the documents when they were added to the index. If all the docs were turned into round holes the query needs to be turned into a round peg to match.
 
-Once all the matches are found they are ranked using a forumla that tries to intuit which documents are the closest of most valuable matches to the user's query. This ranking process can vary a lot between search engines.
+Once all the matches are found they are ranked using a formula that tries to intuit which documents are the closest of most valuable matches to the user's query. This ranking process can vary a lot between search engines.
 
 <div style="max-width: 680px">
   <img src="./index-construction.png" alt="Index Construction & Searching" />
@@ -109,4 +109,8 @@ To summarize, constructing the index is slow, which allows searching to be fast.
 
 ### Additional Resources
 
-- A great much deeper dive is the book [Relevant Search by Doug Turnbull and John Berryman](https://www.manning.com/books/relevant-search). It's written with a focus for developers but most of the first few chapters is very readable by a general audience.
+- A great much deeper dive is the book [Relevant Search by Doug Turnbull and John Berryman](https://www.manning.com/books/relevant-search). It's written with a focus on developers but most of the first few chapters is very readable by a general audience.
+- The book [Speech and Language Processing](https://web.stanford.edu/~jurafsky/slp3/) by Dan Jurafsky and James H. Martin covers a wide slew of topics on Natural Language.
+- The book [Introduction to Information Retrieval](https://nlp.stanford.edu/IR-book/) by Christopher D. Manning, Prabhakar Raghavan, and Hinrich Schütze is a great resource for understanding the basics of search engines.
+- [Elasticsearch in Action by Madusdhan Konda](https://www.manning.com/books/elasticsearch-in-action-second-edition) is a great book for learning about Elasticsearch. The Second Edition is currently in MEAP and is being updated for Elasticsearch 7.0.
+- [Elasticsearch: the Definitive Guide by Clinton Gormley and Zachary Tong](https://www.oreilly.com/library/view/elasticsearch-the-definitive/9781449358532/) is a great book for learning about Elasticsearch. It's a bit out of date but still a great resource.
