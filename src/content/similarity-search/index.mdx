@@ -1,0 +1,45 @@
+---
+title: 'Similarity Search'
+description: 'What's a word embedding and how we can use neural networks to improve the relevance of search results?'
+date: '2023-06-17'
+tags: ['algorithms', 'information-retrieval', 'search', 'nlp', 'seedling-🌱']
+path: '/ideas/similarity-search'
+draft: false
+audience: 'All'
+---
+
+Emma is looking for information about a new movie she wants to see. She searches for "new movie" on a site with data about movies, but the results are not very relevant. She tries again with "new movie 2021", but still doesn't find what she's looking for. Finally, she searches for "new movie 2021 trailer" and finds exactly what she was looking for.
+
+Why did Emma have to search three times? Because the search engine she was using is not very good at understanding what she wants. It's not smart enough to know that she's looking for a movie trailer, so it shows her a bunch of irrelevant results instead.
+
+What if there was a better way? What if there was a search engine that could understand what Emma wants and show her exactly what she's looking for? That's what similarity search does. It uses neural networks to understand what people are looking for and show them relevant results.
+
+## What is similarity search?
+
+Similarity search is an approach that goes by many names - some of the common ones are vector search, approximate nearest neighbors, semantic search, and neural search. It's a technique for finding similar items in a large dataset. It's used in a variety of applications, including recommendation systems, information retrieval, computer vision, and natural language processing.
+
+Similarity search is a broad topic, and there are many different techniques. The most common approach is to use a vector space model, where each item is represented as a vector of numbers. The vectors are then compared using a distance metric, such as cosine similarity or Euclidean distance. The vectors can be generated using a variety of techniques, including word embeddings, image embeddings, and graph embeddings. The vectors can also be generated using neural network-based models both small and large - including large language models like GPT-4.
+
+All of that is a mouthful and for most people, it's not very helpful. So let's break it down into simpler terms. 
+
+### What are vectors and embeddings?
+
+Vectors are just lists of numbers. They can be used to represent anything - natural phenomena like velocity and acceleration in addition to things we care about searching for like words, images, documents,  etc. Vectors let us turn important things into numbers that computers can understand and work with. 
+
+
+
+
+
+### 
+
+How can you compare vectors to one another and why does that matter? A canonical example in natural language processing is to say that if we have a vector pointing at king and we subtract a vector pointing at man, we get a vector pointing at queen. This is a simple example of vector arithmetic, but it's a powerful one. It lets us do things like find the most similar words to a given word, or find the most similar documents to a given document.
+
+
+# How does it compare to other approaches?
+
+Similarity search has many benefits, including:
+
+- **Efficiency** - it's much faster than brute force search
+- **Scalability** - it can handle large datasets with millions of items
+- **Flexibility** - it can be used for a wide range of applications
+- **Accuracy** - it's more accurate than other techniques like keyword matching
