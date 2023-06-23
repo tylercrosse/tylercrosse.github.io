@@ -1,9 +1,9 @@
 ---
-title: 'Similarity Search'
-description: "What's a word embedding and how we can use neural networks to improve the relevance of search results?"
-date: '2023-06-17'
+title: 'Semantic Search'
+description: "What's an embedding vector, and how we can use neural networks to improve the relevance of search results?"
+date: '2023-06-22'
 tags: ['information-retrieval', 'search', 'nlp', 'data-science', 'algorithms', 'seedling-🌱']
-path: '/ideas/similarity-search'
+path: '/ideas/semantic-search'
 draft: false
 audience: 'All'
 ---
@@ -16,49 +16,41 @@ Why did Emma have to search three times? Because the search engine she was using
 
 What if there was a better way? What if there was a search engine that could understand what Emma wants and show her exactly what she's looking for? That's what similarity search does. It uses neural networks to understand what people are looking for and show them relevant results.
 
-## What is similarity search?
+## What is semantic search?
 
 Similarity search is a technique for finding similar items in a large dataset. It's used in a variety of applications, including recommendation systems, information retrieval, computer vision, and natural language processing. In information retrieval (aka. search engines), **similarity search is used to find documents that are similar to a given query based on the meaning of the words in the query and the documents instead of purely matching the words themselves.**
 
-Similarity search is an approach that goes by many names - some of the common ones are vector search, approximate nearest neighbors, semantic search, and neural search. The core idea is the same: use a model to generate vectors for each item in a dataset and then use those vectors to find similar items. For this article we'll constrain ourselves to just text-based similarity search and focus on information retrieval.
+Semantic search is an approach that goes by many names - some of the common ones are vector search, approximate nearest neighbors, similarity search, and neural search. The core idea is the same: use a model to generate vectors for each item in a dataset and then use those vectors to find similar items. For this article, we'll constrain ourselves to just text-based similarity search and focus on information retrieval.
 
 - some examples of when similarity search is effective
 
-## How does similarity search work?
+## How does semantic search work?
 
-Similarity search is a broad topic, and there are many different techniques. The most common approach is to use a vector space model, where each item is represented as a vector of numbers. The vectors are then compared using a distance metric, such as cosine similarity or Euclidean distance. The vectors can be generated using a variety of techniques, including word embeddings, image embeddings, and graph embeddings. The vectors can also be generated using neural network-based models both small and large - including large language models like GPT-4.
+Similarity search is a broad topic, and there are many different techniques. The most common approach is to use a vector space, where each item is represented as a vector of numbers called an embedding. The embedding vectors are then compared using a distance metric, such as cosine similarity or approximate nearest neighbor. For text, large language models like BERT and ChatGPT are great at generating embeddings that capture the semantic meaning of the text.
+
+![Overview of similarity search](similarity-search-overview2.png)
 
 All of that is a mouthful and for most people, it's not very helpful. So let's break it down into simpler terms. 
 
-### What are vectors?
+#### What are vectors and embeddings?
 
 Vectors are just lists of numbers. A decent way to think about vectors is as a row in a spreadsheet where each cell is a number. They can be used to represent anything - natural phenomena like velocity and acceleration in addition to things we care about searching for like words, images, and documents. Vectors let us turn important things into numbers that computers can understand and work with.
 
-How do we turn words into vectors (remember vectors are just numbers)? First, we start by creating a vocabulary of all the words we care about. Then we assign each word a unique number. Then we create a vector for each word by setting the number at the index of the word to 1 and all other numbers to 0. This creates a vector called one-hot encoding.
+Models typically do this conversion from text to numbers in a few steps. First, they create a vocabulary of all the words or parts of words they care about. Then they assign each a unique number. Then they create a vector for each word by setting the number at the index of the word to 1 and all other numbers to 0. This creates a vector called one-hot encoding. These one-hot vectors are a good start but don't tell much about the meaning of words and are mostly zeros, often referred to as sparse.
 
-As an example, let's say we have a vocabulary of 10 words: cat, dog, bird, fish, mouse, lion, tiger, bear, elephant, and giraffe. We assign each word a unique number from 0 to 9. Then we create a vector for each word by setting the number at the index of the word to 1 and all other numbers to 0. This creates a vector called one-hot encoding.
+![PLACEHOLDER](https://www.researchgate.net/publication/358234888/figure/fig3/AS:1128411317706759@1646045631279/Comparison-of-representations-between-one-hot-encoding-and-word-embeddings.png)
 
-![PLACEHOLDER vector representation of words](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*Q63oC7lJmGPSgpKexs1YMg.png)
+![PLACEHOLDER](https://neuro.cs.ut.ee/wp-content/uploads/2018/09/embeddings.png)
 
-The one hot-encoding is a good start, but it's not very useful. It doesn't capture any information about the meaning of the words. For example, the words "cat" and "dog" are very similar in meaning, but they have completely different vectors. This is because they are represented by different numbers in the vocabulary. The one hot-encoding is also very sparse, which means that most of the numbers in the vector are 0. This makes it hard to compare vectors to one another. What we really want is a way to represent words as vectors that capture their meaning and are dense (i.e., most of the numbers are not 0).
+The one-hot vectors are fed into a model that was trained on a large body of text and has learned the statistical relationships between words. This process of feeding data to the model is typically called inference. The model is a humongous math formula, like a spreadsheet on steroids, with a ton of numbers in them called weights and biases. The model takes in the one-hot vectors, does a bunch of multiplications, and outputs an embedding vector. The embedding vectors are dense, meaning they have a lot of non-zero values, and have been embued with meaning from the model.
 
-### Word embeddings
+Interestingly enough, the model doesn't actually know what the words mean - the model is just numbers and equations. It just knows that certain words are more likely to appear together than others. This is called distributional semantics and is a powerful way to represent the meaning of words. It's also the reason why models like BERT and ChatGPT are so good at generating embeddings that capture the semantic meaning of text. It's also a big challenge for understanding why models make certain predictions.
 
-To solve this problem, we can use word embeddings. Word embeddings are vectors that capture the meaning of words. The ways to create embeddings have evolved and the latest and most effective approach is to use a large language model - a neural network on a large corpus of text. The neural network learns to predict the context of each word, and the resulting vectors are used to represent the words. This allows us to compare words based on their meaning, rather than just their spelling.
+Words that have similar meanings to humans get used in sentences in similar ways. For example, the words "queen" and "queen" are both nouns and are often used in the same context. The model learns this relationship and encodes it in the embedding vectors. As a result, the embedding vectors for "queen" and "queen" are similar to each other. The model has learned that they are similar to each other and has encoded that information in the embedding vectors.
 
-![PLACEHOLDER word embeddings](https://miro.medium.com/v2/resize:fit:2000/format:webp/1*HOvcH2lZXWyOtmcqwniahQ.png)
+#### How do you compare vectors?
 
-- fix this next paragraph
-
-We can also use word embeddings to represent documents. This is done by averaging the word embeddings for each word in the document. This creates a vector that captures the meaning of the document. We can then compare documents based on their meaning, rather than just their words.
-
-### Comparing vectors
-
-How can you compare vectors to one another and why does that matter? A canonical example in natural language processing is to say that if we have a vector pointing at king and we subtract a vector pointing at man, we get a vector pointing at queen. This is a simple example of vector arithmetic, but it's a powerful one. It lets us do things like find the most similar words to a given word, or find the most similar documents to a given document.
-
-![PLACEHOLDER vector arithmetic](https://miro.medium.com/v2/resize:fit:1228/format:webp/1*UQw1pQuMVZKm3gEqTAo5lQ.png)
-
-- more here
+Once we have a few embedding vectors, we need a way to compare them. The most common way to do this is with a distance metric, such as cosine similarity or approximate nearest neighbor. These metrics measure how similar two vectors are to each other. The higher the score, the more similar they are. The lower the score, the less similar they are.
 
 ## Similarity search in practice
 
@@ -75,3 +67,19 @@ Now that we have a basic understanding of how similarity search works, let's loo
 
 - For more on word embeddings, check out [this article](https://towardsdatascience.com/deep-learning-for-nlp-word-embeddings-4f5c90bcdab5) by James Thorn
 - A helpful [overview of semantic search](https://medium.com/ml6team/semantic-search-a-practical-overview-bf2515e7be76) by Mathias Leys
+
+---
+
+## WIP
+
+How do we turn words into vectors (remember vectors are just numbers)? First, we start by creating a vocabulary of all the words we care about. Then we assign each word a unique number. Then we create a vector for each word by setting the number at the index of the word to 1 and all other numbers to 0. This creates a vector called one-hot encoding.
+
+![PLACEHOLDER vector representation of words](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*Q63oC7lJmGPSgpKexs1YMg.png)
+
+The one hot-encoding is a good start, but it's not very useful. It doesn't capture any information about the meaning of the words. The one hot-encoding is also very sparse, which means that most of the numbers in the vector are 0. This makes it hard to compare vectors to one another. What we really want is a way to represent words as vectors that capture their meaning and are dense (i.e., most of the numbers are not 0).
+
+#### What are embeddings?
+
+To solve this problem, we can use embedding vectors. The ways to create embeddings have evolved and the latest and most effective approach is to use a large language model - a neural network on a large corpus of text. The neural network learns to predict the context of each word, and the resulting vectors are used to represent the words. This allows us to compare words based on their meaning, rather than just their spelling.
+
+![PLACEHOLDER](https://miro.medium.com/v2/resize:fit:2000/format:webp/1*HOvcH2lZXWyOtmcqwniahQ.png)
